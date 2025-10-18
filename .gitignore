@@ -1,0 +1,20 @@
+# Arquivos e pastas do Visual Studio
+.vs/
+*.VC.db
+*.suo
+*.user
+
+# Pastas de Build (Compilação)
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bin/
+
+# Arquivos de Build
+*.ilk
+*.obj
+*.pdb
+*.tlog
+*.exe
+*.dll
