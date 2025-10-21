@@ -1,11 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <vector>
-#include <string>
-#include <memory>
-#include <stdexcept> //tirar?????
 
 using namespace std;
 using namespace sf;
