@@ -64,8 +64,7 @@ void Menu::set_values() {
 }
 
 void Menu::loop_menu(Event& event){
-	if (event.type == Event::Closed ||
-		Keyboard::isKeyPressed(Keyboard::Escape)) {
+	if (event.type == Event::Closed) {
 		sair = true;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Down) && !pressed) {
