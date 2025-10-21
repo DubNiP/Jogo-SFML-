@@ -1,12 +1,16 @@
 #include "Gerenciador.Grafico.hpp"
-#include "Menu.hpp"
 
 
-GerenciadorGrafico::GerenciadorGrafico() {
+
+GerenciadorGrafico::GerenciadorGrafico():
+    window(NULL)
+{
     
     window = new RenderWindow(VideoMode(1280, 720), "Jogo Simas");
-    window->setFramerateLimit(60);
-    window->setPosition(Vector2i(0, 0));
+    if (window) {
+        window->setFramerateLimit(60);
+        window->setPosition(Vector2i(0, 0));
+    }
 }
 
 
@@ -16,20 +20,26 @@ GerenciadorGrafico::~GerenciadorGrafico() {
     }
 }
 
+//desenharEnte();
 
 void GerenciadorGrafico::clearWindow(Color cor) {
-    window->clear(cor);
-
+    if (window) {
+        window->clear(cor);
+    }
 }
 
 void GerenciadorGrafico::drawWindow(const Drawable& corpo) {
-    window->draw(corpo);
+    if (window) {
+        window->draw(corpo);
+    }
 }
 
 void GerenciadorGrafico::displayWindow() {
-    window->display();
+    if (window) {
+        window->display();
+    }
 }
 
-RenderWindow* GerenciadorGrafico::getWindow() {
+RenderWindow* GerenciadorGrafico::getWindow() const {
     return window;
 }

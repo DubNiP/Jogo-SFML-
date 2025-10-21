@@ -1,18 +1,22 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <vector>
+#include <memory>
+
 using namespace sf;
 class Ente;
 
 class GerenciadorGrafico {
+private:
+    RenderWindow* window;
 public:
+    GerenciadorGrafico();
+    ~GerenciadorGrafico();
+    //void desenharEnte(Ente* pE);
     void clearWindow(Color cor = Color::Black);
     void drawWindow(const Drawable& corpo);
     void displayWindow();
-    RenderWindow* getWindow();
-    ~GerenciadorGrafico();
-    GerenciadorGrafico();
-    //void desenharEnte(Ente* pE);
-
-private:
-    RenderWindow* window;
+    RenderWindow* getWindow() const;
 };

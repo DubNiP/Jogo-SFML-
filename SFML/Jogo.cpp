@@ -1,61 +1,60 @@
 #include "Jogo.hpp"
-#include "Menu.hpp"
 
 Jogo::Jogo() :
-    GG()
+    pJog1(NULL),
+    GG(),
+    menu(),
+    event()
 {
 }
 
 Jogo::~Jogo() {
+    if (pJog1) {
+        delete pJog1;
+    }
 }
 
 void Jogo::executar() {
-    Menu menu;
-
-    while (GG.getWindow()->isOpen()) {
+    RenderWindow* window = GG.getWindow();
+    while (window && window->isOpen()) {
         executarMenu(menu);
 
-
-        if (menu.getIniciar() && GG.getWindow()->isOpen()) {
+        if (menu.getIniciar() && window->isOpen()) {
             menu.reseta();
             executarJogo();
         }
 
-        
+
         if (menu.getSair()) {
-            GG.getWindow()->close();
+            window->close();
         }
     }
 }
 
 void Jogo::executarMenu(Menu& menu) {
-    Event event;
+    RenderWindow* window = GG.getWindow();
 
-    while (GG.getWindow()->isOpen() && !menu.getIniciar() && !menu.getSair()) {
-        while (GG.getWindow()->pollEvent(event)) {
+    while (window && window->isOpen() && !menu.getIniciar() && !menu.getSair()) {
+        while (window->pollEvent(event)) {
             menu.loop_menu(event);
         }
-        menu.draw_menu(GG.getWindow());
+        menu.draw_menu(window);
     }
 }
 
 void Jogo::executarJogo() {
-    Event event;
-    Font fonte;
-    Text texto;
-
-    if (fonte.loadFromFile("Fonts/Newsreader-VariableFont_opsz,wght.ttf")) {
-        texto.setFont(fonte);
+    if (pJog1) {
+        delete pJog1;
     }
-    texto.setString("TELA DO JOGO\n\nPressione ESC para voltar ao menu");
-    texto.setCharacterSize(50);
-    texto.setFillColor(Color::White);
-    texto.setPosition(350, 300);
+    pJog1 = new Jogador(Vector2f(640,360));
 
-    while (GG.getWindow()->isOpen()) {
-        while (GG.getWindow()->pollEvent(event)) {
+    RenderWindow* window = GG.getWindow();
+
+
+    while (window && window->isOpen()) {
+        while (window->pollEvent(event)) {
             if (event.type == Event::Closed) {
-                GG.getWindow()->close();
+                window->close();
                 return;
             }
 
@@ -63,8 +62,14 @@ void Jogo::executarJogo() {
                 return;
             }
         }
+        if (pJog1) {
+            pJog1->executar();
+            pJog1->limitarMovimento(window->getSize());
+        }
         GG.clearWindow(Color::Blue);
-        GG.drawWindow(texto);
+        if (pJog1) {                                     //talvez desnecessarias...
+            pJog1->draw(window);            
+        }
         GG.displayWindow();
     }
 }

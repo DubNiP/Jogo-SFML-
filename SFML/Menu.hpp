@@ -2,6 +2,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
+#include <string>
+#include <memory>
+#include <stdexcept> //tirar?????
 
 using namespace std;
 using namespace sf;
@@ -15,7 +19,6 @@ private:
 	bool sair;
 	bool iniciar;
 
-	RectangleShape* winclose;
 	Font* font;
 	Texture* image;
 	Sprite* bg;
@@ -37,8 +40,8 @@ public:
 	~Menu();
 	void loop_menu(Event& event);
 	void draw_menu(RenderWindow* window);
-	bool getIniciar();
-	bool getSair();
+	bool getIniciar() const;
+	bool getSair() const;
 	void reseta();
 
 };

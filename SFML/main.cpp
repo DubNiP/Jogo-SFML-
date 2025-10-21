@@ -1,13 +1,11 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
-#include "Menu.hpp"
-#include "Gerenciador.Grafico.hpp"
 #include "Jogo.hpp"
-
-using namespace std;
-using namespace sf;
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <vector>
+#include <memory>
+#include "Gerenciador.Grafico.hpp"
+#include "Menu.hpp"
+#include "Jogador.hpp"
 
 int main() {
     Jogo jogo;

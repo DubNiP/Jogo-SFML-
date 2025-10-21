@@ -1,14 +1,25 @@
 #include "Menu.hpp"
+#include <iostream>
 
 Menu::Menu() :
-	winclose(NULL),
+	pos(1),
+	pressed(false),
+	theselect(false),
+	sair(false),
+	iniciar(false),
+
 	font(NULL),
 	image(NULL),
 	bg(NULL),
-	sair(false),    
-	iniciar(false)   
+
+	pos_mouse(),
+	mouse_coord(),
+
+	options(),
+	coords(),
+	texts(),
+	sizes()
 {
-	winclose = new RectangleShape();
 	font = new Font();
 	image = new Texture();
 	bg = new Sprite();
@@ -16,9 +27,6 @@ Menu::Menu() :
 }
 
 Menu::~Menu() {
-	if (winclose) {
-		delete winclose;
-	}
 	if (font) {
 		delete font;
 	}
@@ -29,22 +37,21 @@ Menu::~Menu() {
 		delete bg;
 	}
 
-	winclose = NULL;
 	font = NULL;
 	image = NULL;
 	bg = NULL;
 }
 
 void Menu::set_values() {
-	pos = 1;
-	pressed = theselect = false;
 	if (!font->loadFromFile("Fonts/Newsreader-VariableFont_opsz,wght.ttf")) {
 		throw "Deu Merda aqui";
 	}
 	if (!image->loadFromFile("Textures/Fundo_menu.png")) {
 		throw "Deu Merda aqui";
 	}
-	bg->setTexture(*image);
+	if (bg) {
+		bg->setTexture(*image);
+	}
 
 	pos_mouse = { 0,0 };
 	mouse_coord = { 0,0 };
@@ -86,11 +93,11 @@ void Menu::loop_menu(Event& event){
 			texts[pos + 1].setOutlineThickness(0);
 			pressed = false;
 			theselect = false;
-			cout << "pos: " << pos << "\n";
+			cout << "pos: " << pos << "\n";                    //tirar no futuro?
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Enter) && !theselect) {
-		theselect = true;                                                    //OBS: os outros botões n fazem nada por enquanto..
+		theselect = true;                                                    //OBS: O botao de opçoes n faz nada por enquanto
 		if (pos == 1) {
 			iniciar = true;
 		}
@@ -102,20 +109,24 @@ void Menu::loop_menu(Event& event){
 }
 
 void Menu::draw_menu(RenderWindow* window) {
-	window->clear();
-	window->draw(*bg);
-	for (auto i : texts) {
-		window->draw(i);
+	if (window) {
+		window->clear();
+		if (bg) {
+			window->draw(*bg);
+		}
+		for (auto i : texts) {
+			window->draw(i);
+		}
+		window->display();
 	}
-	window->display();
 }
 
-bool Menu::getSair() {
+bool Menu::getSair() const {
 	return sair;
 }
 
 
-bool Menu::getIniciar() {
+bool Menu::getIniciar() const {
 	return iniciar;
 }
 
