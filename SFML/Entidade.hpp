@@ -11,7 +11,7 @@ using namespace sf;
 class Entidade {
 protected:
 	Vector2f pos;
-	RectangleShape shape;   
+	RectangleShape shape;                             //Ente??
 	// ostream buffer;
 	//void salvarDataBuffer();
 public:
@@ -20,6 +20,7 @@ public:
 	virtual void executar() = 0;
 	//virtual void salvar() = 0;
 	Vector2f getPos() const;
+	void setPos(const Vector2f& pos);
 	void draw(RenderWindow* window);                  //Ente
 	void attPos();
 	void setCorShape(Color cor);

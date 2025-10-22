@@ -1,5 +1,6 @@
 #include "Jogo.hpp"
 
+
 Jogo::Jogo() :
     pJog1(NULL),
     GG(),
@@ -48,11 +49,14 @@ void Jogo::executarJogo() {
         delete pJog1;
     }
     pJog1 = new Jogador(Vector2f(640,360));
+    Obstaculo* obs1 = new Obstaculo(Vector2f(400.f, 300.f), Vector2f(200.f, 40.f), false, 0);
 
     RenderWindow* window = GG.getWindow();
 
     GC.setJog(pJog1);
     GC.setWindow(window);
+    GC.incluirObstaculo(obs1);
+
 
     while (window && window->isOpen()) {
         while (window->pollEvent(event)) {
@@ -65,15 +69,16 @@ void Jogo::executarJogo() {
                 return;
             }
         }
+
+        GG.clearWindow(Color::Blue);
+
         if (pJog1) {
             pJog1->executar();
-            pJog1->limitarMovimento(window->getSize());
+            pJog1->limitarMovimento(window->getSize());     //desenhar deve ser no GG, e tlvz a verificação seja desnecessária.
+            pJog1->draw(window);
         }
+
         GC.executar();
-        GG.clearWindow(Color::Blue);
-        if (pJog1) {                                     //talvez desnecessarias... perguntar
-            pJog1->draw(window);            
-        }
         GG.displayWindow();
     }
 }

@@ -14,7 +14,14 @@ Entidade::~Entidade() {
 }
 
 
-//Fzer o getpos aq
+Vector2f Entidade::getPos() const {
+	return pos;
+}
+
+void Entidade::setPos(const Vector2f& p) {
+	pos = p;
+	attPos();
+}
 
 void Entidade::draw(RenderWindow* window) {
 	window->draw(shape);
@@ -27,10 +34,6 @@ void Entidade::attPos() {
 }
 
 //Entidade::void salvarDataBuffer() {}
-
-Vector2f Entidade::getPos() const {
-	return pos;
-}
 
 void Entidade::setCorShape(Color cor) { 
 	shape.setFillColor(cor); 

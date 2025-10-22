@@ -5,6 +5,8 @@
 #include "Gerenciador_Colisoes.hpp"
 #include "Menu.hpp"
 #include "Jogador.hpp"
+#include "Obstaculo.hpp"
+
 
 using namespace sf;
 

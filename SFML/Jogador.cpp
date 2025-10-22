@@ -56,6 +56,7 @@ void Jogador::limitarMovimento(const Vector2u& windowSize) {            //GERENC
 int Jogador::getPontos() const { 
 	return pontos;
 }
+
 void Jogador::adicionarPontos(int pts) { 
 	pontos += pts; 
 }
