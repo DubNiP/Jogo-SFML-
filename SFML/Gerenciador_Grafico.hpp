@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Entidade.hpp"
 
 
 /*    TROCAR O NOME DO ARQUIVO, É GERENCIADOR_GRAFICO E NAO GERENCIADOR.GRAFICO   (no cpp tbm)         */

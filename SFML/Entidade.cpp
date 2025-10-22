@@ -46,3 +46,7 @@ void Entidade::setTamanhoShape(Vector2f tamanho) {
 FloatRect Entidade::getBounds() const {
 	return shape.getGlobalBounds();
 }
+
+RectangleShape Entidade::getShape() const {
+	return shape;
+}
