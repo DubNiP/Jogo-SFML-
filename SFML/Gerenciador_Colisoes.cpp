@@ -59,38 +59,11 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	if (pJog1) {
 		list<Obstaculo*>::iterator it = LOs.begin();
 		while (it != LOs.end()) {
-			if (*it) {                                             //no futuro posso implementar uma funçao que simplifica esse processo de AABB e MTV
+			if (*it) {                                           
 				FloatRect jog = pJog1->getBounds();
 				FloatRect obs = (*it)->getBounds();
-				if (jog.intersects(obs)) {                
-					float jogx = jog.left + jog.width / 2;         //Lógica: a posição central é a coordenada que fica no topo superior esquerdo + a altura/largura.         
-					float jogy = jog.top + jog.height / 2;
-					float obsx = obs.left + obs.width / 2;
-					float obsy = obs.top + obs.height / 2;
-					const float sobrePosX = (jog.width * 0.5f + obs.width * 0.5f) - fabs(jogx - obsx);
-					const float sobrePosY = (jog.height * 0.5f + obs.height * 0.5f) - fabs(jogy - obsy);
-
-
-					Vector2f MTV(0, 0);                      //dar uma olhada na colisão
-					if (sobrePosX < sobrePosY) {        
-						if (jogx > obsx) {
-							MTV.x = sobrePosX;
-						}
-						else {
-							MTV.x = -sobrePosX; 
-						}
-					}
-					else {
-						
-						if (jogy > obsy) {
-							MTV.y = sobrePosY;
-						}
-						else {
-							MTV.y = -sobrePosY;
-						}
-					}
-
-					pJog1->setPos(pJog1->getPos() + MTV);
+				if (jog.intersects(obs)) {
+					colidiu(*it, pJog1, jog, obs);
 					(*it)->obstaculizar(pJog1);
 				}
 			}
@@ -115,14 +88,16 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 	}
 }
 
-void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) {
-	if (pObstaculo) {
-		LOs.push_back(pObstaculo);
-	}
-}
+
 void GerenciadorColisoes::incluirInimigo(Inimigo* pi) {
 	if (pi) {
 		LIs.push_back(pi);
+	}
+}
+
+void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) {
+	if (pObstaculo) {
+		LOs.push_back(pObstaculo);
 	}
 }
 
