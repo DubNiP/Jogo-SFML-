@@ -1,19 +1,23 @@
 #include "Jogo.hpp"
 
+/*Seguinte, a parte de desenhar está sendo feita aqui, mas ela deve ser feita no GG,
+         para arrumar isso, teremos a classe Ente e a lista de entidades,
+         o que faremos é que o menu será derivado de ente, e através de uma
+         função estática, setaremos o GG de ente, assim, percorreremos a lista
+         de entidades e desenharemos elas no GG.                                */
+
+
 
 Jogo::Jogo() :
-    pJog1(NULL),
+    pJog1(Vector2f(640,360), 50.0f),
     GG(),
-    GC(),
     menu(),
-    event()
+    event(),
+    fase1(&pJog1,&GG)
 {
 }
 
 Jogo::~Jogo() {
-    if (pJog1) {
-        delete pJog1;
-    }
 }
 
 void Jogo::executar() {
@@ -45,40 +49,5 @@ void Jogo::executarMenu(Menu& menu) {
 }
 
 void Jogo::executarJogo() {
-    if (pJog1) {
-        delete pJog1;
-    }
-    pJog1 = new Jogador(Vector2f(640,360), 50.0f);
-    Obstaculo* obs1 = new Obstaculo(Vector2f(400.f, 300.f), Vector2f(200.f, 40.f), false, 0);
-
-    RenderWindow* window = GG.getWindow();
-
-    GC.setJog(pJog1);
-    GC.setWindow(window);
-    GC.incluirObstaculo(obs1);
-
-
-    while (window && window->isOpen()) {
-        while (window->pollEvent(event)) {
-            if (event.type == Event::Closed) {
-                window->close();
-                return;
-            }
-
-            if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
-                return;
-            }
-        }
-
-        GG.clearWindow(Color::Blue);
-
-        if (pJog1) {
-            pJog1->executar();
-            pJog1->limitarMovimento(window->getSize());     //desenhar deve ser no GG, e tlvz a verificação seja desnecessária.
-            pJog1->draw(window);
-        }
-
-        GC.executar();
-        GG.displayWindow();
-    }
+    fase1.executar();
 }

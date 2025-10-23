@@ -42,21 +42,16 @@ void Jogador::processarInput() {
 	}
 }
 
-void Jogador::limitarMovimento(const Vector2u& windowSize) {            //GERENCIADOR DE COLISOES!!!  (ou colocar obstaculos em volta...)
-	FloatRect boundJog = shape.getGlobalBounds();
-
-	const int X = windowSize.x - boundJog.width;
-	const int Y = windowSize.y - boundJog.height;
-	if (pos.x < 0)   pos.x = 0;
-	if (pos.y < 0)   pos.y = 0;
-	if (pos.x > X) pos.x = X;
-	if (pos.y > Y) pos.y = Y;
-}
-
 int Jogador::getPontos() const { 
 	return pontos;
 }
 
 void Jogador::adicionarPontos(int pts) { 
 	pontos += pts; 
+}
+
+void Jogador::reseta(Vector2f posicao, int vidas, int pts) {
+	setPos(posicao);
+	num_vidas = vidas;
+	pontos = pts;
 }
