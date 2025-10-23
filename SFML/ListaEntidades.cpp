@@ -14,14 +14,21 @@ ListaEntidades::~ListaEntidades()
 
 void ListaEntidades::incluir(Entidade* pE)
 {
-	if (pE != nullptr)
-		LEs.inserir(pE);
+	if (pE)
+		LEs.incluir(pE);
 
+}
+
+void ListaEntidades::percorrer() {
+	for (int i = 0; i < LEs.getSize(); ++i) {
+		Entidade* e = LEs.getItem(i);
+		if (e) e->executar();
+	}
 }
 
 void ListaEntidades::excluir(Entidade* pE)
 {
-	if (pE != nullptr)
+	if (pE)
 		LEs.deletar(pE);
 }
 

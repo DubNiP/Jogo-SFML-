@@ -140,6 +140,7 @@
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
+    <ClCompile Include="ListaEntidades.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
@@ -153,6 +154,8 @@
     <ClInclude Include="Inimigo.hpp" />
     <ClInclude Include="Jogador.hpp" />
     <ClInclude Include="Jogo.hpp" />
+    <ClInclude Include="Lista.hpp" />
+    <ClInclude Include="ListaEntidades.hpp" />
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Obstaculo.hpp" />
     <ClInclude Include="Personagem.hpp" />

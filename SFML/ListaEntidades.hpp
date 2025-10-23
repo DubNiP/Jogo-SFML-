@@ -12,6 +12,7 @@ public:
     ~ListaEntidades();
 
     void incluir(Entidade* pE);
+    void percorrer();
     void excluir(Entidade* pE);
     void getItem(int pos);
     void limpar();
