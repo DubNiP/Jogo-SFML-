@@ -2,7 +2,7 @@
 
 #include "Entidade.hpp"
 #include "Jogador.hpp"
-//#include "Inimigo.hpp"
+#include "Inimigo.hpp"
 #include "Obstaculo.hpp"
 //#include "Projetil.hpp"
 #include <vector>
@@ -13,7 +13,7 @@ using namespace std;
 
 class GerenciadorColisoes {
 private:
-    //vector<Inimigo*>  LIs;   // lista de inimigos
+    vector<Inimigo*>  LIs;
     list<Obstaculo*>  LOs;
     //set<Projetil*>    LPs;   // conjunto de projéteis
     Jogador* pJog1;
@@ -24,16 +24,18 @@ public:
     ~GerenciadorColisoes();
 
     const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
+    void colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, FloatRect obs);
 
-    void tratarColisoesJogsObstaculos();
-    // void tratarColisoesJogsInimigos();
+    void tratarColisoesJogsObstacs();
+    void tratarColisoesJogsInimgs();
     // void tratarColisoesJogsProjeteis();
 
-    // void incluirInimigo(Inimigo* pInimigo);
+    void incluirInimigo(Inimigo* pInimigo);
     void incluirObstaculo(Obstaculo* pObstaculo);
     // void incluirProjetil(Projetil* pProjetil);
 
     void limparObstaculos();
+    void limparInimigos();
 
     void executar();
 

@@ -18,7 +18,43 @@ const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) c
 	return pe1->getBounds().intersects(pe2->getBounds());
 }
 
-void GerenciadorColisoes::tratarColisoesJogsObstaculos() {
+void GerenciadorColisoes::colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, FloatRect en) {
+	if (pe1 && pe2 && pe1 != pe2) {
+		float jogx = jog.left + jog.width / 2;         //Lógica: a posição central é a coordenada que fica no topo superior esquerdo + a altura/largura.         
+		float jogy = jog.top + jog.height / 2;
+		float obsx = en.left + en.width / 2;
+		float obsy = en.top + en.height / 2;
+		const float sobrePosX = (jog.width * 0.5f + en.width * 0.5f) - fabs(jogx - obsx);
+		const float sobrePosY = (jog.height * 0.5f + en.height * 0.5f) - fabs(jogy - obsy);
+
+
+		Vector2f MTV(0, 0);                      //dar uma olhada na colisão
+		if (sobrePosX < sobrePosY) {
+			if (jogx > obsx) {
+				MTV.x = sobrePosX;
+			}
+			else {
+				MTV.x = -sobrePosX;
+			}
+		}
+		else {
+
+			if (jogy > obsy) {
+				MTV.y = sobrePosY;
+			}
+			else {
+				MTV.y = -sobrePosY;
+			}
+		}
+		pJog1->setPos(pJog1->getPos() + MTV);
+	}
+
+}
+
+
+
+
+void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	
 	if (pJog1) {
 		list<Obstaculo*>::iterator it = LOs.begin();
@@ -64,12 +100,34 @@ void GerenciadorColisoes::tratarColisoesJogsObstaculos() {
 
 	}
 }
+void GerenciadorColisoes::tratarColisoesJogsInimgs() {
+	if (pJog1) {
+		for (int i = 0; i < LIs.size(); i++) {
+			if (LIs[i]) {
+				FloatRect jog = pJog1->getBounds();
+				FloatRect inim = LIs[i]->getBounds();
+				if (jog.intersects(inim)) {
+					colidiu(LIs[i], pJog1, jog, inim);
+					LIs[i]->danificar(pJog1);                //isso tá sugando a vida do jogador MT rápido, dps é bom dar uma olhada
+				}
+			}
+		}
+	}
+}
 
 void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) {
 	if (pObstaculo) {
 		LOs.push_back(pObstaculo);
 	}
 }
+void GerenciadorColisoes::incluirInimigo(Inimigo* pi) {
+	if (pi) {
+		LIs.push_back(pi);
+	}
+}
+
+
+
 
 void GerenciadorColisoes::limparObstaculos() {
 	list<Obstaculo*>::iterator it = LOs.begin();
@@ -82,6 +140,15 @@ void GerenciadorColisoes::limparObstaculos() {
 	LOs.clear();
 }
 
+void GerenciadorColisoes::limparInimigos() {
+	for (int i = 0; i < LIs.size(); i++) {
+		if (LIs[i]) {
+			delete LIs[i];
+		}
+	}
+	LIs.clear();
+}
+
 void GerenciadorColisoes::executar() {
 	if (pJog1) {
 		list<Obstaculo*>::iterator it = LOs.begin();
@@ -92,7 +159,15 @@ void GerenciadorColisoes::executar() {
 			}
 			it++;
 		}
-		tratarColisoesJogsObstaculos();
+		tratarColisoesJogsObstacs();
+
+		for (int i = 0; i < LIs.size(); i++) {
+			if (LIs[i] && window) {
+				LIs[i]->executar();
+				LIs[i]->draw(window);
+			}
+		}
+		tratarColisoesJogsInimgs();
 	}
 }
 

@@ -2,7 +2,9 @@
 
 Jogador::Jogador(Vector2f pos, float vel) :
 	Personagem(pos, vel),
-	pontos(0)
+	pontos(0),
+	invencibilidade(0.3f),
+	danoClock()
 {
 	setCorShape(Color::Red);
 }
@@ -54,4 +56,15 @@ void Jogador::reseta(Vector2f posicao, int vidas, int pts) {
 	setPos(posicao);
 	num_vidas = vidas;
 	pontos = pts;
+	danoClock.restart();
+}
+
+void Jogador::tomarDano(int dano) {
+	if (dano > 0) {
+		if (danoClock.getElapsedTime().asSeconds() < invencibilidade) return;
+		int vidas = getVidas() - dano;
+		if (vidas < 0) vidas = 0;
+		setVidas(vidas);
+		danoClock.restart();
+	}
 }

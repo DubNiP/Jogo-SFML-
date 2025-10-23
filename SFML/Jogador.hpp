@@ -1,10 +1,13 @@
 #pragma once
 
 #include "Personagem.hpp"
+#include <SFML/System/Clock.hpp>
 
 class Jogador: public Personagem {
 protected:
 	int pontos;
+	float invencibilidade;
+	Clock danoClock;
 public:
 	Jogador(Vector2f pos, float vel);
 	~Jogador();
@@ -19,4 +22,6 @@ public:
 	void adicionarPontos(int pts);
 
 	void reseta(Vector2f pos,int vidas, int pontos);
+	void tomarDano(int dano);
+
 };

@@ -2,7 +2,7 @@
 
 Personagem::Personagem(Vector2f pos, float velocidade):
 	Entidade(pos),
-	num_vidas(10),
+	num_vidas(1000),
 	vel(velocidade)
 {
 	setTamanhoShape(Vector2f(50, 50));

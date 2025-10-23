@@ -15,7 +15,7 @@ protected:
 	Jogador* jog;
 	//void criarInimFaceis();
 	//void criarPlataformas();
-	//virtual void criarInimigos() = 0;
+	void criarInimigos();             //DEVE SER VIRTUAL NO FUTURO
 	void criarObstaculo();                          //DEVE SER VIRTUAL NO FUTURO
 	void criarCenario();
 public:
