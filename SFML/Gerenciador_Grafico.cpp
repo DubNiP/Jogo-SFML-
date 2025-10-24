@@ -20,7 +20,11 @@ GerenciadorGrafico::~GerenciadorGrafico() {
     }
 }
 
-//desenharEnte();
+void GerenciadorGrafico::desenharEnte(const RectangleShape &shape) {
+    if (window) {
+        window->draw(shape);
+    }
+}
 
 void GerenciadorGrafico::clearWindow(Color cor) {
     if (window) {

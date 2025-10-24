@@ -4,22 +4,24 @@
 #include "Gerenciador_Colisoes.hpp"
 #include "Jogador.hpp"
 #include "Obstaculo.hpp"
+#include "Ente.hpp"
+#include "ListaEntidades.hpp"
 
 using namespace sf;
 
-class Fase {
+class Fase: public Ente {
 protected:
-	//ListaEntidades lista_ents;
+	ListaEntidades lista_ents;
 	GerenciadorGrafico* GG;
 	GerenciadorColisoes GC;
 	Jogador* jog;
 	//void criarInimFaceis();
 	//void criarPlataformas();
 	void criarInimigos();             //DEVE SER VIRTUAL NO FUTURO
-	void criarObstaculo();                          //DEVE SER VIRTUAL NO FUTURO
+	void criarObstaculo();            //DEVE SER VIRTUAL NO FUTURO
 	void criarCenario();
 public:
 	Fase(Jogador* pJog, GerenciadorGrafico* pGG);
 	~Fase();
-	void executar();                          //DEVE SER VIRTUAL NO FUTURO
+	void executar();                  //DEVE SER VIRTUAL NO FUTURO
 };

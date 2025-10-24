@@ -69,6 +69,11 @@ void Menu::set_values() {
 	}
 }
 
+
+void Menu::executar() {
+
+}
+
 void Menu::loop_menu(Event& event){
 	if (event.type == Event::Closed) {
 		sair = true;
@@ -104,16 +109,16 @@ void Menu::loop_menu(Event& event){
 	}
 }
 
-void Menu::draw_menu(RenderWindow* window) {
-	if (window) {
-		window->clear();
+void Menu::draw_menu() {
+	if (pGG){
+		pGG->clearWindow();
 		if (bg) {
-			window->draw(*bg);
+			pGG->drawWindow(*bg);
 		}
-		for (auto i : texts) {
-			window->draw(i);
+		for (auto& t : texts) {
+			pGG->drawWindow(t);
 		}
-		window->display();
+		pGG->displayWindow();
 	}
 }
 

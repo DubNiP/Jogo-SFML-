@@ -105,45 +105,16 @@ void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) {
 
 
 void GerenciadorColisoes::limparObstaculos() {
-	list<Obstaculo*>::iterator it = LOs.begin();
-	while (it != LOs.end()) {
-		if (*it) {
-			delete (*it);
-		}
-		it++;
-	}
 	LOs.clear();
 }
 
 void GerenciadorColisoes::limparInimigos() {
-	for (int i = 0; i < LIs.size(); i++) {
-		if (LIs[i]) {
-			delete LIs[i];
-		}
-	}
 	LIs.clear();
 }
 
 void GerenciadorColisoes::executar() {
-	if (pJog1) {
-		list<Obstaculo*>::iterator it = LOs.begin();
-		while (it != LOs.end()) {
-			if (*it && window) {
-				(*it)->executar();
-				(*it)->draw(window);                             //WARNING: DESENHAR DEVE SER NO GERENCIADOR GRÁFICO...
-			}
-			it++;
-		}
-		tratarColisoesJogsObstacs();
-
-		for (int i = 0; i < LIs.size(); i++) {
-			if (LIs[i] && window) {
-				LIs[i]->executar();
-				LIs[i]->draw(window);
-			}
-		}
-		tratarColisoesJogsInimgs();
-	}
+	tratarColisoesJogsObstacs();
+	tratarColisoesJogsInimgs();
 }
 
 void GerenciadorColisoes::setJog(Jogador* pJog) {

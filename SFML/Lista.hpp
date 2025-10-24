@@ -16,7 +16,7 @@ private:
 
     public:
         Elemento() : pProx(NULL), pInfo(NULL) {};
-        ~Elemento() = default;   //????
+        ~Elemento() = default;
 
         void setProx(Elemento<TE>* pE) { pProx = pE; }
         void setInfo(TE* p) { pInfo = p; }
@@ -87,7 +87,7 @@ public:
         delete temp;
         size--;
     }
-    TL* getItem(int posicao) {
+    TL* getItem(int posicao) const {
         if (posicao < 0 || posicao >= size || !pPrimeiro) {
             return NULL;
         }
