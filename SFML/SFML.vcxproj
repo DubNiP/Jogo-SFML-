@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -147,6 +148,7 @@
     <ClCompile Include="Personagem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />
     <ClInclude Include="Fase.hpp" />
     <ClInclude Include="Gerenciador_Grafico.hpp" />

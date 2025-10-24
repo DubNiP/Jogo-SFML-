@@ -4,7 +4,9 @@ Inimigo::Inimigo(Vector2f pos, float vel) :
 	Personagem(pos, vel),
 	nivel_maldade(3)
 {
+	criarCirculo(25.f);
 	setCorShape(Color::Magenta);
+	setPos(pos);
 }
 
 Inimigo::~Inimigo() {

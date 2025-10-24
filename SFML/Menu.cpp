@@ -1,4 +1,5 @@
 #include "Menu.hpp"
+#include "Gerenciador_Grafico.hpp"
 
 Menu::Menu() :
 	pos(1),
@@ -9,7 +10,6 @@ Menu::Menu() :
 
 	font(NULL),
 	image(NULL),
-	bg(NULL),
 
 	pos_mouse(),
 	mouse_coord(),
@@ -21,7 +21,15 @@ Menu::Menu() :
 {
 	font = new Font();
 	image = new Texture();
-	bg = new Sprite();              //mover pra ente
+
+	if (!font->loadFromFile("Fonts/Newsreader-VariableFont_opsz,wght.ttf")) {
+		throw "Deu Merda aqui";
+	}
+	if (!image->loadFromFile("Textures/Fundo_menu.png")) {
+		throw "Deu Merda aqui";
+	}
+
+	criarSprite(image);
 	set_values();
 }
 
@@ -32,25 +40,12 @@ Menu::~Menu() {
 	if (image) {
 		delete image;
 	}
-	if (bg) {
-		delete bg;
-	}
 
 	font = NULL;
 	image = NULL;
-	bg = NULL;
 }
 
 void Menu::set_values() {
-	if (!font->loadFromFile("Fonts/Newsreader-VariableFont_opsz,wght.ttf")) {
-		throw "Deu Merda aqui";
-	}
-	if (!image->loadFromFile("Textures/Fundo_menu.png")) {
-		throw "Deu Merda aqui";
-	}
-	if (bg) {
-		bg->setTexture(*image);
-	}
 
 	pos_mouse = { 0,0 };
 	mouse_coord = { 0,0 };
@@ -59,7 +54,10 @@ void Menu::set_values() {
 	texts.resize(4);
 	coords = { {490,180},{620,350},{600,420},{630,490} };
 	sizes = { 80,50,50,50 };
+
 	texts[1].setOutlineThickness(4);
+
+
 	for (size_t i{}; i < texts.size(); i++) {
 		texts[i].setFont(*font);
 		texts[i].setString(options[i]);
@@ -67,6 +65,11 @@ void Menu::set_values() {
 		texts[i].setPosition(coords[i]);
 		texts[i].setOutlineColor(Color::Black);
 	}
+}
+
+
+void Menu::executar() {
+
 }
 
 void Menu::loop_menu(Event& event){
@@ -104,16 +107,16 @@ void Menu::loop_menu(Event& event){
 	}
 }
 
-void Menu::draw_menu(RenderWindow* window) {
-	if (window) {
-		window->clear();
-		if (bg) {
-			window->draw(*bg);
+void Menu::draw_menu() {
+	if (pGG){
+		pGG->clearWindow();
+
+		desenhar();
+		
+		for (auto& t : texts) {
+			pGG->desenharEnte(t);
 		}
-		for (auto i : texts) {
-			window->draw(i);
-		}
-		window->display();
+		pGG->displayWindow();
 	}
 }
 

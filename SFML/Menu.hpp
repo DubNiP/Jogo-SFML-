@@ -2,12 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Ente.hpp"
 
 using namespace std;
 using namespace sf;
 
 
-class Menu {
+class Menu: public Ente {
 private:
 	int pos;
 	bool pressed;
@@ -17,7 +18,7 @@ private:
 
 	Font* font;
 	Texture* image;
-	Sprite* bg;              //mover para ente no futuro...
+	//Sprite* bg;  
 
 	Vector2i pos_mouse;
 	Vector2f mouse_coord;
@@ -34,8 +35,9 @@ private:
 public:
 	Menu();
 	~Menu();
+	void executar();
 	void loop_menu(Event& event);
-	void draw_menu(RenderWindow* window);
+	void draw_menu();
 	bool getIniciar() const;
 	bool getSair() const;
 	void reseta();

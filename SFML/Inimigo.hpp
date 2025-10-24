@@ -13,5 +13,5 @@ public:
 	void executar();                             //virtual no futuro..
 	void danificar(Jogador* p);                  //virtual no futuro..
 	//virtual void salva() = 0;
-	virtual void mover();
+	void mover();
 };

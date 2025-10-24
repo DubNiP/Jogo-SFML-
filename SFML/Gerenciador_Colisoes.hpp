@@ -7,15 +7,19 @@
 //#include "Projetil.hpp"
 #include <vector>
 #include <list>
-#include <set>
+//#include <set>
 
 using namespace std;
+
+//POR ENQUANTO A COLISÃO PEGA OS QUADRADOS DOS FORMATOS, VALE A PENA ANALISAR ISSO E MELHORAR NO FUTURO...
+
+
 
 class GerenciadorColisoes {
 private:
     vector<Inimigo*>  LIs;
     list<Obstaculo*>  LOs;
-    //set<Projetil*>    LPs;   // conjunto de projéteis
+    //set<Projetil*>    LPs;  
     Jogador* pJog1;
     RenderWindow* window;
 

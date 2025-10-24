@@ -1,10 +1,11 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Entidade.hpp"
+
+
+class ListaEntidades;
 
 using namespace sf;
-class Ente;
 
 class GerenciadorGrafico {
 private:
@@ -12,9 +13,9 @@ private:
 public:
     GerenciadorGrafico();
     ~GerenciadorGrafico();
-    //void desenharEnte(Ente* pE);
-    void clearWindow(Color cor = Color::Black);
-    void drawWindow(const Drawable& corpo);
+    void desenharEnte(const Drawable &shape);
+    void clearWindow(Color cor = Color::Black);                     
     void displayWindow();
+    void desenhaTodos(ListaEntidades* LE, Color cor = Color::Black);
     RenderWindow* getWindow() const;
 };

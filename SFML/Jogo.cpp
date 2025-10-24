@@ -1,12 +1,5 @@
 #include "Jogo.hpp"
 
-/*Seguinte, a parte de desenhar está sendo feita aqui, mas ela deve ser feita no GG,
-         para arrumar isso, teremos a classe Ente e a lista de entidades,
-         o que faremos é que o menu será derivado de ente, e através de uma
-         função estática, setaremos o GG de ente, assim, percorreremos a lista
-         de entidades e desenharemos elas no GG.                                */
-
-
 
 Jogo::Jogo() :
     pJog1(Vector2f(640,360), 50.0f),
@@ -15,6 +8,7 @@ Jogo::Jogo() :
     event(),
     fase1(&pJog1,&GG)
 {
+    Ente::setGG(&GG);
 }
 
 Jogo::~Jogo() {
@@ -44,7 +38,7 @@ void Jogo::executarMenu(Menu& menu) {
         while (window->pollEvent(event)) {
             menu.loop_menu(event);
         }
-        menu.draw_menu(window);
+        menu.draw_menu();
     }
 }
 
