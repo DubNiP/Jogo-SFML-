@@ -5,12 +5,14 @@ GerenciadorGrafico* Ente::pGG = NULL;
 
 Ente::Ente() :
 	id(0),
-	pFig(NULL)
+	pFig(NULL),
+	pT(NULL)
 {
-	pFig = new RectangleShape();              
-	pFig->setSize(Vector2f(50.f, 50.f));     
-	pFig->setFillColor(Color::White);
-	pFig->setPosition({ 0.f, 0.f });
+	auto* rect = new RectangleShape(Vector2f(50.f, 50.f));            //modificar no futuro
+	rect->setFillColor(Color::White);
+
+	pFig = rect;
+	pT = rect;
 }
 
 Ente::~Ente() {
@@ -19,7 +21,44 @@ Ente::~Ente() {
 		delete pFig;
 	}
 	pFig = NULL;
+	pT = NULL;
 }
+
+void Ente::criarRetangulo(const sf::Vector2f& tamanho, const sf::Color& cor) {
+	delete pFig;
+	auto* rect = new sf::RectangleShape(tamanho);
+	rect->setFillColor(cor);
+	pFig = rect;
+	pT = rect;
+}
+
+void Ente::criarCirculo(float raio, const sf::Color& cor) {
+	delete pFig;
+	auto* circle = new sf::CircleShape(raio);
+	circle->setFillColor(cor);
+	pFig = circle;
+	pT = circle;
+}
+
+void Ente::criarSprite(sf::Texture* textura) {
+	delete pFig;
+	auto* sprite = new sf::Sprite();
+	if (textura) sprite->setTexture(*textura);
+	pFig = sprite;
+	pT = sprite;
+}
+
+void Ente::criarTexto(sf::Font* fonte, const std::string& str, unsigned int tamanho) {
+	delete pFig;
+	auto* text = new sf::Text();
+	if (fonte) text->setFont(*fonte);
+	text->setString(str);
+	text->setCharacterSize(tamanho);
+	pFig = text;
+	pT = text;
+}
+
+
 
 void Ente::desenhar() {
 	if (pGG && pFig) {
@@ -31,28 +70,42 @@ void Ente::setGG(GerenciadorGrafico* pG) {
 	pGG = pG;
 }
 
+void Ente::setPos(const Vector2f& pos) {
+	if (pT) pT->setPosition(pos);
+}
+
+void Ente::setRot(float angle) {
+	if (pT) pT->setRotation(angle);
+}
+
+void Ente::setScale(const Vector2f& scale) {
+	if (pT) pT->setScale(scale);
+}
+
 void Ente::setCorShape(Color cor) {
-	if (pFig) {
-		pFig->setFillColor(cor);
+	// Tenta converter para Shape (funciona com RectangleShape, CircleShape, etc.)
+	if (auto* shape = dynamic_cast<Shape*>(pFig)) {
+		shape->setFillColor(cor);
 	}
 }
 
 void Ente::setTamanhoShape(Vector2f tamanho) {
-	if (pFig) {
-		pFig->setSize(tamanho);
+	// Específico para RectangleShape
+	if (auto* rect = dynamic_cast<RectangleShape*>(pFig)) {
+		rect->setSize(tamanho);
 	}
 }
 
 FloatRect Ente::getBounds() const {
-	if (pFig) {
-		return pFig->getGlobalBounds();
+	// Tenta pegar bounds de qualquer tipo que tenha getGlobalBounds
+	if (auto* shape = dynamic_cast<Shape*>(pFig)) {
+		return shape->getGlobalBounds();
 	}
-	throw "Deu merda aqui";
-}
-
-RectangleShape Ente::getShape() const {
-	if (pFig) {
-		return *pFig;
+	if (auto* sprite = dynamic_cast<Sprite*>(pFig)) {
+		return sprite->getGlobalBounds();
 	}
-	throw "Deu merda aqui";
+	if (auto* text = dynamic_cast<Text*>(pFig)) {
+		return text->getGlobalBounds();
+	}
+	return FloatRect();
 }
