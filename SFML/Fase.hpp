@@ -5,6 +5,7 @@
 #include "Jogador.hpp"
 #include "Obst_Dificil.hpp"
 #include "Ente.hpp"
+#include "Projetil.hpp"
 #include "ListaEntidades.hpp"
 
 using namespace sf;
@@ -17,6 +18,7 @@ protected:
 	Jogador* jog;
 	//void criarInimFaceis();
 	//void criarPlataformas();
+	void criarProjetil();                                       //Comentar com o Rafa
 	virtual void criarInimigos() = 0;          
 	virtual void criarObstaculo() = 0;
 	void criarCenario();
