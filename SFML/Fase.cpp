@@ -15,14 +15,25 @@ Fase::~Fase() {
     lista_ents.limparPreservando(jog);                 //estranho..
     GC.limparObstaculos();
     GC.limparInimigos();
+    GC.limparProjetis();
     jog = NULL;
     GG = NULL;
 }
+
+void Fase::criarProjetil()                                                       //COMENTAR COM O RAFA
+{
+    Projetil* pProjetil = new Projetil(Vector2f(1000.f, 360.f), false);
+    GC.incluirProjetil(pProjetil);
+    lista_ents.incluir(pProjetil);
+}
+
+
 
 void Fase::criarCenario() {
     lista_ents.limparPreservando(jog);                                    //estranho..
     GC.limparObstaculos();
     GC.limparInimigos();
+    GC.limparProjetis();
 
     //deve ter criar plataformas, etc...
     if (jog) {
@@ -31,6 +42,7 @@ void Fase::criarCenario() {
     }
     criarObstaculo();
     criarInimigos();
+    criarProjetil(); //adicionar de forma que seja enviado pelo chefão
 }
 
 void Fase::executar() {

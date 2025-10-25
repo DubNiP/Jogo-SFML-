@@ -1,7 +1,9 @@
 #include "Gerenciador_Colisoes.hpp"
 
 GerenciadorColisoes::GerenciadorColisoes(Jogador* pJog, RenderWindow* win):
+	LIs(),
 	LOs(),
+	LPs(),
 	pJog1(pJog),
 	window(win)
 {
@@ -62,7 +64,7 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 			if (*it) {                                           
 				FloatRect jog = pJog1->getBounds();
 				FloatRect obs = (*it)->getBounds();
-				if (jog.intersects(obs)) {
+				if (verificarColisao(pJog1, *it)) {
 					colidiu(*it, pJog1, jog, obs);
 					(*it)->obstaculizar(pJog1);
 				}
@@ -79,11 +81,28 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 			if (LIs[i]) {
 				FloatRect jog = pJog1->getBounds();
 				FloatRect inim = LIs[i]->getBounds();
-				if (jog.intersects(inim)) {
+				if (verificarColisao(pJog1, LIs[i])) {
 					colidiu(LIs[i], pJog1, jog, inim);
 					LIs[i]->danificar(pJog1);                //isso tá sugando a vida do jogador MT rápido, dps é bom dar uma olhada
 				}
 			}
+		}
+	}
+}
+
+void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
+	if (pJog1) {
+		set<Projetil*>::iterator it = LPs.begin();
+		while (it != LPs.end()) {
+			FloatRect jog = pJog1->getBounds();
+			FloatRect inim = (*it)->getBounds();
+			if (verificarColisao(pJog1, *it)) {
+				pJog1->tomarDano((*it)->getDano());                //analisar se é possível deixar mais organizado, mas tá massa
+				(*it)->setAtivo(false);
+				it = LPs.erase(it);
+				continue;
+			}
+			it++;
 		}
 	}
 }
@@ -101,7 +120,12 @@ void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) {
 	}
 }
 
-
+void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil)
+{
+	if (pProjetil) {
+		LPs.insert(pProjetil);
+	}
+}
 
 
 void GerenciadorColisoes::limparObstaculos() {
@@ -112,8 +136,14 @@ void GerenciadorColisoes::limparInimigos() {
 	LIs.clear();
 }
 
+void GerenciadorColisoes::limparProjetis()
+{
+	LPs.clear();
+}
+
 void GerenciadorColisoes::executar() {
 	tratarColisoesJogsObstacs();
+	tratarColisoesJogsProjeteis();
 	tratarColisoesJogsInimgs();
 }
 
@@ -126,18 +156,49 @@ void GerenciadorColisoes::setWindow(RenderWindow* win) {
 }
 
 void GerenciadorColisoes::limiteDeTela() {
-	if (pJog1 && window) {
+	if (window) {
+
 		FloatRect boundJog = pJog1->getBounds();
 		Vector2u windowSize = window->getSize();
 
 		const int X = windowSize.x - boundJog.width;
 		const int Y = windowSize.y - boundJog.height;
-		if (pJog1->getPos().x < 0)   pJog1->setPos(Vector2f(0.f, pJog1->getPos().y));
-		if (pJog1->getPos().y < 0)   pJog1->setPos(Vector2f(pJog1->getPos().x, 0.f));
-		if (pJog1->getPos().x > X)	 pJog1->setPos(Vector2f(X, pJog1->getPos().y));
-		if (pJog1->getPos().y > Y)   pJog1->setPos(Vector2f(pJog1->getPos().x, Y));
+
+		if (pJog1){
+			limiteDeTelaJogador(X, Y);
+		}
+
+		limiteDeTelaProjeteis(X, Y);
 	}
 }
 
-// Observação:  as demais funções comentadas no .hpp
-// não são definidas aqui até que as dependências sejam implementadas
+void GerenciadorColisoes::limiteDeTelaJogador(int X, int Y) {
+
+	if (pJog1->getPos().x < 0)   pJog1->setPos(Vector2f(0.f, pJog1->getPos().y));
+	if (pJog1->getPos().y < 0)   pJog1->setPos(Vector2f(pJog1->getPos().x, 0.f));
+	if (pJog1->getPos().x > X)   pJog1->setPos(Vector2f(X, pJog1->getPos().y));
+	if (pJog1->getPos().y > Y)   pJog1->setPos(Vector2f(pJog1->getPos().x, Y));
+}
+
+void GerenciadorColisoes::limiteDeTelaProjeteis(int X, int Y) {
+
+	set<Projetil*>::iterator it = LPs.begin();
+
+	while (it != LPs.end()) {
+		Projetil* projetil = *it;
+
+		if (projetil) {
+			Vector2f posProjetil = projetil->getPos();
+
+			if (posProjetil.x  < 0 || posProjetil.y  < 0 || posProjetil.x > X || posProjetil.y > Y) {
+				projetil->setAtivo(false); //fazer a devida alteração
+
+				it = LPs.erase(it);
+				continue;
+
+			}
+		}
+		it++;
+	}
+
+}

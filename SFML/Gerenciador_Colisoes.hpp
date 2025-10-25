@@ -4,10 +4,10 @@
 #include "Jogador.hpp"
 #include "Inimigo.hpp"
 #include "Obstaculo.hpp"
-//#include "Projetil.hpp"
+#include "Projetil.hpp"
 #include <vector>
 #include <list>
-//#include <set>
+#include <set>
 
 using namespace std;
 
@@ -19,10 +19,9 @@ class GerenciadorColisoes {
 private:
     vector<Inimigo*>  LIs;
     list<Obstaculo*>  LOs;
-    //set<Projetil*>    LPs;  
+    set<Projetil*>    LPs;  
     Jogador* pJog1;
     RenderWindow* window;
-
 public:
     GerenciadorColisoes(Jogador* pJog = NULL,RenderWindow* window = NULL);
     ~GerenciadorColisoes();
@@ -32,14 +31,15 @@ public:
 
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
-    // void tratarColisoesJogsProjeteis();
+    void tratarColisoesJogsProjeteis();
 
     void incluirInimigo(Inimigo* pInimigo);
     void incluirObstaculo(Obstaculo* pObstaculo);
-    // void incluirProjetil(Projetil* pProjetil);
+    void incluirProjetil(Projetil* pProjetil);
 
     void limparObstaculos();
     void limparInimigos();
+    void limparProjetis();
 
     void executar();
 
@@ -47,4 +47,6 @@ public:
     void setWindow(RenderWindow* win);
 
     void limiteDeTela();
+    void limiteDeTelaJogador(int X, int Y);
+    void limiteDeTelaProjeteis(int X, int Y);
 };

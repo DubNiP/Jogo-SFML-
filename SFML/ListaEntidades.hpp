@@ -1,6 +1,7 @@
 #pragma once
 #include "Lista.hpp"
 #include "Entidade.hpp"
+#include "Projetil.hpp"
 
 class ListaEntidades
 {
@@ -18,6 +19,7 @@ public:
 
     void executarTodos();
     void desenharTodos();
+    void removerProjetis();
 
     Entidade* getItem(int pos) const;
 };

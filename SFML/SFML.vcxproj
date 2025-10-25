@@ -151,6 +151,7 @@
     <ClCompile Include="Obst_Medio.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
+    <ClCompile Include="Projetil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ente.hpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Obst_Medio.hpp" />
     <ClInclude Include="Personagem.hpp" />
     <ClInclude Include="Plataforma.hpp" />
+    <ClInclude Include="Projetil.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
