@@ -147,7 +147,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
+    <ClCompile Include="Obst_Dificil.cpp" />
+    <ClCompile Include="Obst_Medio.cpp" />
     <ClCompile Include="Personagem.cpp" />
+    <ClCompile Include="Plataforma.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ente.hpp" />
@@ -164,7 +167,10 @@
     <ClInclude Include="ListaEntidades.hpp" />
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Obstaculo.hpp" />
+    <ClInclude Include="Obst_Dificil.hpp" />
+    <ClInclude Include="Obst_Medio.hpp" />
     <ClInclude Include="Personagem.hpp" />
+    <ClInclude Include="Plataforma.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

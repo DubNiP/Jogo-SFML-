@@ -3,7 +3,7 @@
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Colisoes.hpp"
 #include "Jogador.hpp"
-#include "Obstaculo.hpp"
+#include "Obst_Dificil.hpp"
 #include "Ente.hpp"
 #include "ListaEntidades.hpp"
 
