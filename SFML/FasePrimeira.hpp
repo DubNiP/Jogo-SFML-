@@ -1,5 +1,7 @@
 #pragma once
 #include "Fase.hpp"
+#include "Inim_Medio.hpp"
+#include "Jogador.hpp"
 
 
 class FasePrimeira : public Fase {

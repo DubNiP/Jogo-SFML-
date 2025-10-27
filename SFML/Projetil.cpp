@@ -4,7 +4,7 @@
 Projetil::Projetil(Vector2f pos, bool dir) :
     Entidade(pos),
     ativo(true),
-    velocidade(5),
+    velocidade(5.0),
     direcao(dir),
     posicao(0),
     dano(1)
