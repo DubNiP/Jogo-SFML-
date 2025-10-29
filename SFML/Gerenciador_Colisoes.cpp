@@ -1,6 +1,8 @@
 #include "Gerenciador_Colisoes.hpp"
 
-GerenciadorColisoes::GerenciadorColisoes(Jogador* pJog, RenderWindow* win):
+using namespace Gerenciadores;
+
+GerenciadorColisoes::GerenciadorColisoes(entidades::personagens::Jogador* pJog, RenderWindow* win):
 	LIs(),
 	LOs(),
 	LPs(),
@@ -22,7 +24,7 @@ const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) c
 
 void GerenciadorColisoes::colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, FloatRect en) {
 	if (pe1 && pe2 && pe1 != pe2) {
-		float jogx = jog.left + jog.width / 2;         //Lógica: a posição central é a coordenada que fica no topo superior esquerdo + a altura/largura.  
+		float jogx = jog.left + jog.width / 2;         //Logica: a posicao central é a coordenada que fica no topo superior esquerdo + a altura/largura.  
 		float jogy = jog.top + jog.height / 2;
 		float obsx = en.left + en.width / 2;
 		float obsy = en.top + en.height / 2;
@@ -59,7 +61,7 @@ void GerenciadorColisoes::colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, F
 void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	
 	if (pJog1) {
-		list<Obstaculo*>::iterator it = LOs.begin();
+		list<entidades::obstaculos::Obstaculo*>::iterator it = LOs.begin();
 		while (it != LOs.end()) {
 			if (*it) {                                           
 				FloatRect jog = pJog1->getBounds();
@@ -83,7 +85,7 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 				FloatRect inim = LIs[i]->getBounds();
 				if (verificarColisao(pJog1, LIs[i])) {
 					colidiu(LIs[i], pJog1, jog, inim);
-					LIs[i]->danificar();                //isso tá sugando a vida do jogador MT rápido, dps é bom dar uma olhada
+					LIs[i]->danificar();                //isso ta sugando a vida do jogador MT rapido, dps e bom dar uma olhada
 				}
 			}
 		}
@@ -108,13 +110,13 @@ void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
 }
 
 
-void GerenciadorColisoes::incluirInimigo(Inimigo* pi) {
+void GerenciadorColisoes::incluirInimigo(entidades::personagens::Inimigo* pi) {
 	if (pi) {
 		LIs.push_back(pi);
 	}
 }
 
-void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) {
+void GerenciadorColisoes::incluirObstaculo(entidades::obstaculos::Obstaculo* pObstaculo) {
 	if (pObstaculo) {
 		LOs.push_back(pObstaculo);
 	}
@@ -148,7 +150,7 @@ void GerenciadorColisoes::executar() {
 	tratarColisoesJogsInimgs();
 }
 
-void GerenciadorColisoes::setJog(Jogador* pJog) {
+void GerenciadorColisoes::setJog(entidades::personagens::Jogador* pJog) {
 	pJog1 = pJog;
 }
 
@@ -190,7 +192,7 @@ void GerenciadorColisoes::limiteDeTelaProjeteis(int X, int Y) {
 			Vector2f posProjetil = projetil->getPos();
 
 			if (posProjetil.x  < 0 || posProjetil.y  < 0 || posProjetil.x > X || posProjetil.y > Y) {
-				projetil->setAtivo(false); //fazer a devida alteração
+				projetil->setAtivo(false); //fazer a devida alteracao	
 
 				it = LPs.erase(it);
 				continue;

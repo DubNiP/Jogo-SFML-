@@ -8,16 +8,15 @@
 #include "Obstaculo.hpp"
 #include "FasePrimeira.hpp"
 
-
 using namespace sf;
 
 class Jogo {
 private:
-	Jogador pJog1;
-	GerenciadorGrafico GG;
+	entidades::personagens::Jogador pJog1;            
+	Gerenciadores::GerenciadorGrafico GG;
 	Menu menu;
 	Event event;
-	FasePrimeira fase1;
+	fases::FasePrimeira fase1;
 	void executarMenu(Menu& menu);
 	void executarJogo();
 public:

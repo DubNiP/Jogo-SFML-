@@ -1,6 +1,8 @@
 #include "Fase.hpp"
 
-Fase::Fase(Jogador* pJog):
+using namespace fases;
+
+Fase::Fase(entidades::personagens::Jogador* pJog):
     Ente(),
     lista_ents(),
     GC(),

@@ -1,6 +1,8 @@
 #include "FaseSegunda.hpp"
 
-FaseSegunda::FaseSegunda(Jogador* pJog):
+using namespace fases;
+
+FaseSegunda::FaseSegunda(entidades::personagens::Jogador* pJog):
 	Fase(pJog),
 	maxChefoes(2)
 {

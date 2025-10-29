@@ -59,7 +59,7 @@ int Projetil::getDano() {
 
 void Projetil::carregarSprite() {
     if (!carregarTexturaSprite("Textures/Charge1.png")) {
-        throw "Deu merda aqui";
+        throw "Textura não carregada";
     }
     setScale(Vector2f(2.f, 2.f));
     setPos(pos);

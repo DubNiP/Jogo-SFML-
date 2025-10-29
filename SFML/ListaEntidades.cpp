@@ -2,6 +2,8 @@
 
 using namespace std;
 
+namespace listas {
+
 ListaEntidades::ListaEntidades() : LEs()
 {
 }
@@ -81,4 +83,6 @@ void ListaEntidades::desenharTodos() {
 
 Entidade* ListaEntidades::getItem(int pos) const {
     return LEs.getItem(pos);
+}
+
 }

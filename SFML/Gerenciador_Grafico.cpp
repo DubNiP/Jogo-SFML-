@@ -1,11 +1,12 @@
 #include "Gerenciador_Grafico.hpp"
 #include "ListaEntidades.hpp"
 
+using namespace Gerenciadores;
+using namespace listas;
 
-GerenciadorGrafico::GerenciadorGrafico():
+GerenciadorGrafico::GerenciadorGrafico() :
     window(NULL)
 {
-    
     window = new RenderWindow(VideoMode(1280, 720), "Jogo Simas");
     if (window) {
         window->setFramerateLimit(60);
@@ -13,14 +14,13 @@ GerenciadorGrafico::GerenciadorGrafico():
     }
 }
 
-
 GerenciadorGrafico::~GerenciadorGrafico() {
     if (window) {
         delete window;
     }
 }
 
-void GerenciadorGrafico::desenharEnte(const Drawable &shape) {
+void GerenciadorGrafico::desenharEnte(const Drawable& shape) {
     if (window) {
         window->draw(shape);
     }
@@ -38,7 +38,7 @@ void GerenciadorGrafico::displayWindow() {
     }
 }
 
-void GerenciadorGrafico::desenhaTodos(ListaEntidades *pLE, Sprite* fundo) {
+void GerenciadorGrafico::desenhaTodos(listas::ListaEntidades* pLE, Sprite* fundo) {
     if (window) {
         clearWindow();
         if (fundo) {

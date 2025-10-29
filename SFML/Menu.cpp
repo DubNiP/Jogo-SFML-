@@ -18,10 +18,10 @@ Menu::Menu() :
 	font = new Font();
 
 	if (!font->loadFromFile("Fonts/ByteBounce.ttf")) {
-		throw "Deu Merda aqui";
+		throw "Textura não carregada";
 	}
 	if (!carregarTexturaSprite("Textures/background 1.png")) {
-		throw "Deu Merda aqui";
+		throw "Textura não carregada";
 	}
 	if (Sprite* sp = getSprite()) {
 		if (const Texture* tex = sp->getTexture()) {

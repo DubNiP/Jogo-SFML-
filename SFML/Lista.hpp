@@ -4,6 +4,8 @@
 
 using namespace std;
 
+namespace listas {
+
 template <class TL>
 class Lista
 {
@@ -114,3 +116,5 @@ public:
         size = 0;
     }
 };
+
+}

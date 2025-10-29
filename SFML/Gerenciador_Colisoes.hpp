@@ -13,40 +13,42 @@ using namespace std;
 
 //POR ENQUANTO A COLISÃO PEGA OS QUADRADOS DOS FORMATOS, VALE A PENA ANALISAR ISSO E MELHORAR NO FUTURO?
 
+namespace Gerenciadores {
 
+    class GerenciadorColisoes {
+    private:
+        vector<entidades::personagens::Inimigo*>  LIs;
+        list<entidades::obstaculos::Obstaculo*>  LOs;
+        set<Projetil*>    LPs;  
+        entidades::personagens::Jogador* pJog1;
+        RenderWindow* window;
+    public:
+        GerenciadorColisoes(entidades::personagens::Jogador* pJog = NULL,RenderWindow* window = NULL);
+        ~GerenciadorColisoes();
 
-class GerenciadorColisoes {
-private:
-    vector<Inimigo*>  LIs;
-    list<Obstaculo*>  LOs;
-    set<Projetil*>    LPs;  
-    Jogador* pJog1;
-    RenderWindow* window;
-public:
-    GerenciadorColisoes(Jogador* pJog = NULL,RenderWindow* window = NULL);
-    ~GerenciadorColisoes();
+        const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;                  //conferir se está no diagrama.
+        void colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, FloatRect obs);
 
-    const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;                  //conferir se está no diagrama.
-    void colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, FloatRect obs);
+        void tratarColisoesJogsObstacs();
+        void tratarColisoesJogsInimgs();
+        void tratarColisoesJogsProjeteis();
 
-    void tratarColisoesJogsObstacs();
-    void tratarColisoesJogsInimgs();
-    void tratarColisoesJogsProjeteis();
+        void incluirInimigo(entidades::personagens::Inimigo* pInimigo);
+        void incluirObstaculo(entidades::obstaculos::Obstaculo* pObstaculo);
+        void incluirProjetil(Projetil* pProjetil);
 
-    void incluirInimigo(Inimigo* pInimigo);
-    void incluirObstaculo(Obstaculo* pObstaculo);
-    void incluirProjetil(Projetil* pProjetil);
+        void limparObstaculos();
+        void limparInimigos();
+        void limparProjetis();
 
-    void limparObstaculos();
-    void limparInimigos();
-    void limparProjetis();
+        void executar();
 
-    void executar();
+        void setJog(entidades::personagens::Jogador* pJog);
+        void setWindow(RenderWindow* win);
 
-    void setJog(Jogador* pJog);
-    void setWindow(RenderWindow* win);
+        void limiteDeTela();
+        void limiteDeTelaJogador(int X, int Y);
+        void limiteDeTelaProjeteis(int X, int Y);
+    };
 
-    void limiteDeTela();
-    void limiteDeTelaJogador(int X, int Y);
-    void limiteDeTelaProjeteis(int X, int Y);
-};
+}

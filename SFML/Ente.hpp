@@ -1,16 +1,15 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Gerenciador_Grafico.hpp"
 
 using namespace sf;
 using namespace std;
 
-class GerenciadorGrafico;
-
 class Ente {
 protected:
 	int id;
-	static GerenciadorGrafico* pGG;
+	static Gerenciadores::GerenciadorGrafico* pGG;
 	Sprite* pSprite;
 	Texture* textura;
 public:
@@ -18,7 +17,7 @@ public:
 	virtual ~Ente();
 	virtual void executar() = 0;
 	void desenhar();
-	void static setGG(GerenciadorGrafico* pG);
+	void static setGG(Gerenciadores::GerenciadorGrafico* pG);
 
 	void setPos(const Vector2f& pos);
 	void setScale(const Vector2f& scale);

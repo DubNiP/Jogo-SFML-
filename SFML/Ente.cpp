@@ -1,7 +1,7 @@
 #include "Ente.hpp"
 #include "Gerenciador_Grafico.hpp"
 
-GerenciadorGrafico* Ente::pGG = NULL;
+Gerenciadores::GerenciadorGrafico* Ente::pGG = NULL;
 
 Ente::Ente() :
 	id(0),
@@ -29,7 +29,7 @@ void Ente::desenhar() {
 	}
 }
 
-void Ente::setGG(GerenciadorGrafico* pG) {
+void Ente::setGG(Gerenciadores::GerenciadorGrafico* pG) {
 	pGG = pG;
 }
 
@@ -47,7 +47,6 @@ FloatRect Ente::getBounds() const {
 	}
 	return FloatRect();
 }
-
 
 bool Ente::carregarTexturaSprite(const string& arquivo, bool repeated, bool smooth) {
 	if (textura) {

@@ -2,27 +2,33 @@
 #include "Inimigo.hpp"
 #include "Jogador.hpp"
 
-class Inim_facil : public Inimigo {
-private:
-    float raio;
-    int destruicao;
-public:
-    Inim_facil(Vector2f pos, float vel, Jogador* pJog);
+namespace entidades { 
+    namespace personagens {
 
-    ~Inim_facil();
+        class Inim_facil : public Inimigo {
+        private:
+            float raio;
+            int destruicao;
+        public:
+            Inim_facil(Vector2f pos, float vel, Jogador* pJog);
 
-    void danificar();
-    void tomarDano(int dano);
+            ~Inim_facil();
 
-    void mover();
-    void moverEsquerda();
-    void moverDireita();
-    void perseguir(Vector2f posicaoJog, Vector2f posicaoInim);
+            void danificar();
+            void tomarDano(int dano);
 
-    void executar();
+            void mover();
+            void moverEsquerda();
+            void moverDireita();
+            void perseguir(Vector2f posicaoJog, Vector2f posicaoInim);
 
-    void carregarSprite();
+            void executar();
 
-    //void salvar() {  }
+            void carregarSprite();
 
-};
+            //void salvar() {  }
+
+        };
+
+    } 
+}

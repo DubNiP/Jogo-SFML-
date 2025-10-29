@@ -10,23 +10,27 @@
 
 using namespace sf;
 
-class Fase: public Ente {
-protected:
-	ListaEntidades lista_ents;
-	GerenciadorColisoes GC;
-	Jogador* jog;
+namespace fases {
 
-	Texture* textFundo;
-	Sprite* spriteFundo;
+	class Fase: public Ente {
+	protected:
+		listas::ListaEntidades lista_ents;
+		Gerenciadores::GerenciadorColisoes GC;
+		entidades::personagens::Jogador* jog;
 
-	//void criarInimFaceis();
-	//void criarPlataformas();
-	virtual void criarInimigos() = 0;          
-	virtual void criarObstaculo() = 0;
-	void criarCenario();
-	virtual void carregarFundo() = 0;
-public:
-	Fase(Jogador* pJog);
-	~Fase();
-	virtual void executar();
-};
+		Texture* textFundo;
+		Sprite* spriteFundo;
+
+		//void criarInimFaceis();
+		//void criarPlataformas();
+		virtual void criarInimigos() = 0;
+		virtual void criarObstaculo() = 0;
+		void criarCenario();                            //fazer ser virtual no futuro??? (diagrama não deixa a princípio)
+		virtual void carregarFundo() = 0;
+	public:
+		Fase(entidades::personagens::Jogador* pJog);
+		~Fase();
+		void executar();         //nao foi implementado executar nas derivadas de fase. Aqui existe uma dúvida em relaçao a esse executar
+	};
+
+}

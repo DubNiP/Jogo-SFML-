@@ -3,26 +3,31 @@
 #include "Personagem.hpp"
 #include <SFML/System/Clock.hpp>
 
-class Jogador: public Personagem {
-protected:
-	int pontos;
-	float invencibilidade;
-	Clock danoClock;
-public:
-	Jogador(Vector2f pos, float vel);
-	~Jogador();
-	//void colidir(Inimigo* pIn);            //PROVAVEL QUE SEJA O JOGADOR DANDO DANO NO INIMIGO.
-	void executar();
-	//void salvar();
-	void mover();
+namespace entidades { 
+	namespace personagens{
 
-	void processarInput();
+		class Jogador: public Personagem {
+		protected:
+			int pontos;
+			float invencibilidade;
+			Clock danoClock;
+		public:
+			Jogador(Vector2f pos, float vel);
+			~Jogador();
+			//void colidir(Inimigo* pIn);            //PROVAVEL QUE SEJA O JOGADOR DANDO DANO NO INIMIGO.
+			void executar();
+			//void salvar();
+			void mover();
 
-	int getPontos() const;
-	void adicionarPontos(int pts);
+			void processarInput();
 
-	void reseta(Vector2f pos,int vidas, int pontos);
-	void tomarDano(int dano);
-	void carregarSprite();
+			int getPontos() const;
+			void adicionarPontos(int pts);
 
-};
+			void reseta(Vector2f pos,int vidas, int pontos);
+			void tomarDano(int dano);
+			void carregarSprite();
+
+		};
+	} 
+}

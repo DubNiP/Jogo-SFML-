@@ -4,27 +4,33 @@
 #include "projetil.hpp"
 #include <vector>
 
-class Chefao : public Inimigo {
-private:
-    float raio;
-    short int forca;
-public:
-    Chefao(Vector2f pos, float vel, Jogador* pJog);
+namespace entidades { 
+    namespace personagens {
 
-    ~Chefao();
+        class Chefao : public Inimigo {
+        private:
+            float raio;
+            short int forca;
+        public:
+            Chefao(Vector2f pos, float vel, Jogador* pJog);
 
-    void danificar();
-    void tomarDano(int dano);
+            ~Chefao();
 
-    void mover();
-    void moverEsquerda();
-    void moverDireita();
-    void perseguir(Vector2f posicaoJog, Vector2f posicaoInim);
+            void danificar();
+            void tomarDano(int dano);
 
-    void executar();
+            void mover();
+            void moverEsquerda();
+            void moverDireita();
+            void perseguir(Vector2f posicaoJog, Vector2f posicaoInim);
 
-    void carregarSprite();
+            void executar();
 
-    //void salvar() {  }
+            void carregarSprite();
 
-};
+            //void salvar() {  }
+
+        };
+
+    } 
+}

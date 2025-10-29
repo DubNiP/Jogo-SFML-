@@ -3,6 +3,8 @@
 #include "Entidade.hpp"
 #include "Projetil.hpp"
 
+namespace listas {
+
 class ListaEntidades
 {
 private:
@@ -23,3 +25,5 @@ public:
 
     Entidade* getItem(int pos) const;
 };
+
+} // namespace listas
