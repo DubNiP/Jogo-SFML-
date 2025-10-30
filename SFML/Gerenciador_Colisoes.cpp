@@ -22,37 +22,49 @@ const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) c
 	return pe1->getBounds().intersects(pe2->getBounds());
 }
 
-void GerenciadorColisoes::colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, FloatRect en) {
-	if (pe1 && pe2 && pe1 != pe2) {
-		float jogx = jog.left + jog.width / 2;         //Logica: a posicao central é a coordenada que fica no topo superior esquerdo + a altura/largura.  
-		float jogy = jog.top + jog.height / 2;
-		float obsx = en.left + en.width / 2;
-		float obsy = en.top + en.height / 2;
-		const float sobrePosX = (jog.width * 0.5f + en.width * 0.5f) - fabs(jogx - obsx);
-		const float sobrePosY = (jog.height * 0.5f + en.height * 0.5f) - fabs(jogy - obsy);
 
+void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
+	if (a && b && a != b) {
 
-		Vector2f MTV(0, 0);                     
-		if (sobrePosX < sobrePosY) {
-			if (jogx > obsx) {
-				MTV.x = sobrePosX;
+		FloatRect ra = a->getBounds();
+		FloatRect rb = b->getBounds();
+		FloatRect inter;
+		if (ra.intersects(rb, inter)) {
+
+			Vector2f mtv(0.f, 0.f);
+			if (inter.width < inter.height) {
+				const float aCx = ra.left + ra.width * 0.5f;
+				const float bCx = rb.left + rb.width * 0.5f;
+
+				mtv.x = (bCx > aCx) ? inter.width : -inter.width;
 			}
 			else {
-				MTV.x = -sobrePosX;
-			}
-		}
-		else {
+				// Resolver no eixo Y
+				const float aCy = ra.top + ra.height * 0.5f;
+				const float bCy = rb.top + rb.height * 0.5f;
 
-			if (jogy > obsy) {
-				MTV.y = sobrePosY;
+				mtv.y = (bCy > aCy) ? inter.height : -inter.height;
 			}
-			else {
-				MTV.y = -sobrePosY;
+
+			const bool aStatic = dynamic_cast<const entidades::obstaculos::Obstaculo*>(a) != NULL;
+			const bool bStatic = dynamic_cast<const entidades::obstaculos::Obstaculo*>(b) != NULL;
+
+			if (aStatic && !bStatic) {
+				b->setPos(b->getPos() + mtv);
+				return;
+			}
+			if (!aStatic && bStatic) {
+				a->setPos(a->getPos() - mtv);
+				return;
+			}
+			if (!aStatic && !bStatic) {
+				mtv.x /= 2;
+				mtv.y /= 2;
+				a->setPos(a->getPos() - mtv);
+				b->setPos(b->getPos() + mtv);
 			}
 		}
-		pJog1->setPos(pJog1->getPos() + MTV);
 	}
-
 }
 
 
@@ -66,10 +78,10 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 			if (*it) {                                           
 				FloatRect jog = pJog1->getBounds();
 				FloatRect obs = (*it)->getBounds();
-				if (verificarColisao(pJog1, *it)) {
-					colidiu(*it, pJog1, jog, obs);
-					(*it)->obstaculizar(pJog1);
+				if (verificarColisao(*it, pJog1)) {
+					colidiu(*it, pJog1);
 				}
+				(*it)->obstaculizar(pJog1);
 			}
 			it++;
 		}
@@ -84,7 +96,7 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 				FloatRect jog = pJog1->getBounds();
 				FloatRect inim = LIs[i]->getBounds();
 				if (verificarColisao(pJog1, LIs[i])) {
-					colidiu(LIs[i], pJog1, jog, inim);
+					colidiu(LIs[i], pJog1);
 					LIs[i]->danificar();                //isso ta sugando a vida do jogador MT rapido, dps e bom dar uma olhada
 				}
 			}

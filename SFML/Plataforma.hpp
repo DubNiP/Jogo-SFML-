@@ -1,15 +1,22 @@
 #pragma once
 
 #include "Obstaculo.hpp"
+using namespace sf;
 
 namespace entidades { 
 	namespace obstaculos {
 
 		class Plataforma : public Obstaculo {
 		private:
-			//int altura;
+			float amplitude;     
+			float periodo;        
+			float yIn;       
+			float yAnt;      
+			int altura;
+			bool ativa;
+			Clock tempo;
 		public:
-			Plataforma(Vector2f pos, Vector2f tam, bool dano = false);
+			Plataforma(Vector2f pos, Vector2f tam, bool dano = false, float amplitude = 100.f, float periodo = 2.f);
 			~Plataforma();
 
 			void executar();

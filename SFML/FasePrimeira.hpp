@@ -2,6 +2,7 @@
 #include "Fase.hpp"
 #include "Inim_Medio.hpp"
 #include "Jogador.hpp"
+#include "Plataforma.hpp"
 
 namespace fases {
 

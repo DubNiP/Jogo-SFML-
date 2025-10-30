@@ -10,10 +10,12 @@ namespace Gerenciadores {
 
 class GerenciadorGrafico {
 private:
+    static GerenciadorGrafico* uniqueInstance;
     RenderWindow* window;
-public:
     GerenciadorGrafico();
     ~GerenciadorGrafico();
+public:
+    static GerenciadorGrafico& Instance();
     void desenharEnte(const Drawable &shape);
     void clearWindow(Color cor = Color::Black);
     void displayWindow();

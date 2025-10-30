@@ -3,7 +3,7 @@
 
 Jogo::Jogo() :
     pJog1(Vector2f(640.f,160.f), 150.0f),
-    GG(),
+    GG(Gerenciadores::GerenciadorGrafico::Instance()),
     menu(),
     event(),
     fase1(&pJog1)

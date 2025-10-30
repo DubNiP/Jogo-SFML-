@@ -13,7 +13,7 @@ using namespace sf;
 class Jogo {
 private:
 	entidades::personagens::Jogador pJog1;            
-	Gerenciadores::GerenciadorGrafico GG;
+	Gerenciadores::GerenciadorGrafico& GG;
 	Menu menu;
 	Event event;
 	fases::FasePrimeira fase1;

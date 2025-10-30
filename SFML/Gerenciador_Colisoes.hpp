@@ -27,7 +27,7 @@ namespace Gerenciadores {
         ~GerenciadorColisoes();
 
         const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;                  //conferir se está no diagrama.
-        void colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, FloatRect obs);
+        void colidiu(Entidade* pe1, Entidade* pe2);
 
         void tratarColisoesJogsObstacs();
         void tratarColisoesJogsInimgs();

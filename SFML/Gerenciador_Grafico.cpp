@@ -3,6 +3,9 @@
 
 using namespace Gerenciadores;
 using namespace listas;
+using namespace std;
+
+GerenciadorGrafico* GerenciadorGrafico::uniqueInstance = NULL;
 
 GerenciadorGrafico::GerenciadorGrafico() :
     window(NULL)
@@ -18,6 +21,14 @@ GerenciadorGrafico::~GerenciadorGrafico() {
     if (window) {
         delete window;
     }
+}
+
+GerenciadorGrafico& GerenciadorGrafico::Instance() {
+    static once_flag flag;
+    call_once(flag, []() {
+        uniqueInstance = new GerenciadorGrafico();
+        });
+    return *uniqueInstance;
 }
 
 void GerenciadorGrafico::desenharEnte(const Drawable& shape) {
