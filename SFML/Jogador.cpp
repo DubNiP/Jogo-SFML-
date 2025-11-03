@@ -4,7 +4,7 @@
 namespace entidades {
 	namespace personagens {
 
-		Jogador::Jogador(Vector2f pos, float vel) :
+		Jogador::Jogador(Vector2f pos, Vector2f vel) :
 			Personagem(pos, vel),
 			pontos(0),
 			invencibilidade(0.3f),
@@ -21,6 +21,7 @@ namespace entidades {
 		void Jogador::executar() {
 			processarInput(); 
 			mover();
+			gravidade();
 		}
 
 		//void Jogador::salvar() {}
@@ -29,19 +30,22 @@ namespace entidades {
 			attPos();
 		}
 
-
 		void Jogador::processarInput() {
-			if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) {
-				pos.y -= vel;
-			}
-			if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down)) {
-				pos.y += vel;
+			if ((Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up))) {
+				if (emTerra) {
+					emTerra = false;
+					vel.y = -velocidadeInicialY;
+					tempoMovimento.restart();
+
+				}
 			}
 			if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left)) {
-				pos.x -= vel;
+				vel.x = velocidadeInicialX;
+				pos.x -= vel.x;
 			}
 			if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right)) {
-				pos.x += vel;
+				vel.x = velocidadeInicialX;
+				pos.x += vel.x;
 			}
 		}
 

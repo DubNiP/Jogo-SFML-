@@ -7,9 +7,8 @@ namespace entidades {
 		class Personagem : public Entidade {
 		protected:
 			int num_vidas;
-			float vel;
 		public:
-			Personagem(Vector2f pos, float velocidade = 0);
+			Personagem(Vector2f pos, Vector2f velocidade = Vector2f(0.f, 0.f));
 			~Personagem();
 			//void salvarDataBuffer;
 			virtual void executar() = 0;
@@ -18,7 +17,7 @@ namespace entidades {
 
 			int getVidas() const;	
 			void setVidas(int vidas); 
-			float getVelocidade() const;
+
 			virtual void tomarDano(int dano);
 		};
 	}
