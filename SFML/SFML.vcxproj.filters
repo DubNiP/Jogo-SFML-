@@ -69,7 +69,7 @@
     <ClCompile Include="Gerenciador_Grafico.cpp">
       <Filter>Gerenciadores</Filter>
     </ClCompile>
-    <ClCompile Include="Obst_Dificil.cpp">
+    <ClCompile Include="Espinho.cpp">
       <Filter>Obstaculos</Filter>
     </ClCompile>
     <ClCompile Include="Obstaculo.cpp">
@@ -97,6 +97,9 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Sapo.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Bloco.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,7 +143,7 @@
     <ClInclude Include="Obstaculo.hpp">
       <Filter>Obstaculos</Filter>
     </ClInclude>
-    <ClInclude Include="Obst_Dificil.hpp">
+    <ClInclude Include="Espinho.hpp">
       <Filter>Obstaculos</Filter>
     </ClInclude>
     <ClInclude Include="Jogo.hpp">
@@ -165,6 +168,9 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Sapo.hpp">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Bloco.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

@@ -28,6 +28,10 @@ namespace entidades {
 			return vel; 
 		}
 
+		void Personagem::setVelocidade(float velo) {
+			vel = velo;
+		}
+
 		void Personagem::tomarDano(int dano) {
 			if (dano > 0) {
 				int vidas = getVidas() - dano;

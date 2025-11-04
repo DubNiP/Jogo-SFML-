@@ -9,10 +9,11 @@ namespace entidades {
 		private:
 			//float largura;
 		public:
-			ObstMedio(Vector2f pos, Vector2f tam, bool dano = false);
+			ObstMedio(Vector2f pos, Vector2f tam);
 			~ObstMedio();
 			void executar();
 			void obstaculizar(entidades::personagens::Jogador* p);
+			void carregarSprite();
 		};
 	} 
 }

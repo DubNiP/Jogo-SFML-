@@ -3,10 +3,11 @@
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Colisoes.hpp"
 #include "Jogador.hpp"
-#include "Obst_Dificil.hpp"
+#include "Espinho.hpp"
 #include "Ente.hpp"
 #include "Projetil.hpp"
 #include "ListaEntidades.hpp"
+#include "Bloco.hpp"
 
 using namespace sf;
 

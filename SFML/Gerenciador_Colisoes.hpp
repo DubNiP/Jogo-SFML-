@@ -3,7 +3,7 @@
 #include "Entidade.hpp"
 #include "Jogador.hpp"
 #include "Inimigo.hpp"
-#include "Obstaculo.hpp"
+#include "Obst_Medio.hpp"
 #include "Projetil.hpp"
 #include <vector>
 #include <list>

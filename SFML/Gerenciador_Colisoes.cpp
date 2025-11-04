@@ -82,22 +82,19 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 
 
 void GerenciadorColisoes::tratarColisoesJogsObstacs() {
-	
 	if (pJog1) {
-		list<entidades::obstaculos::Obstaculo*>::iterator it = LOs.begin();
-		while (it != LOs.end()) {
-			if (*it) {                                           
-				if (verificarColisao(*it, pJog1)) {
+		for (auto it = LOs.begin(); it != LOs.end(); ++it) {
+			if (*it && verificarColisao(*it, pJog1)) {
+				if (dynamic_cast<entidades::obstaculos::ObstMedio*>(*it) == NULL) {
 					colidiu(*it, pJog1);
 				}
 				(*it)->obstaculizar(pJog1);
 			}
-			it++;
 		}
-
-
 	}
 }
+
+
 void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 	if (pJog1) {
 		for (int i = 0; i < LIs.size(); i++) {

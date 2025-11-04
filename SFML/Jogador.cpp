@@ -21,6 +21,9 @@ namespace entidades {
 		void Jogador::executar() {
 			processarInput(); 
 			mover();
+			static float baseVel = -1.f;
+			if (baseVel == -1.f) baseVel = vel;
+			setVelocidade(baseVel);
 		}
 
 		//void Jogador::salvar() {}

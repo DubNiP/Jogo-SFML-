@@ -83,8 +83,8 @@ void Fase::executar() {
                     return;
                 }
             }
-            lista_ents.executarTodos();  
             GC.executar();
+            lista_ents.executarTodos();
 
             pGG->desenhaTodos(&lista_ents,spriteFundo);     //talvez trocar no futuro
         }

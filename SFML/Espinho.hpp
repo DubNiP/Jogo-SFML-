@@ -4,12 +4,12 @@
 namespace entidades {
 	namespace obstaculos {
 
-		class ObstDificil : public Obstaculo {
+		class Espinho : public Obstaculo {
 		private:
 			short int danosidade;
 		public:
-			ObstDificil(Vector2f pos, Vector2f tam, bool dano = false, int quantDano = 1);
-			~ObstDificil();
+			Espinho(Vector2f pos, Vector2f tam, int quantDano = 1);
+			~Espinho();
 			//void salvarDataBuffer();
 			void executar();
 			void obstaculizar(entidades::personagens::Jogador* p);

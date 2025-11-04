@@ -1,6 +1,7 @@
 #include "FasePrimeira.hpp"
 #include "Plataforma.hpp"
 #include "Sapo.hpp"
+#include "Obst_Medio.hpp"
 
 using namespace fases;
 
@@ -29,18 +30,22 @@ void FasePrimeira::criarGolems() {
 
 void FasePrimeira::criarObsMedios() {
     //1280 e 720
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(0.f, 500.f), Vector2f(400.f, 40.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(600.f, 500.f), Vector2f(680.f, 40.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(0.f, 280.f), Vector2f(760.f, 40.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(980.f, 0.f), Vector2f(40.f, 350.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(1020.f, 170.f), Vector2f(80.f, 40.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(1020.f, 310.f), Vector2f(80.f, 40.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(1180.f, 380.f), Vector2f(80.f, 40.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(1180.f, 240.f), Vector2f(80.f, 40.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(0.f, 700.f), Vector2f(1300.f, 20.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(0.f, 0.f), Vector2f(20.f, 720.f), false));
-    criaEntidade(new entidades::obstaculos::ObstDificil(Vector2f(1260.f, 0.f), Vector2f(20.f, 720.f), false));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 500.f), Vector2f(400.f, 40.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(600.f, 500.f), Vector2f(680.f, 40.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 280.f), Vector2f(760.f, 40.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(980.f, 0.f), Vector2f(40.f, 350.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1020.f, 170.f), Vector2f(80.f, 40.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1020.f, 310.f), Vector2f(80.f, 40.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1180.f, 380.f), Vector2f(80.f, 40.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1180.f, 240.f), Vector2f(80.f, 40.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 700.f), Vector2f(1300.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(20.f, 720.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1260.f, 0.f), Vector2f(20.f, 720.f)));
+
+
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(950.f, 690.f), Vector2f(80.f,10.f), 1));
+    criaEntidade(new entidades::obstaculos::ObstMedio(Vector2f(800.f, 650.f), Vector2f(60.f, 50.f)));
 
     // Plataforma de teste
     Vector2f platPos(400.f, 588.f);

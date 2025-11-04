@@ -5,25 +5,25 @@
 
 namespace listas {
 
-class ListaEntidades
-{
-private:
-    Lista<Entidade> LEs;
+    class ListaEntidades
+    {
+    private:
+        Lista<Entidade> LEs;
 
-public:
-    ListaEntidades();
-    ~ListaEntidades();
+    public:
+        ListaEntidades();
+        ~ListaEntidades();
 
-    void incluir(Entidade* pE);
-    void excluir(Entidade* pE);
-    void limpar();
-    void limparPreservando(Entidade* keep);
+        void incluir(Entidade* pE);
+        void excluir(Entidade* pE);
+        void limpar();
+        void limparPreservando(Entidade* keep);
 
-    void executarTodos();
-    void desenharTodos();
-    void removerProjetis();
+        void executarTodos();
+        void desenharTodos();
+        void removerProjetis();
 
-    Entidade* getItem(int pos) const;
-};
+        Entidade* getItem(int pos) const;
+    };
 
-} // namespace listas
+}

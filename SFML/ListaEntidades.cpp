@@ -26,7 +26,7 @@ void ListaEntidades::excluir(Entidade* pE)
 		LEs.deletar(pE);
 }
 
-void ListaEntidades::limpar()                                           //OBSERVAÇÃO: DOUBLE DELETE?
+void ListaEntidades::limpar()                                       
 {
     for (int i = 0; i < LEs.getSize(); ++i) {
         Entidade* e = LEs.getItem(i);
@@ -64,8 +64,8 @@ void ListaEntidades::removerProjetis() {                     //olhar dps
         if (e) {
             Projetil* proj = dynamic_cast<Projetil*>(e);
             if (proj && !proj->getAtivo()) {
-                delete e;
                 LEs.deletar(e);
+                delete e;
                 continue;
             }
         }
