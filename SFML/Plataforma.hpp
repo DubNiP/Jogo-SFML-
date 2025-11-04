@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Obstaculo.hpp"
+
 using namespace sf;
 
 namespace entidades { 
@@ -20,6 +21,7 @@ namespace entidades {
 
 			void executar();
 			void obstaculizar(entidades::personagens::Jogador* p);
+			void setAtiva();
 			void carregarSprite();
 		};
 	} 

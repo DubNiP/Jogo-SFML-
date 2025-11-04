@@ -12,6 +12,9 @@ namespace entidades {
 			ativa(false),
 			tempo()
 		{
+			this->pos.y = yIn + amplitude;
+			yAnt = pos.y;
+
 			carregarSprite();
 			tempo.restart();
 		}
@@ -21,12 +24,14 @@ namespace entidades {
 		}
 
 		void Plataforma::executar() {
-			yAnt = pos.y;
+			if (ativa) {
+				yAnt = pos.y;
 
-			const float t = tempo.getElapsedTime().asSeconds();      
-			const float omega = 2.f * 3.1415f / periodo;     // w = 2pi/T
-			pos.y = yIn + amplitude * cos(omega * t);        // x = x0 + A * cos(wt)
+				const float t = tempo.getElapsedTime().asSeconds();
+				const float omega = 2.f * 3.1415f / periodo;     // w = 2pi/T
+				pos.y = yIn + amplitude * cos(omega * t);        // x = x0 + A * cos(wt)
 
+			}
 			attPos();
 		}
 
@@ -54,6 +59,11 @@ namespace entidades {
 				}
 			}
 		}
+
+		void Plataforma::setAtiva() {
+			ativa = true;
+		}
+
 		void Plataforma::carregarSprite() {
 			if (!carregarTexturaSprite("Textures/plataforma.png", true, false)) {
 				throw "Textura não carregada";

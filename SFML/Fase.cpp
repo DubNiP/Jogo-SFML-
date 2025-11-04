@@ -37,8 +37,12 @@ void Fase::criarSapos() {
 }
 
 void Fase::criarPlataformas() {
-    criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(400.f, 588.f), Vector2f(200.f, 20.f), false, 90.f, 5.f));
-    criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(760.f, 380.f), Vector2f(220.f, 20.f), false, 100.f, 5.f));
+
+    auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(400.f, 588.f), Vector2f(200.f, 20.f), false, 90.f, 5.f)));
+    auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(760.f, 380.f), Vector2f(220.f, 20.f), false, 100.f, 5.f)));
+
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1100.f, 670.f), Vector2f(30.f, 50.f), plat1));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1030.f, 120.f), Vector2f(30.f, 50.f), plat2));
 }
 
 void Fase::criarCenario() {
@@ -98,7 +102,7 @@ void Fase::executar() {
             GC.executar();
             lista_ents.executarTodos();
 
-            pGG->desenhaTodos(&lista_ents,spriteFundo);     //talvez trocar no futuro
+            pGG->desenhaTodos(&lista_ents,spriteFundo);     //trocar no futuro?
         }
     }
 }

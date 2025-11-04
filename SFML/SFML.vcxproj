@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Alavanca.cpp" />
     <ClCompile Include="Bloco.cpp" />
     <ClCompile Include="Chefao.cpp" />
     <ClCompile Include="Ente.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Projetil.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Alavanca.hpp" />
     <ClInclude Include="Bloco.hpp" />
     <ClInclude Include="Chefao.hpp" />
     <ClInclude Include="Ente.hpp" />

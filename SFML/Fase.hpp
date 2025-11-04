@@ -10,6 +10,9 @@
 #include "Bloco.hpp"
 #include "Plataforma.hpp"
 #include "Sapo.hpp"
+#include "Alavanca.hpp"
+
+
 
 using namespace sf;
 
