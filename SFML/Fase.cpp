@@ -64,6 +64,7 @@ Entidade* Fase::criaEntidade(Entidade* e) {
 
         return e;
     }
+    return NULL;
 }
 
 void Fase::executar() {

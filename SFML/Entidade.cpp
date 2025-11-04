@@ -5,11 +5,11 @@ Entidade::Entidade(Vector2f posicao, Vector2f velocidade) :
 	pos(posicao),
 	emTerra(true),
 	vel(velocidade),
-	tempoMovimento(),
-	forcaGravidade(30.f)
+	velocidadeInicialY(velocidade.y),
+	velocidadeInicialX(velocidade.x),
+	forcaGravidade(30.f),
+	tempoMovimento()
 {
-	velocidadeInicialY = velocidade.y;
-	velocidadeInicialX = velocidade.x;
 	attPos();
 }
 
@@ -31,16 +31,35 @@ void Entidade::setPos(const Vector2f& p) {
 	attPos();
 }
 
-float Entidade::getVelocidade() const {
+float Entidade::getVelocidadeX() const {
 	return vel.x;
 }
 
-void Entidade ::setVelocidadeY(const float v) {
-	vel.y = v;
+float Entidade::getVelocidadeY() const {
+	return vel.y;
 }
 
 void Entidade::setVelocidadeX(const float v) {
 	vel.x = v;
+}
+
+
+void Entidade::setVelocidadeY(const float v) {
+	vel.y = v;
+}
+
+float Entidade::getVelocidadeInicialX() const { 
+	return velocidadeInicialX; 
+}
+
+float Entidade::getVelocidadeInicialY() const { 
+	return velocidadeInicialY; 
+}
+void Entidade::setVelocidadeInicialX(float v) { 
+	velocidadeInicialX = v;
+}
+void Entidade::setVelocidadeInicialY(float v) { 
+	velocidadeInicialY = v;
 }
 
 void Entidade::attPos() {

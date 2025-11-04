@@ -5,7 +5,7 @@
 
 using namespace sf;
 
-class Entidade: public Ente {
+class Entidade : public Ente {
 protected:
 	Vector2f pos;
 	bool emTerra;
@@ -24,12 +24,21 @@ public:
 	//virtual void salvar() = 0;
 
 	void setEmTerra(const bool v);
-	
+
 	Vector2f getPos() const;
 	void setPos(const Vector2f& p);
-	float getVelocidade() const;
-	void setVelocidadeY(const float v);
+
+
+	float getVelocidadeX() const;
+	float getVelocidadeY() const;
 	void setVelocidadeX(const float v);
+	void setVelocidadeY(const float v);
+
+	float getVelocidadeInicialX() const;
+	float getVelocidadeInicialY() const;
+	void setVelocidadeInicialX(float v);
+	void setVelocidadeInicialY(float v);
+
 	
 	void attPos();
 	void gravidade();

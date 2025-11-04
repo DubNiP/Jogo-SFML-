@@ -8,7 +8,8 @@ namespace entidades {
 			Personagem(pos, vel),
 			pontos(0),
 			invencibilidade(0.3f),
-			danoClock()
+			danoClock(),
+			naTeia(false)
 		{
 			carregarSprite();
 		}
@@ -22,9 +23,6 @@ namespace entidades {
 			processarInput();
 			gravidade();
 			mover();
-			static float baseVel = -1.f;
-			if (baseVel == -1.f) baseVel = vel;
-			setVelocidade(baseVel);
 		}
 
 		//void Jogador::salvar() {}
@@ -34,8 +32,9 @@ namespace entidades {
 		}
 
 		void Jogador::processarInput() {
+			float t = naTeia ? 0.3f : 1.0f;
 			if ((Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up))) {
-				if (emTerra) {
+				if (emTerra && !naTeia) {
 					emTerra = false;
 					vel.y = -velocidadeInicialY;
 					tempoMovimento.restart();
@@ -43,11 +42,11 @@ namespace entidades {
 				}
 			}
 			if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left)) {
-				vel.x = velocidadeInicialX;
+				vel.x = velocidadeInicialX * t;
 				pos.x -= vel.x;
 			}
 			if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right)) {
-				vel.x = velocidadeInicialX;
+				vel.x = velocidadeInicialX * t;
 				pos.x += vel.x;
 			}
 		}
@@ -84,6 +83,10 @@ namespace entidades {
 				throw "Textura não carregada";
 			}
 			setPos(pos);
+		}
+
+		void Jogador::setNaTeia(bool estado) { 
+			naTeia = estado;
 		}
 	} 
 }

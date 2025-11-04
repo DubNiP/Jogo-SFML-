@@ -49,7 +49,6 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 		FloatRect rb = b->getBounds();
 
 		if (estaSobre(ra, rb, b, 40.f)) {
-			b->resetaRelogio();
 			b->setEmTerra(true);
 		}
 		else {
@@ -86,8 +85,8 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 			}
 			if (aPerson && bPerson) {
 
-				float va = max(0.f, a->getVelocidade());
-				float vb = max(0.f, b->getVelocidade());
+				float va = max(0.f, a->getVelocidadeX());
+				float vb = max(0.f, b->getVelocidadeX());
 
 				float soma = va + vb;
 				float fracA = 0.5f;
@@ -106,6 +105,8 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 
 void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	if (pJog1) {
+		pJog1->setNaTeia(false);
+
 		for (auto it = LOs.begin(); it != LOs.end(); ++it) {
 			if (*it && verificarColisao(*it, pJog1)) {
 				if (dynamic_cast<entidades::obstaculos::ObstMedio*>(*it) == NULL) {

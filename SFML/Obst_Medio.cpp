@@ -19,7 +19,7 @@ namespace entidades {
 
 		void ObstMedio::obstaculizar(entidades::personagens::Jogador* p) {
 			if (p) {
-				p->setVelocidade(p->getVelocidade() / 3);
+				p->setNaTeia(true);
 			}
 		}
 

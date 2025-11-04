@@ -11,6 +11,7 @@ namespace entidades {
 			int pontos;
 			float invencibilidade;
 			Clock danoClock;
+			bool naTeia;
 		public:
 			Jogador(Vector2f pos, Vector2f vel);
 			~Jogador();
@@ -27,7 +28,7 @@ namespace entidades {
 			void reseta(Vector2f pos,int vidas, int pontos);
 			void tomarDano(int dano);
 			void carregarSprite();
-
+			void setNaTeia(bool t);
 		};
 	} 
 }
