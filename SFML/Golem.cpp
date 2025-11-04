@@ -5,7 +5,7 @@ namespace entidades {
 
 		Golem::Golem(Vector2f pos, Jogador* pJog, Vector2f vel) :
 			Inimigo(pos, pJog, vel),
-			tamanho(300),
+			tamanho(200),
 			destruicao(1),
 			relogio(),
 			posInicial(pos)
@@ -54,7 +54,7 @@ namespace entidades {
 			}
 			else {
 				if (getPos().x < posInicial.x - tamanho * 0.5 && getPos().x < 30.0f) moverDireita();
-				else if (getPos().x > posInicial.x + tamanho * 3 && getPos().x > 30) moverEsquerda();
+				else if (getPos().x > posInicial.x + tamanho * 3 && getPos().x > 30.0f) moverEsquerda();
 				else movimentoAleatorio();
 			}
 		}

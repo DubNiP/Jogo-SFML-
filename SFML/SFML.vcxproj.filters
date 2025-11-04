@@ -81,7 +81,7 @@
     <ClCompile Include="Menu.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="Obst_Medio.cpp">
+    <ClCompile Include="Teia.cpp">
       <Filter>Obstaculos</Filter>
     </ClCompile>
     <ClCompile Include="Plataforma.cpp">
@@ -152,7 +152,7 @@
     <ClInclude Include="Menu.hpp">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="Obst_Medio.hpp">
+    <ClInclude Include="Teia.hpp">
       <Filter>Obstaculos</Filter>
     </ClInclude>
     <ClInclude Include="Plataforma.hpp">

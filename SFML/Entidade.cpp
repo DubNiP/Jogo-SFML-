@@ -69,7 +69,7 @@ void Entidade::attPos() {
 }
 
 void Entidade::gravidade() {
-	float dt = tempoMovimento.getElapsedTime().asSeconds();
+	float dt = (tempoMovimento.getElapsedTime().asSeconds()) * 0.7 ;
 
 	const float TERMINAL = 30.f;   // velocidade máxima de queda (px/s)
 

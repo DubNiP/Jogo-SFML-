@@ -5,12 +5,12 @@
 namespace entidades {
 	namespace obstaculos {
 
-		class ObstMedio :public Obstaculo {
+		class Teia :public Obstaculo {
 		private:
 			//float largura;
 		public:
-			ObstMedio(Vector2f pos, Vector2f tam);
-			~ObstMedio();
+			Teia(Vector2f pos, Vector2f tam);
+			~Teia();
 			void executar();
 			void obstaculizar(entidades::personagens::Jogador* p);
 			void carregarSprite();

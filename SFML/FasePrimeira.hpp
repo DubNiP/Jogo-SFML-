@@ -12,12 +12,13 @@ namespace fases {
 	protected:
 		void criarInimigos();
 		void criarObstaculo();
+		void criarBlocos();
 
 
 		void criarGolems();
 
 
-		void criarObsMedios();
+		void criarTeias();
 
 		void carregarFundo();
 

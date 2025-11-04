@@ -30,6 +30,17 @@ Fase::~Fase() {
     jog = NULL;
 }
 
+void Fase::criarSapos() {
+    criaEntidade(new entidades::personagens::Sapo(Vector2f(300.f, 250.f), jog, Vector2f(50.f, 80.0f)));
+    criaEntidade(new entidades::personagens::Sapo(Vector2f(400.f, 250.f), jog, Vector2f(50.f, 80.0f)));
+    criaEntidade(new entidades::personagens::Sapo(Vector2f(200.f, 250.f), jog, Vector2f(50.f, 80.0f)));
+}
+
+void Fase::criarPlataformas() {
+    criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(400.f, 588.f), Vector2f(200.f, 20.f), false, 90.f, 5.f));
+    criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(760.f, 380.f), Vector2f(220.f, 20.f), false, 100.f, 5.f));
+}
+
 void Fase::criarCenario() {
     lista_ents.limparPreservando(jog);                                    //estranho..
     GC.limparObstaculos();
@@ -38,13 +49,13 @@ void Fase::criarCenario() {
 
     carregarFundo();
 
-    //deve ter criar plataformas, etc...
     if (jog) {
-        jog->reseta(Vector2f(640.f, 240.f), 10, 0);
+        jog->reseta(Vector2f(100.f, 630.f), 10, 0);
         lista_ents.incluir(jog);
     }
     criarObstaculo();
     criarInimigos();
+    criarBlocos();
 }
 
 Entidade* Fase::criaEntidade(Entidade* e) {

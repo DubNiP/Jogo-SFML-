@@ -22,25 +22,6 @@ const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) c
 	return pe1->getBounds().intersects(pe2->getBounds());
 }
 
-bool GerenciadorColisoes::estaSobre(const FloatRect& obst, const FloatRect& ent, Entidade* b, float folga) {
-	const float entCordDireita = ent.left + ent.width;
-	const float obstCordDireita = obst.left + obst.width;
-	const float entCordInferior = ent.top + ent.height;
-	const float obstCordSuperior = obst.top;
-
-	const float sobrePosicao = min(entCordDireita, obstCordDireita) - max(ent.left, obst.left);
-	if (sobrePosicao <= 0.f) return false;
-
-	if (sobrePosicao < ent.width * 0.1) return false;
-
-	if (entCordInferior >= obstCordSuperior - folga && entCordInferior <= obstCordSuperior + folga) {
-		b->resetaRelogio();
-		return true;
-	}
-		
-	return false;
-}
-
 
 void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 	if (a && b && a != b) {
@@ -103,13 +84,32 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 	}
 }
 
+bool GerenciadorColisoes::estaSobre(const FloatRect& obst, const FloatRect& ent, Entidade* b, float folga) {
+	const float entCordDireita = ent.left + ent.width;
+	const float obstCordDireita = obst.left + obst.width;
+	const float entCordInferior = ent.top + ent.height;
+	const float obstCordSuperior = obst.top;
+
+	const float sobrePosicao = min(entCordDireita, obstCordDireita) - max(ent.left, obst.left);
+	if (sobrePosicao <= 0.f) return false;
+
+	if (sobrePosicao < ent.width * 0.2f) return false;
+
+	if (entCordInferior >= obstCordSuperior - folga && entCordInferior <= obstCordSuperior + folga) {
+		b->resetaRelogio();
+		return true;
+	}
+
+	return false;
+}
+
 void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	if (pJog1) {
 		pJog1->setNaTeia(false);
 
 		for (auto it = LOs.begin(); it != LOs.end(); ++it) {
 			if (*it && verificarColisao(*it, pJog1)) {
-				if (dynamic_cast<entidades::obstaculos::ObstMedio*>(*it) == NULL) {
+				if (dynamic_cast<entidades::obstaculos::Teia*>(*it) == NULL) {
 					colidiu(*it, pJog1);
 				}
 				(*it)->obstaculizar(pJog1);
@@ -154,7 +154,7 @@ void GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 			while (itIni != LIs.end()) {
 				if (*itIni) {
 					if (verificarColisao(*itObs, *itIni)) {
-						entidades::obstaculos::ObstMedio* pTeia = dynamic_cast<entidades::obstaculos::ObstMedio*>(*itObs);
+						entidades::obstaculos::Teia* pTeia = dynamic_cast<entidades::obstaculos::Teia*>(*itObs);
 						if (pTeia == NULL) {
 							colidiu(*itObs, *itIni);
 						}

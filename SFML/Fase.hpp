@@ -8,6 +8,8 @@
 #include "Projetil.hpp"
 #include "ListaEntidades.hpp"
 #include "Bloco.hpp"
+#include "Plataforma.hpp"
+#include "Sapo.hpp"
 
 using namespace sf;
 
@@ -22,10 +24,11 @@ namespace fases {
 		Texture* textFundo;
 		Sprite* spriteFundo;
 
-		//void criarInimFaceis();
-		//void criarPlataformas();
+		void criarSapos();
+		void criarPlataformas();
 		virtual void criarInimigos() = 0;
 		virtual void criarObstaculo() = 0;
+		virtual void criarBlocos() = 0;
 		void criarCenario();                            //fazer ser virtual no futuro??? (diagrama não deixa a princípio)
 		virtual void carregarFundo() = 0;
 		Entidade* criaEntidade(Entidade* e);

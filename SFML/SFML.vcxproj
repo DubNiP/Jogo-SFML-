@@ -152,7 +152,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="Espinho.cpp" />
-    <ClCompile Include="Obst_Medio.cpp" />
+    <ClCompile Include="Teia.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="Projetil.cpp" />
@@ -177,7 +177,7 @@
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Obstaculo.hpp" />
     <ClInclude Include="Espinho.hpp" />
-    <ClInclude Include="Obst_Medio.hpp" />
+    <ClInclude Include="Teia.hpp" />
     <ClInclude Include="Personagem.hpp" />
     <ClInclude Include="Plataforma.hpp" />
     <ClInclude Include="Projetil.hpp" />

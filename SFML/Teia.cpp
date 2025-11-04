@@ -1,29 +1,29 @@
-#include "Obst_Medio.hpp"
+#include "Teia.hpp"
 
 namespace entidades { 
 	namespace obstaculos {
 
-		ObstMedio::ObstMedio(Vector2f pos, Vector2f tam):
+		Teia::Teia(Vector2f pos, Vector2f tam):
 			Obstaculo(pos,tam)
 		{
 			carregarSprite();
 		}
-		ObstMedio::~ObstMedio() {
+		Teia::~Teia() {
 
 		}
 
 
-		void ObstMedio::executar() {
+		void Teia::executar() {
 			attPos();
 		}
 
-		void ObstMedio::obstaculizar(entidades::personagens::Jogador* p) {
+		void Teia::obstaculizar(entidades::personagens::Jogador* p) {
 			if (p) {
 				p->setNaTeia(true);
 			}
 		}
 
-		void	ObstMedio::carregarSprite() {
+		void	Teia::carregarSprite() {
 			if (!carregarTexturaSprite("Textures/Web3.png", true, false)) {
 				throw "Textura não carregada";
 			}
