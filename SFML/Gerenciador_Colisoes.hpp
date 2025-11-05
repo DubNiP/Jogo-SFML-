@@ -6,13 +6,12 @@
 #include "Teia.hpp"
 #include "Plataforma.hpp"
 #include "Projetil.hpp"
+#include "Saida.hpp"
 #include <vector>
 #include <list>
 #include <set>
 
 using namespace std;
-
-//POR ENQUANTO A COLISÃO PEGA OS QUADRADOS DOS FORMATOS, VALE A PENA ANALISAR ISSO E MELHORAR NO FUTURO?
 
 namespace Gerenciadores {
 
@@ -23,9 +22,12 @@ namespace Gerenciadores {
         set<Projetil*>    LPs;  
         entidades::personagens::Jogador* pJog1;
         RenderWindow* window;
+        bool faseConcluida;
     public:
         GerenciadorColisoes(entidades::personagens::Jogador* pJog = NULL,RenderWindow* window = NULL);
         ~GerenciadorColisoes();
+        
+        bool getFaseConcluida() const;
 
         const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;                  //conferir se está no diagrama.
         void colidiu(Entidade* pe1, Entidade* pe2);

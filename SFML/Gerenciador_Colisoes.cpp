@@ -7,7 +7,8 @@ GerenciadorColisoes::GerenciadorColisoes(entidades::personagens::Jogador* pJog, 
 	LOs(),
 	LPs(),
 	pJog1(pJog),
-	window(win)
+	window(win),
+	faseConcluida(false)
 {
 
 }
@@ -20,6 +21,10 @@ const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) c
 		return false;
 	}
 	return pe1->getBounds().intersects(pe2->getBounds());
+}
+
+bool GerenciadorColisoes::getFaseConcluida() const {
+	return faseConcluida;
 }
 
 
@@ -101,9 +106,11 @@ bool GerenciadorColisoes::estaSobre(const FloatRect& obst, const FloatRect& ent,
 void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	if (pJog1) {
 		pJog1->setNaTeia(false);
-
 		for (auto it = LOs.begin(); it != LOs.end(); ++it) {
 			if (*it && verificarColisao(*it, pJog1)) {
+				if (dynamic_cast<entidades::obstaculos::Saida*>(*it) != NULL) {
+					faseConcluida = true;
+				}
 				if (dynamic_cast<entidades::obstaculos::Teia*>(*it) == NULL) {
 					colidiu(*it, pJog1);
 				}
@@ -157,8 +164,7 @@ void GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 						if (dynamic_cast<entidades::obstaculos::Plataforma*>(*itObs) != NULL && plat->esmagou(*itIni)) {
 							(*itIni)->setVidas(0);
 						}
-						entidades::obstaculos::Teia* pTeia = dynamic_cast<entidades::obstaculos::Teia*>(*itObs);
-						if (pTeia == NULL) {
+						if (!dynamic_cast<entidades::obstaculos::Teia*>(*itObs) && (!dynamic_cast<entidades::obstaculos::Saida*>(*itObs))) {
 							colidiu(*itObs, *itIni);
 						}
 					}
