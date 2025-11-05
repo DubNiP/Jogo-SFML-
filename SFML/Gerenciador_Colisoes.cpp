@@ -107,6 +107,10 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 				if (dynamic_cast<entidades::obstaculos::Teia*>(*it) == NULL) {
 					colidiu(*it, pJog1);
 				}
+				auto* plat = dynamic_cast<entidades::obstaculos::Plataforma*>(*it);
+				if (dynamic_cast<entidades::obstaculos::Plataforma*>(*it) != NULL && plat->esmagou(pJog1)) {
+					pJog1->setVidas(0);
+				}
 				(*it)->obstaculizar(pJog1);
 			}
 		}
@@ -149,6 +153,10 @@ void GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 			while (itIni != LIs.end()) {
 				if (*itIni) {
 					if (verificarColisao(*itObs, *itIni)) {
+						auto* plat = dynamic_cast<entidades::obstaculos::Plataforma*>(*itObs);
+						if (dynamic_cast<entidades::obstaculos::Plataforma*>(*itObs) != NULL && plat->esmagou(*itIni)) {
+							(*itIni)->setVidas(0);
+						}
 						entidades::obstaculos::Teia* pTeia = dynamic_cast<entidades::obstaculos::Teia*>(*itObs);
 						if (pTeia == NULL) {
 							colidiu(*itObs, *itIni);

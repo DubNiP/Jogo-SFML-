@@ -4,6 +4,7 @@
 #include "Jogador.hpp"
 #include "Inimigo.hpp"
 #include "Teia.hpp"
+#include "Plataforma.hpp"
 #include "Projetil.hpp"
 #include <vector>
 #include <list>
