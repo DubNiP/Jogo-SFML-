@@ -31,9 +31,18 @@ Fase::~Fase() {
 }
 
 void Fase::criarSapos() {
-    criaEntidade(new entidades::personagens::Sapo(Vector2f(300.f, 250.f), jog, Vector2f(50.f, 80.0f)));
-    criaEntidade(new entidades::personagens::Sapo(Vector2f(400.f, 250.f), jog, Vector2f(50.f, 80.0f)));
-    criaEntidade(new entidades::personagens::Sapo(Vector2f(200.f, 250.f), jog, Vector2f(50.f, 80.0f)));
+    vector<Vector2f>v;
+    v.push_back(Vector2f(300.f, 250.f));
+    v.push_back(Vector2f(400.f, 250.f));
+    v.push_back(Vector2f(200.f, 250.f));
+    v.push_back(Vector2f(1190.f, 180.f));
+    int i = rand() % 2 + 3;
+    while (i--) {
+        int j = rand() % v.size();
+        criaEntidade(new entidades::personagens::Sapo(v[j], jog, Vector2f(50.f, 80.f)));
+        v[j] = v.back();
+        v.pop_back();
+    }
 }
 
 void Fase::criarPlataformas() {
