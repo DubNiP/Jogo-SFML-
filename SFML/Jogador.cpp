@@ -7,10 +7,15 @@ namespace entidades {
 		Jogador::Jogador(Vector2f pos, Vector2f vel) :
 			Personagem(pos, vel),
 			pontos(0),
-			invencibilidade(30.f),
+			invencibilidade(0.3f),
 			danoClock(),
 			naTeia(false)
 		{
+			if (barraVida && barraFundo) {
+				barraFundo->setPosition(Vector2f(pos.x -11.f, pos.y - 10.f));
+				barraVida->setPosition(Vector2f(pos.x - 11.f, pos.y - 10.f));
+			}
+
 			carregarSprite();
 		}
 
@@ -23,6 +28,7 @@ namespace entidades {
 			processarInput();
 			gravidade();
 			mover();
+			posicaoBarra();
 		}
 
 		//void Jogador::salvar() {}
@@ -64,6 +70,7 @@ namespace entidades {
 			num_vidas = vidas;
 			pontos = pts;
 			danoClock.restart();
+			barraVida->setSize(Vector2f(40.f * (num_vidas / 10.f), 3.f));
 		}
 
 		void Jogador::tomarDano(int dano) {
@@ -75,6 +82,17 @@ namespace entidades {
 				if (vidas < 0) vidas = 0;
 				setVidas(vidas);
 				danoClock.restart();
+			}
+			barraVida->setSize(Vector2f(40.f*(num_vidas/10.f), 3.f));
+		}
+
+		void Jogador::posicaoBarra() {
+			Vector2f barraPos = getPos();
+			barraPos.y -=10.f;
+			barraPos.x -= 11.f;
+			if (barraVida && barraFundo) {
+				barraFundo->setPosition(barraPos);
+				barraVida->setPosition(barraPos);
 			}
 		}
 

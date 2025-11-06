@@ -13,6 +13,12 @@ namespace entidades {
 			relogio.restart();
 			carregarSprite();
 			moverAleatorio = rand() % 2;
+			if (barraVida && barraFundo) {
+				barraFundo->setSize(Vector2f(50.f, 2.f));
+				barraVida->setSize(Vector2f(50.f, 2.f));
+				barraFundo->setPosition(Vector2f(pos.x +10.f, pos.y - 10.f));
+				barraVida->setPosition(Vector2f(pos.x + 10.f, pos.y - 10.f));
+			}
 		}
 
 		Golem::~Golem()
@@ -44,7 +50,7 @@ namespace entidades {
 			Vector2f posJog = pJog->getPos();
 			Vector2f posInim = getPos();
 
-			if (fabs(posJog.x - posInim.x) < tamanho) {
+			if (fabs(posJog.x - posInim.x) < tamanho && fabs(posJog.y - posInim.y) < tamanho){
 				if (posJog.x > posInim.x) moverDireita();
 
 				else if(getPos().x > 30.0f){
@@ -89,6 +95,17 @@ namespace entidades {
 			mover();
 			attPos();
 			gravidade();
+			posicaoBarra();
+		}
+
+		void Golem::posicaoBarra() {
+			Vector2f barraPos = getPos();
+			barraPos.y -= 10.f;
+			barraPos.x += 10.f;
+			if (barraVida && barraFundo) {
+				barraFundo->setPosition(barraPos);
+				barraVida->setPosition(barraPos);
+			}
 		}
 
 		void Golem::carregarSprite() {

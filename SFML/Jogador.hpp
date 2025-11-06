@@ -27,6 +27,7 @@ namespace entidades {
 
 			void reseta(Vector2f pos,int vidas, int pontos);
 			void tomarDano(int dano);
+			void posicaoBarra();
 			void carregarSprite();
 			void setNaTeia(bool t);
 		};

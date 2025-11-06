@@ -12,6 +12,8 @@ protected:
 	static Gerenciadores::GerenciadorGrafico* pGG;
 	Sprite* pSprite;
 	Texture* textura;
+	RectangleShape* barraFundo;
+	RectangleShape* barraVida;        
 public:
 	Ente();
 	virtual ~Ente();

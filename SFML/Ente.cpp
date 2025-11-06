@@ -6,9 +6,20 @@ Gerenciadores::GerenciadorGrafico* Ente::pGG = NULL;
 Ente::Ente() :
 	id(0),
 	pSprite(NULL),
-	textura(NULL)
+	textura(NULL),
+	barraFundo(NULL),
+	barraVida(NULL)
 {
 	pSprite = new Sprite();
+	barraVida = new RectangleShape(Vector2f(40.f, 2.f));
+	barraFundo = new RectangleShape(Vector2f(40.f, 2.f));
+	barraVida->setFillColor(Color::Green);
+	barraFundo->setFillColor(Color::Transparent);
+	barraFundo->setOutlineThickness(1.f);
+	barraFundo->setOutlineColor(Color::Green);
+	barraFundo->setSize(Vector2f(40.f, 2.f));
+	barraVida->setSize(Vector2f(40.f, 2.f));
+	
 }
 
 Ente::~Ente() {
@@ -19,13 +30,25 @@ Ente::~Ente() {
 	if (textura) {
 		delete textura;
 	}
+	if (barraVida) {
+		delete barraVida;
+	}
+	if (barraFundo) {
+		delete barraFundo;
+	}
 	pSprite = NULL;
 	textura = NULL;
+	barraVida = NULL;
+	barraFundo = NULL;
 }
 
 void Ente::desenhar() {
 	if (pGG && pSprite) {
 		pGG->desenharEnte(*pSprite);
+	}
+	if (pGG && barraFundo && barraVida) {
+		pGG->desenharEnte(*barraFundo);
+		pGG->desenharEnte(*barraVida);
 	}
 }
 
