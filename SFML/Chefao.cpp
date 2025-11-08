@@ -21,8 +21,8 @@ namespace entidades {
 			}
 		}
 
-		void Chefao::tomarDano(int dano) {
-			if (dano > 0) {
+		void Chefao::tomarDano(int dano, bool bondade) {
+			if (dano > 0 && bondade) {
 				{
 					int vidas = getVidas() - dano;
 					if (vidas < 0) {

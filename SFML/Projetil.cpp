@@ -1,14 +1,16 @@
 #include "Projetil.hpp"
 
-
-Projetil::Projetil(Vector2f pos, bool dir) :
+Projetil::Projetil(Vector2f pos, bool dir,bool bondade) :
     Entidade(pos),
     ativo(true),
-    velocidade(5.0),
+    bondade(bondade),
+    velocidadeInicialX(500.0),
     direcao(dir),
     posicao(0),
-    dano(1)
+    dano(2)
 {
+    vel.x = velocidadeInicialX;
+	vel.y = 50.f;
     carregarSprite();
 }
 
@@ -27,33 +29,43 @@ bool Projetil::getAtivo() const {
 
 void Projetil::moverDireita() {
     if (ativo) {
-        Vector2f novaPos = getPos();
-        novaPos.x += velocidade;
-        setPos(novaPos);
+        vel.x = velocidadeInicialX; // Move para direita
     }
 }
 
 void Projetil::moverEsquerda() {
     if (ativo) {
-        Vector2f novaPos = getPos();
-        novaPos.x -= velocidade;
-        setPos(novaPos);
+        vel.x = -velocidadeInicialX; // Move para esquerda
     }
 }
 
 void Projetil::executar() {
     if (ativo) {
+        emTerra = false;
+
         if (direcao) {
             moverDireita();
-            return;
         }
-        moverEsquerda();
+        else {
+            moverEsquerda();
+        }
+
+        float dt = tempoMovimento.restart().asSeconds();
+        pos.x += vel.x * dt;
+        pos.y += vel.y * dt;
+
+        attPos();
     }
 }
+
 
 int Projetil::getDano() {
     return dano;
 }
+
+bool Projetil::getBondade() {
+    return bondade;
+}   
 
 //void Projetil::salvar() { }
 

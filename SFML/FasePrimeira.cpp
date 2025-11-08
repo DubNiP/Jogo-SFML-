@@ -52,7 +52,7 @@ void FasePrimeira::criarGolems() {
         v[j] = v.back();
         v.pop_back();
     }
-	criaEntidade(new Projetil(Vector2f(120.f, 150.f), 1));
+
 }
 
 void FasePrimeira::criarTeias() {

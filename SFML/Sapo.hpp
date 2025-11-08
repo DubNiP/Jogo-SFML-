@@ -13,6 +13,7 @@ namespace entidades {
             Vector2f posInicial;
 			Clock relogioDePulo;
             float intervaloPulo;
+            bool bondade;
         public:
             Sapo(Vector2f pos, Jogador* pJog, Vector2f vel);
 

@@ -1,6 +1,12 @@
 #pragma once
-#include "Jogador.hpp"
 #include "Personagem.hpp"
+
+namespace entidades {
+	namespace personagens {
+		class Jogador;  // Forward declaration
+	}
+}
+
 
 namespace entidades {
 	namespace personagens {

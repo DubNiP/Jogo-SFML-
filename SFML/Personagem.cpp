@@ -5,7 +5,7 @@ namespace entidades {
 
 		Personagem::Personagem(Vector2f pos, Vector2f velocidade):
 			Entidade(pos, velocidade),
-			num_vidas(1000)
+			num_vidas(10)
 		{
 		}
 

@@ -142,8 +142,8 @@ void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
 	if (pJog1) {
 		set<Projetil*>::iterator it = LPs.begin();
 		while (it != LPs.end()) {
-			if (verificarColisao(pJog1, *it)) {
-				pJog1->tomarDano((*it)->getDano());               
+			if (verificarColisao(pJog1, *it) && !(*it)->getBondade()) {
+				pJog1->tomarDano((*it)->getDano());
 				it = LPs.erase(it);
 				continue;
 			}

@@ -11,7 +11,8 @@ namespace entidades {
 			relogio(),
 			posInicial(pos),
 			relogioDePulo(),
-			intervaloPulo(1.5f)
+			intervaloPulo(1.5f),
+			bondade(false)
 		{
 			velocidadeInicialY = -vel.y;
 			velocidadeInicialX = vel.x;
@@ -41,6 +42,7 @@ namespace entidades {
 					int vidas = getVidas() - dano;
 					if (vidas < 0) vidas = 0;
 					setVidas(vidas);
+					barraVida->setSize(Vector2f(40.f * (num_vidas / 10.f), 3.f));
 				}
 			}
 		}

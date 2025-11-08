@@ -4,12 +4,13 @@
 class Projetil :public Entidade {
 protected:
 	bool ativo;
-	float velocidade;                       //todo personagem tem velocidade, então talvez vale  pena mover velocidade para entidade...
+	float velocidadeInicialX;   
 	bool direcao;
+	bool bondade; 
 	int posicao;
-	int dano;                              //mesma coisa com dano
+	int dano;                              
 public:
-	Projetil(Vector2f pos, bool dir);
+	Projetil(Vector2f pos, bool dir, bool bondade);
 	~Projetil();
 
 	void setAtivo(bool valor);
@@ -18,6 +19,7 @@ public:
 	void moverEsquerda();
 	void executar();
 	int getDano();
+	bool getBondade();
 	//void salvar();
 	void carregarSprite();
 };

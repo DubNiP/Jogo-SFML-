@@ -1,7 +1,14 @@
 #pragma once
-
 #include "Personagem.hpp"
+#include "ListaEntidades.hpp"
 #include <SFML/System/Clock.hpp>
+#include "Projetil.hpp"
+
+namespace Gerenciadores {
+	class GerenciadorColisoes;
+}
+
+using namespace sf;
 
 namespace entidades { 
 	namespace personagens{
@@ -11,11 +18,21 @@ namespace entidades {
 			int pontos;
 			float invencibilidade;
 			Clock danoClock;
+			Clock ataqueClock;
 			bool naTeia;
+			bool direcao;
+			bool apto;
+			listas::ListaEntidades* listaEntidades;
+			Gerenciadores::GerenciadorColisoes* GC;
+
 		public:
 			Jogador(Vector2f pos, Vector2f vel);
 			~Jogador();
-			//void colidir(Inimigo* pIn);            //PROVAVEL QUE SEJA O JOGADOR DANDO DANO NO INIMIGO.
+
+			void incluirListaEntidades(listas::ListaEntidades* pLEnt);
+
+			void incluirGerenciadorColisoes(Gerenciadores::GerenciadorColisoes* pGC);
+
 			void executar();
 			//void salvar();
 			void mover();
@@ -30,6 +47,7 @@ namespace entidades {
 			void posicaoBarra();
 			void carregarSprite();
 			void setNaTeia(bool t);
+			void criarProjetil();
 		};
 	} 
 }

@@ -1,5 +1,5 @@
 #include "Jogador.hpp"
-#include "Gerenciador_Grafico.hpp"
+#include "Gerenciador_Colisoes.hpp"
 
 namespace entidades {
 	namespace personagens {
@@ -9,7 +9,12 @@ namespace entidades {
 			pontos(0),
 			invencibilidade(0.3f),
 			danoClock(),
-			naTeia(false)
+			ataqueClock(),
+			naTeia(false),
+			direcao(true),
+			apto(true),
+			GC(NULL),
+			listaEntidades(NULL)
 		{
 			if (barraVida && barraFundo) {
 				barraFundo->setPosition(Vector2f(pos.x -11.f, pos.y - 10.f));
@@ -20,9 +25,18 @@ namespace entidades {
 		}
 
 		Jogador::~Jogador() {
+			GC = NULL;
+			listaEntidades = NULL;
 		}
 
-		//void Jogador::colidir(Inimigo* pIn) {}
+
+		void Jogador::incluirListaEntidades(listas::ListaEntidades* pLEnt) {
+			listaEntidades = pLEnt;
+		}
+
+		void Jogador::incluirGerenciadorColisoes(Gerenciadores::GerenciadorColisoes* pGC) {
+			GC = pGC;
+		}
 
 		void Jogador::executar() {
 			processarInput();
@@ -50,10 +64,16 @@ namespace entidades {
 			if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left)) {
 				vel.x = velocidadeInicialX * t;
 				pos.x -= vel.x;
+				direcao = false;
 			}
 			if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right)) {
 				vel.x = velocidadeInicialX * t;
 				pos.x += vel.x;
+				direcao = true;
+			}
+			if (Keyboard::isKeyPressed(Keyboard::Space) ){
+
+				criarProjetil();
 			}
 		}
 
@@ -82,8 +102,8 @@ namespace entidades {
 				if (vidas < 0) vidas = 0;
 				setVidas(vidas);
 				danoClock.restart();
+				barraVida->setSize(Vector2f(40.f * (num_vidas / 10.f), 3.f));
 			}
-			barraVida->setSize(Vector2f(40.f*(num_vidas/10.f), 3.f));
 		}
 
 		void Jogador::posicaoBarra() {
@@ -105,6 +125,22 @@ namespace entidades {
 
 		void Jogador::setNaTeia(bool estado) { 
 			naTeia = estado;
+		}
+
+		void Jogador::criarProjetil() {
+			if (ataqueClock.getElapsedTime().asSeconds() < 1.f && apto && GC && listaEntidades) {
+				apto = false;
+				if (listaEntidades && GC) {
+					Projetil* p = new Projetil(Vector2f(pos.x + 20.f, pos.y + 10.f), direcao, true);
+					GC->incluirProjetil(p);
+					listaEntidades->incluir(p);
+				}
+			}
+
+			if (ataqueClock.getElapsedTime().asSeconds() > 1.f) {
+				apto = true;
+				ataqueClock.restart();
+			}
 		}
 	} 
 }

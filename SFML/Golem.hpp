@@ -9,19 +9,25 @@ namespace entidades {
         private:
             int tamanho;
             int destruicao;
-	        Clock relogio;
+            sf::Clock relogio;
+            sf::Clock relogioPulo;
             Vector2f posInicial;
+            bool bondade;
+            int moverAleatorio;
+            float velocidadeInicialX;  // Novo atributo
+
         public:
             Golem(Vector2f pos, Jogador* pJog, Vector2f vel);
             ~Golem();
 
             void danificar();
-            void tomarDano(int dano);    //Discutir depois
+            void tomarDano(int dano);
 
             void mover();
             void moverEsquerda();
             void moverDireita();
-	        void movimentoAleatorio();
+            void movimentoAleatorio();
+            void pular();
 
             void executar();
             void posicaoBarra();
@@ -30,5 +36,5 @@ namespace entidades {
             //void salvar() {  }
 
         };
-    } 
+    }
 }
