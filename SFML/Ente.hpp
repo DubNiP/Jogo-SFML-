@@ -12,7 +12,7 @@ protected:
 	static Gerenciadores::GerenciadorGrafico* pGG;
 	Sprite* pSprite;
 	Texture* textura;
-	RectangleShape* barraFundo;
+	RectangleShape* barraFundo;     //nao deveria ser em entidade?
 	RectangleShape* barraVida;        
 public:
 	Ente();

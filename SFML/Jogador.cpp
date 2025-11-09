@@ -11,10 +11,9 @@ namespace entidades {
 			danoClock(),
 			ataqueClock(),
 			naTeia(false),
-			direcao(true),
 			apto(true),
-			GC(NULL),
-			listaEntidades(NULL)
+			listaEntidades(NULL),
+			GC(NULL)
 		{
 			if (barraVida && barraFundo) {
 				barraFundo->setPosition(Vector2f(pos.x -11.f, pos.y - 10.f));
@@ -64,12 +63,12 @@ namespace entidades {
 			if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left)) {
 				vel.x = velocidadeInicialX * t;
 				pos.x -= vel.x;
-				direcao = false;
+				setOlhandoDir(false);
 			}
 			if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right)) {
 				vel.x = velocidadeInicialX * t;
 				pos.x += vel.x;
-				direcao = true;
+				setOlhandoDir(true);
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Space) ){
 
@@ -128,10 +127,15 @@ namespace entidades {
 		}
 
 		void Jogador::criarProjetil() {
-			if (ataqueClock.getElapsedTime().asSeconds() < 1.f && apto && GC && listaEntidades) {
+			if (apto && GC && listaEntidades) {
 				apto = false;
-				if (listaEntidades && GC) {
-					Projetil* p = new Projetil(Vector2f(pos.x + 20.f, pos.y + 10.f), direcao, true);
+				if (olhandoDir) {
+					Projetil* p = new Projetil(Vector2f(pos.x + 20.f, pos.y + 10.f), olhandoDir, true);
+					GC->incluirProjetil(p);
+					listaEntidades->incluir(p);
+				}
+				else {
+					Projetil* p = new Projetil(Vector2f(pos.x - 20.f, pos.y + 10.f), olhandoDir, true);
 					GC->incluirProjetil(p);
 					listaEntidades->incluir(p);
 				}

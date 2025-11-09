@@ -15,8 +15,8 @@ namespace entidades {
 			//virtual void salvar() = 0;
 			virtual void mover() = 0;
 
-			int getVidas() const;	
-			void setVidas(int vidas); 
+			int getVidas() const;
+			void setVidas(int vidas);
 			virtual void tomarDano(int dano);
 		};
 	}

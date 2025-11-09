@@ -101,12 +101,14 @@ namespace entidades {
 			Vector2f novaPos = getPos();
 			novaPos.x -= velocidadeInicialX;  
 			setPos(novaPos);
+			setOlhandoDir(false);
 		}
 
 		void Golem::moverDireita() {
 			Vector2f novaPos = getPos();
 			novaPos.x += velocidadeInicialX;  
 			setPos(novaPos);
+			setOlhandoDir(true);
 		}
 
 		void Golem::movimentoAleatorio() {
@@ -143,6 +145,7 @@ namespace entidades {
 			}
 			setScale(Vector2f(2.f, 2.f));
 			setPos(pos);
+			atualizaDirSprite();
 		}
 	}
 }

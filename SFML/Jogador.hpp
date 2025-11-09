@@ -20,7 +20,6 @@ namespace entidades {
 			Clock danoClock;
 			Clock ataqueClock;
 			bool naTeia;
-			bool direcao;
 			bool apto;
 			listas::ListaEntidades* listaEntidades;
 			Gerenciadores::GerenciadorColisoes* GC;

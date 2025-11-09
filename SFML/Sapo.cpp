@@ -108,6 +108,7 @@ namespace entidades {
 				vel.y = velocidadeInicialY;
 				vel.x = -velocidadeInicialX;
 			}
+			setOlhandoDir(false);
 		}
 
 		void Sapo::moverDireita() {
@@ -123,6 +124,7 @@ namespace entidades {
 				vel.y = velocidadeInicialY;
 				vel.x = velocidadeInicialX;
 			}
+			setOlhandoDir(true);
 		}
 
 		void Sapo::executar() {
@@ -148,6 +150,7 @@ namespace entidades {
 			}
 			setScale(Vector2f(1.5f, 1.5f));
 			setPos(pos);
+			atualizaDirSprite();
 		}
 
 		//void salvar() {}	

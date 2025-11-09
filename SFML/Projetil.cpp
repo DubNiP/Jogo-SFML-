@@ -1,11 +1,10 @@
 #include "Projetil.hpp"
 
-Projetil::Projetil(Vector2f pos, bool dir,bool bondade) :
-    Entidade(pos),
+
+Projetil::Projetil(Vector2f pos, bool dir, bool bond) :
+    Entidade(pos, Vector2f(2.f,2.f), dir),
     ativo(true),
-    bondade(bondade),
-    velocidadeInicialX(500.0),
-    direcao(dir),
+    bondade(bond),
     posicao(0),
     dano(2)
 {
@@ -27,36 +26,23 @@ bool Projetil::getAtivo() const {
     return ativo;
 }
 
-void Projetil::moverDireita() {
-    if (ativo) {
-        vel.x = velocidadeInicialX; 
-    }
-}
-
-void Projetil::moverEsquerda() {
-    if (ativo) {
-        vel.x = -velocidadeInicialX; 
-    }
-}
-
 void Projetil::executar() {
     if (ativo) {
-        emTerra = false;
-
-        if (direcao) {
-            moverDireita();
+        Vector2f novaPos = getPos();
+        if (olhandoDir) {
+            novaPos.x += velocidadeInicialX;
         }
         else {
-            moverEsquerda();
+            novaPos.x -= velocidadeInicialX;
         }
 
-        float dt = tempoMovimento.restart().asSeconds();
-        pos.x += vel.x * dt;
-        pos.y += vel.y * dt;
-
-        attPos();
+        setPos(novaPos);
     }
 }
+    //float dt = tempoMovimento.restart().asSeconds();
+    //pos.x += vel.x * dt;
+    //pos.y += vel.y * dt;
+
 
 
 int Projetil::getDano() {
@@ -75,4 +61,5 @@ void Projetil::carregarSprite() {
     }
     setScale(Vector2f(2.f, 2.f));
     setPos(pos);
+    atualizaDirSprite();
 }

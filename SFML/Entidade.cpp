@@ -1,6 +1,6 @@
 #include "Entidade.hpp"
 
-Entidade::Entidade(Vector2f posicao, Vector2f velocidade) :
+Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 	Ente(),
 	pos(posicao),
 	emTerra(true),
@@ -10,7 +10,8 @@ Entidade::Entidade(Vector2f posicao, Vector2f velocidade) :
 	aceleracao(0.1f),
 	emAceleracao(false),
 	forcaGravidade(30.f),
-	velocidadeTerminal(30.f)
+	velocidadeTerminal(30.f),
+	olhandoDir(dir)
 {
 	tempoMovimento.restart();
 	tempoAceleracao.restart();
@@ -112,6 +113,33 @@ void Entidade::acelerar() {
 
 void Entidade::resetaRelogio() {
 	tempoMovimento.restart();
+}
+
+bool Entidade::getOlhandoDir() const {
+	return olhandoDir;
+}
+
+void Entidade::setOlhandoDir(bool dir) {
+	if (olhandoDir != dir) {
+		olhandoDir = dir;
+		atualizaDirSprite();
+	}
+}
+
+void Entidade::atualizaDirSprite() {
+	if (pSprite) {
+		if (olhandoDir) {
+
+			pSprite->setScale(abs(pSprite->getScale().x), pSprite->getScale().y);
+			pSprite->setOrigin(0.f, 0.f);
+		}
+		else {
+			
+			pSprite->setScale(-abs(pSprite->getScale().x), pSprite->getScale().y);
+			FloatRect bounds = pSprite->getLocalBounds();
+			pSprite->setOrigin(bounds.width, 0.f);
+		}
+	}
 }
 
 

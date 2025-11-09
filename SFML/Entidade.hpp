@@ -18,10 +18,11 @@ protected:
 	float velocidadeTerminal;	
 	Clock tempoMovimento;
 	Clock tempoAceleracao;
+	bool olhandoDir;
 	// ostream buffer;
 	//void salvarDataBuffer();
 public:
-	Entidade(Vector2f posicao, Vector2f velocidade = Vector2f(0.f, 0.f));
+	Entidade(Vector2f posicao = Vector2f(0.f, 0.f), Vector2f velocidade = Vector2f(0.f, 0.f), bool dir = true);
 	virtual ~Entidade();
 
 	virtual void executar() = 0;
@@ -50,4 +51,7 @@ public:
 	void acelerar();
 
 	void resetaRelogio();
+	bool getOlhandoDir() const;
+	void setOlhandoDir(bool dir);
+	void atualizaDirSprite();
 };
