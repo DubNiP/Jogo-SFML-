@@ -1,5 +1,6 @@
 #pragma once
 #include "Obstaculo.hpp"
+#include "Jogador.hpp"
 
 namespace entidades {
 	namespace obstaculos {

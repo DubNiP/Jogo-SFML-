@@ -178,26 +178,42 @@ void GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 
 
 void GerenciadorColisoes::tratarColisoesProjeteisObstacs() {
-	set<Projetil*>::iterator itP = LPs.begin();
+	auto itP = LPs.begin();
 	while (itP != LPs.end()) {
-		bool colidiu = false;
-		auto* p = dynamic_cast<entidades::obstaculos::Teia*>(*itP);
-		list<entidades::obstaculos::Obstaculo*>::iterator itObs = LOs.begin();
-		while (itObs != LOs.end()) {
 
-			if (*itObs && verificarColisao(*itP, *itObs) && p) {
+		bool removido = false;
+
+		for (auto itObs = LOs.begin(); itObs != LOs.end();) {
+
+			if (*itObs && verificarColisao(*itP, *itObs)) {
+
+				if (auto* teia = dynamic_cast<entidades::obstaculos::Teia*>(*itObs)) {
+					if ((*itP)->getBondade()) {
+						teia->setVida(teia->getVida() - (*itP)->getDano());
+						if (!teia->getAtivo()) {
+							itObs = LOs.erase(itObs);
+						} else {
+							itObs++;
+						}
+					} else {
+						itObs++;
+					}
+				} else {
+					itObs++;
+				}
+
 				(*itP)->setAtivo(false);
 				itP = LPs.erase(itP);
-				colidiu = true;
+				removido = true;
 				break;
+			} else {
+				itObs++;
 			}
-			itObs++;
 		}
 
-		if (colidiu) {
-			continue;
+		if (!removido) {
+			itP++;
 		}
-		itP++;
 	}
 }
 

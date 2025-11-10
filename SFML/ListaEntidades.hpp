@@ -3,7 +3,7 @@
 #include "Entidade.hpp"
 #include "Inimigo.hpp"
 #include "Projetil.hpp"
-
+#include "Teia.hpp"
 namespace listas {
 
     class ListaEntidades

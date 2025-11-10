@@ -1,5 +1,6 @@
 #include "Espinho.hpp"
 
+
 namespace entidades { 
 	namespace obstaculos {
 

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Jogador.hpp"
 #include "Entidade.hpp"
 #include <SFML/Graphics.hpp>
 
@@ -8,13 +7,18 @@ using namespace sf;
 using namespace std;
 
 namespace entidades {
+	namespace personagens {
+		class Jogador;
+		class Personagem;
+	}
+}
+
+namespace entidades {
 	namespace obstaculos {
 
 		class Obstaculo : public Entidade {
 		protected:
 			bool danoso;
-
-			//COMENTAR COM O PROFESSOR
 			float largura;
 			float altura;
 

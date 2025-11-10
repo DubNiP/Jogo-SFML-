@@ -51,6 +51,7 @@ namespace entidades {
 		}
 
 		void Jogador::processarInput() {
+
 			float t = naTeia ? 0.3f : 1.0f;
 			if ((Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up))) {
 				if (emTerra && !naTeia) {
