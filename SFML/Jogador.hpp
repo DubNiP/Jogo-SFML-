@@ -36,7 +36,8 @@ namespace entidades {
 			//void salvar();
 			void mover();
 
-			void processarInput();
+			void processarInput(bool esquerda, bool direita, bool pular, bool atirar);
+
 
 			const int getPontos() const;
 			void adicionarPontos(int pts);

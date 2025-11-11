@@ -10,6 +10,7 @@ Jogo::Jogo() :
     fase2(&pJog1)
 {
     Ente::setGG(&GG);         //pode mudar
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(&menu);
 }
 
 Jogo::~Jogo() {
@@ -25,7 +26,11 @@ void Jogo::executar() {
 
         if (menu.getIniciar() && window->isOpen()) {
             menu.reseta();
+            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(NULL);
+            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setJogador(&pJog1);
             executarJogo();
+            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setJogador(NULL);
+            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(&menu);
         }
 
 
@@ -40,14 +45,19 @@ void Jogo::executarMenu(Menu& menu) {
 
     while (window && window->isOpen() && !menu.getIniciar() && !menu.getSair()) {
         while (window->pollEvent(event)) {
-            menu.loop_menu(event);
+            if (event.type == Event::Closed) { 
+                window->close(); return; 
+            }
+            if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
+                menu.reseta();
+            }
         }
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->executarMenu();
         menu.draw_menu();
     }
 }
 
 void Jogo::executarJogo() {
-    //fase1.executar();
-
+    fase1.executar();
     fase2.executar();
 }

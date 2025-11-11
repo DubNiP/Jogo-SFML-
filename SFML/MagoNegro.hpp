@@ -11,12 +11,7 @@ namespace entidades {
         class MagoNegro : public Inimigo {
         private:
             int tamanho;
-            int destruicao;
-            Clock relogio;
-            Clock relogioPulo;
             Clock ataqueClock;
-            Vector2f posInicial;
-            bool bondade;
             bool apto;
             int moverAleatorio;
             float velocidadeInicialX;

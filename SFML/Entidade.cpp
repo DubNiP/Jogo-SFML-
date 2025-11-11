@@ -5,8 +5,7 @@ Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 	pos(posicao),
 	emTerra(true),
 	vel(velocidade),
-	velocidadeInicialY(velocidade.y),
-	velocidadeInicialX(velocidade.x),
+	velocidadeInicial(velocidade),
 	aceleracao(0.1f),
 	emAceleracao(false),
 	forcaGravidade(30.f),
@@ -57,17 +56,17 @@ void Entidade::setVelocidadeY(const float v) {
 }
 
 const float Entidade::getVelocidadeInicialX() const { 
-	return velocidadeInicialX; 
+	return velocidadeInicial.x; 
 }
 
 const float Entidade::getVelocidadeInicialY() const { 
-	return velocidadeInicialY; 
+	return velocidadeInicial.y; 
 }
 void Entidade::setVelocidadeInicialX(float v) { 
-	velocidadeInicialX = v;
+	velocidadeInicial.x = v;
 }
 void Entidade::setVelocidadeInicialY(float v) { 
-	velocidadeInicialY = v;
+	velocidadeInicial.y = v;
 }
 
 void Entidade::attPos() {

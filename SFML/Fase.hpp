@@ -11,7 +11,7 @@
 #include "Plataforma.hpp"
 #include "Sapo.hpp"
 #include "Alavanca.hpp"
-
+#include "Gerenciador_Eventos.hpp"
 
 
 using namespace sf;

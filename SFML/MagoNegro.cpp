@@ -9,20 +9,13 @@ namespace entidades {
 	namespace personagens {
 
 		MagoNegro::MagoNegro(Vector2f pos, Jogador* pJog, Vector2f vel) :
-			Inimigo(pos, pJog, vel),
+			Inimigo(pos, pJog, vel, 1),
 			tamanho(400),
-			destruicao(1),
-			relogio(),
-			relogioPulo(),
 			ataqueClock(),
-			posInicial(pos),
-			bondade(false),
 			apto(true),
 			moverAleatorio(0),
 			velocidadeInicialX(vel.x)
 		{
-			relogio.restart();
-			relogioPulo.restart();
 			carregarSprite();
 			moverAleatorio = rand() % 2;
 			if (barraVida && barraFundo) {
@@ -76,9 +69,9 @@ namespace entidades {
 				criarProjetil();
 			}
 
-			if (relogioPulo.getElapsedTime().asSeconds() >= 3.0f && emTerra) {
+			if (relogioDePulo.getElapsedTime().asSeconds() >= 3.0f && emTerra) {
 				pular();
-				relogioPulo.restart();
+				relogioDePulo.restart();
 				return;
 			}
 

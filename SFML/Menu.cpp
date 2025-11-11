@@ -4,21 +4,12 @@
 Menu::Menu() :
 	Ente(),
 	pos(1),
-	pressed(false),
-	theselect(false),
 	sair(false),
 	iniciar(false),
-
-	font(NULL),
-
-	options(),
-	coords(),
-	texts(),
-	sizes()
+	font(),
+	texts()
 {
-	font = new Font();
-
-	if (!font->loadFromFile("Fonts/ByteBounce.ttf")) {
+	if (!font.loadFromFile("Fonts/ByteBounce.ttf")) {
 		throw "Textura não carregada";
 	}
 	if (!carregarTexturaSprite("Textures/background 1.png")) {
@@ -39,28 +30,27 @@ Menu::Menu() :
 }
 
 Menu::~Menu() {
-	if (font) {
-		delete font;
-	}
-	font = NULL;
 }
 
 void Menu::set_values() {
 
-	options = { "Nome_Jogo","Jogar","Ranking","Sair" };                                //Classe de objetos gráficos, vale a pena olhar no futuro...
-	texts.resize(4);
-	coords = { {490.f,110.f},{620.f,380.f},{600.f,450.f},{630.f,520.f} };
-	sizes = { 80u,50u,50u,50u };
+	const char* options[] = {"Nome_Jogo", "Jogar","Ranking","Sair"};                                //Classe de objetos gráficos, vale a pena olhar no futuro..
+	const Vector2f posi[] = {{490.f,110.f},{620.f,380.f},{600.f,450.f},{630.f,520.f}};
+	const unsigned int tam[] = {80u,50u,50u,50u};
 
-	texts[1].setOutlineThickness(6);
+	texts.clear();
+	texts.reserve(4);
 
 
-	for (size_t i = 0; i < texts.size(); i++) {
-		texts[i].setFont(*font);
-		texts[i].setString(options[i]);
-		texts[i].setCharacterSize(sizes[i]);
-		texts[i].setPosition(coords[i]);
-		texts[i].setOutlineColor(Color::Black);
+	for (size_t i = 0; i < 4; i++) {
+		Text t;
+		t.setFont(font);
+		t.setString(options[i]);
+		t.setCharacterSize(tam[i]);
+		t.setPosition(posi[i]);
+		t.setOutlineColor(Color::Black);
+		t.setOutlineThickness(0.f);
+		texts.push_back(t);
 	}
 }
 
@@ -69,40 +59,32 @@ void Menu::executar() {          //WTFFFFFFFFF
 
 }
 
-void Menu::loop_menu(Event& event){
-	if (event.type == Event::Closed) {
-		sair = true;
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Down) && !pressed) {
-		if (pos < 3) {
-			pos++;
-			pressed = true;
-			texts[pos].setOutlineThickness(6);
-			texts[pos-1].setOutlineThickness(0);
-			pressed = false;
-			theselect = false;
-		}
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Up) && !pressed) {
-		if (pos > 1) {
-			pos--;
-			pressed = true;
-			texts[pos].setOutlineThickness(6);
-			texts[pos + 1].setOutlineThickness(0);
-			pressed = false;
-			theselect = false;
-		}
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Enter) && !theselect) {
-		theselect = true;                                                    //OBS: O botao de opçoes n faz nada por enquanto
-		if (pos == 1) {
-			iniciar = true;
-		}
-		if (pos == 3) {
-			sair = true;
-		}
+void Menu::moverBaixo() {
+    if (pos < 3) {
+        texts[pos].setOutlineThickness(0);
+        pos++;
+        texts[pos].setOutlineThickness(6);
+    }
+}
+
+void Menu::moverCima() {
+	if (pos > 1) {
+		texts[pos].setOutlineThickness(0);
+		pos--;
+		texts[pos].setOutlineThickness(6);;
 	}
 }
+
+void Menu::confirmar() {
+	if (pos == 1) {
+		iniciar = true;
+	}
+
+	if (pos == 3) {
+		sair = true;
+	}
+}
+
 
 void Menu::draw_menu() {
 	if (pGG){
@@ -129,5 +111,4 @@ bool Menu::getIniciar() const {
 void Menu::reseta() {
 	iniciar = false;
 	sair = false;
-	theselect = false;
 }

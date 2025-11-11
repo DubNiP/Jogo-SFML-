@@ -10,8 +10,7 @@ protected:
 	Vector2f pos;
 	bool emTerra;
 	Vector2f vel;
-	float velocidadeInicialY;
-	float velocidadeInicialX;
+	Vector2f velocidadeInicial;
 	float aceleracao;
 	float emAceleracao;
 	float forcaGravidade;

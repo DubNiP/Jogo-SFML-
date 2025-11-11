@@ -5,18 +5,13 @@ namespace entidades {
 	namespace personagens {
 
 		Golem::Golem(Vector2f pos, Jogador* pJog, Vector2f vel) :
-			Inimigo(pos, pJog, vel),
+			Inimigo(pos, pJog, vel, 1),
 			tamanho(200),
-			destruicao(1),
-			relogio(),
-			relogioPulo(),
-			posInicial(pos),
-			bondade(false),
 			moverAleatorio(0),
 			velocidadeInicialX(vel.x)  
 		{
 			relogio.restart();
-			relogioPulo.restart();
+			relogioDePulo.restart();
 			carregarSprite();
 			moverAleatorio = rand() % 2;
 			if (barraVida && barraFundo) {
@@ -56,9 +51,9 @@ namespace entidades {
 			Vector2f posJog = pJog->getPos();
 			Vector2f posInim = getPos();
 
-			if (relogioPulo.getElapsedTime().asSeconds() >= 3.0f && emTerra) {
+			if (relogioDePulo.getElapsedTime().asSeconds() >= 3.0f && emTerra) {
 				pular();
-				relogioPulo.restart();
+				relogioDePulo.restart();
 				return;
 			}
 

@@ -8,8 +8,8 @@ Projetil::Projetil(Vector2f pos, bool dir, bool bond) :
     posicao(0),
     dano(2)
 {
-    velocidadeInicialX = vel.x;
-	velocidadeInicialY = vel.y;
+    velocidadeInicial.x = vel.x;
+	velocidadeInicial.y = vel.y;
     carregarSprite();
 }
 
@@ -32,10 +32,10 @@ void Projetil::executar() {
 
         Vector2f novaPos = getPos();
         if (olhandoDir) {
-            vel.x = velocidadeInicialX;
+            vel.x = velocidadeInicial.x;
         }
         else {
-            vel.x = -velocidadeInicialX;
+            vel.x = -velocidadeInicial.x;
         }
 
         float dt = tempoMovimento.restart().asSeconds();

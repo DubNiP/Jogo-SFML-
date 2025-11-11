@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Alavanca.cpp" />
     <ClCompile Include="Bloco.cpp" />
+    <ClCompile Include="Gerenciador_Eventos.cpp" />
     <ClCompile Include="MagoNegro.cpp" />
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp">
@@ -162,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="Alavanca.hpp" />
     <ClInclude Include="Bloco.hpp" />
+    <ClInclude Include="Gerenciador_Eventos.hpp" />
     <ClInclude Include="MagoNegro.hpp" />
     <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />

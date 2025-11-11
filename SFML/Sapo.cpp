@@ -5,17 +5,12 @@ namespace entidades {
 	namespace personagens {
 
 		Sapo::Sapo(Vector2f pos, Jogador* pJog, Vector2f vel) :
-			Inimigo(pos, pJog, vel),
+			Inimigo(pos, pJog, vel, 2),
 			raio(150.f),
-			destruicao(2),
-			relogio(),
-			posInicial(pos),
-			relogioDePulo(),
-			intervaloPulo(1.5f),
-			bondade(false)
+			intervaloPulo(1.5f)
 		{
-			velocidadeInicialY = -vel.y;
-			velocidadeInicialX = vel.x;
+			velocidadeInicial.y = -vel.y;
+			velocidadeInicial.x = vel.x;
 			relogioDePulo.restart();
 			if (barraVida && barraFundo) {
 				barraFundo->setSize(Vector2f(30.f, 2.f));
@@ -105,8 +100,8 @@ namespace entidades {
 				emTerra = false;
 				emAceleracao = true;
 
-				vel.y = velocidadeInicialY;
-				vel.x = -velocidadeInicialX;
+				vel.y = velocidadeInicial.y;
+				vel.x = -velocidadeInicial.x;
 			}
 			setOlhandoDir(false);
 		}
@@ -121,8 +116,8 @@ namespace entidades {
 				relogioDePulo.restart();
 				tempoAceleracao.restart();
 
-				vel.y = velocidadeInicialY;
-				vel.x = velocidadeInicialX;
+				vel.y = velocidadeInicial.y;
+				vel.x = velocidadeInicial.x;
 			}
 			setOlhandoDir(true);
 		}

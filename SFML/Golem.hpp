@@ -8,11 +8,6 @@ namespace entidades {
         class Golem : public Inimigo {
         private:
             int tamanho;
-            int destruicao;
-            Clock relogio;
-            Clock relogioPulo;
-            Vector2f posInicial;
-            bool bondade;
             int moverAleatorio;
             float velocidadeInicialX;  // Novo atributo
 

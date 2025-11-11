@@ -120,6 +120,15 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 				(*it)->obstaculizar(pJog1);
 			}
 		}
+
+		const FloatRect bJog = pJog1->getBounds();
+		for (auto it = LOs.begin(); it != LOs.end(); ++it) {
+			if (*it) {
+				if (auto* saida = dynamic_cast<entidades::obstaculos::Saida*>(*it)) {
+					saida->atualizarPorProximidade(bJog);
+				}
+			}
+		}
 	}
 }
 

@@ -15,10 +15,11 @@ Fase::Fase(entidades::personagens::Jogador* pJog):
 }
 
 Fase::~Fase() {
-    lista_ents.limparPreservando(jog);                 //estranho..
     GC.limparObstaculos();
     GC.limparInimigos();
     GC.limparProjetis();
+    GC.limparBlocos();
+    lista_ents.limparPreservando(jog);                 //estranho..
     if (spriteFundo) {
         delete spriteFundo;
         spriteFundo = NULL;
@@ -56,10 +57,11 @@ void Fase::criarPlataformas() {
 }
 
 void Fase::criarCenario() {
-    lista_ents.limparPreservando(jog);                                    //estranho..
     GC.limparObstaculos();
     GC.limparInimigos();
     GC.limparProjetis();
+    GC.limparBlocos();
+    lista_ents.limparPreservando(jog);                                    //estranho..
 
     carregarFundo();
 
@@ -68,6 +70,7 @@ void Fase::criarCenario() {
         lista_ents.incluir(jog);
 		jog->incluirListaEntidades(&lista_ents);
 		jog->incluirGerenciadorColisoes(&GC);
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setJogador(jog);
     }
     criarObstaculo();
     criarInimigos();
@@ -119,8 +122,11 @@ void Fase::executar() {
                     return;
                 }
             }
-            GC.executar();
+
+            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->executar();
             lista_ents.executarTodos();
+
+            GC.executar();
 
             pGG->desenhaTodos(&lista_ents,spriteFundo);     //trocar no futuro?
         }

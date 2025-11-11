@@ -25,7 +25,6 @@ void FasePrimeira::criarObstaculo() {
 
 void FasePrimeira::criarBlocos() {
     //1280 e 720
-
     criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 500.f), Vector2f(400.f, 40.f)));
     criaEntidade(new entidades::obstaculos::Bloco(Vector2f(600.f, 500.f), Vector2f(680.f, 40.f)));
     criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 280.f), Vector2f(760.f, 40.f)));

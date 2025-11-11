@@ -38,7 +38,6 @@ namespace entidades {
 		}
 
 		void Jogador::executar() {
-			processarInput();
 			gravidade();
 			mover();
 			posicaoBarra();
@@ -50,29 +49,30 @@ namespace entidades {
 			attPos();
 		}
 
-		void Jogador::processarInput() {
-
+		void Jogador::processarInput(bool esquerda, bool direita, bool pular, bool atirar) {
 			float t = naTeia ? 0.3f : 1.0f;
-			if ((Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up))) {
+
+			if (pular) {
 				if (emTerra && !naTeia) {
 					emTerra = false;
-					vel.y = -velocidadeInicialY;
+					vel.y = -velocidadeInicial.y;
 					tempoMovimento.restart();
-
 				}
 			}
-			if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left)) {
-				vel.x = velocidadeInicialX * t;
+
+			if (esquerda && !direita) {
+				vel.x = velocidadeInicial.x * t;
 				pos.x -= vel.x;
 				setOlhandoDir(false);
 			}
-			if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right)) {
-				vel.x = velocidadeInicialX * t;
+
+			if (direita && !esquerda) {
+				vel.x = velocidadeInicial.x * t;
 				pos.x += vel.x;
 				setOlhandoDir(true);
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Space) ){
 
+			if (atirar) {
 				criarProjetil();
 			}
 		}

@@ -8,12 +8,7 @@ namespace entidades {
         class Sapo : public Inimigo {
         private:
             float raio;
-            int destruicao;
-            Clock relogio;
-            Vector2f posInicial;
-			Clock relogioDePulo;
             float intervaloPulo;
-            bool bondade;
         public:
             Sapo(Vector2f pos, Jogador* pJog, Vector2f vel);
 
