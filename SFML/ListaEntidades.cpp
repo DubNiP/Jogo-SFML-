@@ -86,6 +86,13 @@ void ListaEntidades::removerMorto() {
                     continue;
                 }
             }
+            if (auto* teia = dynamic_cast<entidades::obstaculos::Teia*>(e)) {
+                if (!teia->getAtivo()) {
+                    LEs.deletar(e);
+                    delete e;
+                    continue;
+                }
+            }
         }
         i++;
     }

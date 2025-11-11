@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Obstaculo.hpp"
+#include "Personagem.hpp"
+#include "Jogador.hpp"
 
 using namespace sf;
 

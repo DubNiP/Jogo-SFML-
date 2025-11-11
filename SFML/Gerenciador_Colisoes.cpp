@@ -16,17 +16,16 @@ GerenciadorColisoes::GerenciadorColisoes(entidades::personagens::Jogador* pJog, 
 GerenciadorColisoes::~GerenciadorColisoes() {
 }
 
+const bool GerenciadorColisoes::getFaseConcluida() const {
+	return faseConcluida;
+}
+
 const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) const {
 	if (!pe1 || !pe2 || pe1 == pe2) {
 		return false;
 	}
 	return pe1->getBounds().intersects(pe2->getBounds());
 }
-
-bool GerenciadorColisoes::getFaseConcluida() const {
-	return faseConcluida;
-}
-
 
 void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 	if (a && b && a != b) {
@@ -124,6 +123,16 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	}
 }
 
+void GerenciadorColisoes::tratarColisoesJogsBlocos() {
+	if (pJog1) {
+		for (auto it = LBs.begin(); it != LBs.end(); ++it) {
+			if (*it && verificarColisao(*it, pJog1)) {
+				colidiu(*it, pJog1);
+			}
+		}
+	}
+}
+
 
 void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 	if (pJog1) {
@@ -131,7 +140,7 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 			if (LIs[i]) {
 				if (verificarColisao(pJog1, LIs[i])) {
 					colidiu(LIs[i], pJog1);
-					LIs[i]->danificar();                //isso ta sugando a vida do jogador MT rapido, dps e bom dar uma olhada
+					LIs[i]->danificar();            
 				}
 			}
 		}
@@ -177,27 +186,56 @@ void GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 	}
 }
 
+void GerenciadorColisoes::tratarColisoesInimgsBlocos() {
+	for (auto itB = LBs.begin(); itB != LBs.end(); ++itB) {
+		if (*itB) {
+			for (auto itI = LIs.begin(); itI != LIs.end(); ++itI) {
+				if (*itI && verificarColisao(*itB, *itI)) {
+					colidiu(*itB, *itI);
+				}
+			}
+		}
+	}
+}
+
 
 void GerenciadorColisoes::tratarColisoesProjeteisObstacs() {
-	set<Projetil*>::iterator itP = LPs.begin();
+	auto itP = LPs.begin();
 	while (itP != LPs.end()) {
-		bool colidiu = false;
 
-		list<entidades::obstaculos::Obstaculo*>::iterator itObs = LOs.begin();
-		while (itObs != LOs.end()) {
+		bool removido = false;
+
+		for (auto itObs = LOs.begin(); itObs != LOs.end();) {
+
 			if (*itObs && verificarColisao(*itP, *itObs)) {
+
+				if (auto* teia = dynamic_cast<entidades::obstaculos::Teia*>(*itObs)) {
+					if ((*itP)->getBondade()) {
+						teia->setVida(teia->getVida() - (*itP)->getDano());
+						if (!teia->getAtivo()) {
+							itObs = LOs.erase(itObs);
+						} else {
+							itObs++;
+						}
+					} else {
+						itObs++;
+					}
+				} else {
+					itObs++;
+				}
+
 				(*itP)->setAtivo(false);
 				itP = LPs.erase(itP);
-				colidiu = true;
+				removido = true;
 				break;
+			} else {
+				itObs++;
 			}
-			itObs++;
 		}
 
-		if (colidiu) {
-			continue;
+		if (!removido) {
+			itP++;
 		}
-		itP++;
 	}
 }
 
@@ -205,7 +243,6 @@ void GerenciadorColisoes::tratarColisoesProjeteisInimgs() {
 	set<Projetil*>::iterator itP = LPs.begin();
 	while (itP != LPs.end()) {
 		bool colidiu = false;
-
 		vector<entidades::personagens::Inimigo*>::iterator itIni = LIs.begin();
 		while (itIni != LIs.end()) {
 			if (*itIni && verificarColisao(*itP, *itIni) && (*itP)->getBondade()) {
@@ -257,6 +294,12 @@ void GerenciadorColisoes::incluirObstaculo(entidades::obstaculos::Obstaculo* pOb
 	}
 }
 
+void GerenciadorColisoes::incluirBloco(entidades::obstaculos::Bloco* pBloco) {
+	if (pBloco) {
+		LBs.push_back(pBloco);
+	}
+}
+
 void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil)
 {
 	if (pProjetil) {
@@ -267,6 +310,10 @@ void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil)
 
 void GerenciadorColisoes::limparObstaculos() {
 	LOs.clear();
+}
+
+void GerenciadorColisoes::limparBlocos() {
+	LBs.clear();
 }
 
 void GerenciadorColisoes::limparInimigos() {
@@ -295,12 +342,14 @@ void GerenciadorColisoes::executar() {
 
 	tratarColisoesInimgs();
 	tratarColisoesInimgsObstacs();
+	tratarColisoesInimgsBlocos();
 
-	tratarColisoesProjeteisObstacs();
 	tratarColisoesProjeteisInimgs();
+	tratarColisoesProjeteisObstacs();
 	tratarColisoesJogsProjeteis();
 
 	tratarColisoesJogsObstacs();
+	tratarColisoesJogsBlocos();
 	tratarColisoesJogsInimgs();
 
 	removerMortos();

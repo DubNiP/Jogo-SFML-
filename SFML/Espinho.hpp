@@ -1,5 +1,6 @@
 #pragma once
 #include "Obstaculo.hpp"
+#include "Jogador.hpp"
 
 namespace entidades {
 	namespace obstaculos {
@@ -13,7 +14,7 @@ namespace entidades {
 			//void salvarDataBuffer();
 			void executar();
 			void obstaculizar(entidades::personagens::Jogador* p);
-			int getDanosidade() const;
+			const int getDanosidade() const;
 			void carregarSprite();
 		};
 	} 

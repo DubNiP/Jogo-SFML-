@@ -29,10 +29,14 @@ void FaseSegunda::criarInimigos() {
 }
 
 void FaseSegunda::criarObstaculo() {
+<<<<<<< HEAD
     criarObsMedios();
     criarPlataformas();
     criarAlavancas();
     //criaEntidade(new entidades::obstaculos::Saida(sf::Vector2f(1150.f, 580.f), sf::Vector2f(47.f, 55.f)));
+=======
+	criarTeias();
+>>>>>>> a1f82eca9fe1299c2c02932883d6b05fc3da183d
 }
 
 void FaseSegunda::criarChefoes() {
@@ -42,7 +46,11 @@ void FaseSegunda::criarChefoes() {
     pM->incluirListaEntidades(&lista_ents);
 }
 
+<<<<<<< HEAD
 void FaseSegunda::criarObsMedios() {
+=======
+void FaseSegunda::criarTeias() {
+>>>>>>> a1f82eca9fe1299c2c02932883d6b05fc3da183d
 
     criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(210.f, 160.f), Vector2f(30.f, 40.f)));
 

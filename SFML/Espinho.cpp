@@ -1,5 +1,6 @@
 #include "Espinho.hpp"
 
+
 namespace entidades { 
 	namespace obstaculos {
 
@@ -28,7 +29,7 @@ namespace entidades {
 			}
 		}
 
-		int Espinho::getDanosidade() const {
+		const int Espinho::getDanosidade() const {
 			return danosidade;
 		}
 
