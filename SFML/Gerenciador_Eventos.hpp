@@ -23,7 +23,7 @@ namespace Gerenciador {
 
         static GerenciadorEvento* getGerenciadorEvento();
 
-        void setJogador(entidades::personagens::Jogador* pj);
+        void setJogador(entidades::personagens::Jogador* p);
         void setMenu(Menu* pm);
 
         void executar();
