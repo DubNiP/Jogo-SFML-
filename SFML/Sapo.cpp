@@ -78,15 +78,15 @@ namespace entidades {
 
 			float dt = relogio.getElapsedTime().asSeconds();
 			if (dt >= 1.0f) {
-				moverAleatorio = rand() % 2; 
+				moverAleatorio = rand() % 4; 
 				relogio.restart();
 			}
 
-			if (moverAleatorio % 2 != 1) {
-				moverDireita();
+			if (moverAleatorio % 2 != 0) {
+				moverEsquerda();
 			}
 			else {
-				moverEsquerda();
+				moverDireita();
 			}
 		}
 

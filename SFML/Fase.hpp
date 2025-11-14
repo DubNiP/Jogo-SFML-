@@ -24,7 +24,7 @@ namespace fases {
 		Gerenciadores::GerenciadorColisoes GC;
 		entidades::personagens::Mago* jog;
 
-		bool faseConcluida;
+		bool faseUmConcluida;
 		Texture* textFundo;
 		Sprite* spriteFundo;
 

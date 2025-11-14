@@ -380,7 +380,7 @@ void GerenciadorColisoes::limiteDeTela() {
 			Vector2u windowSize = window->getSize();
 
 			const float X = windowSize.x - boundJog.width;
-			const float Y = 1080;
+			const float Y = 1280;
 			limiteDeTelaMago(X, Y);
 			limiteDeTelaProjeteis(X, Y);
 		}

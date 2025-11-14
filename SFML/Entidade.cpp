@@ -90,7 +90,6 @@ void Entidade::gravidade() {
 		if (vel.y += dt * forcaGravidade < -90)
 			vel.y = +15;
 
-		tempoMovimento.getElapsedTime().asSeconds();
 		pos.y += vel.y * dt;
 	}
 

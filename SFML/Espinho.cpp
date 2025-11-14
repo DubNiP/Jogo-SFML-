@@ -25,7 +25,7 @@ namespace entidades {
 
 		void Espinho::obstaculizar(entidades::personagens::Mago* p) {
 			if (p) {
-				p->setVidas(p->getVidas() - danosidade);
+				p->tomarDano(danosidade, false);
 			}
 		}
 

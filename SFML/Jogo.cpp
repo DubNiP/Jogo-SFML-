@@ -58,6 +58,13 @@ void Jogo::executarMenu(Menu& menu) {
 }
 
 void Jogo::executarJogo() {
-    //fase1.executar();
-    fase2.executar();
+
+    fase1.executar();
+
+    if(fase1.getFaseConcluida()) {
+        GG.setSegundaTela(true);
+        fase2.executar();
+	}
+    
+    
 }

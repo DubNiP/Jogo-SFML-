@@ -10,7 +10,7 @@ namespace entidades {
 
 		MagoNegro::MagoNegro(Vector2f pos, Mago* pJog, Vector2f vel) :
 			Inimigo(pos, pJog, vel, 1),
-			tamanho(400),
+			tamanho(300),
 			ataqueClock(),
 			apto(true),
 			moverAleatorio(0),

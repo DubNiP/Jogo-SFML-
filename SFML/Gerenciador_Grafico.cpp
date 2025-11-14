@@ -1,14 +1,17 @@
 #include "Gerenciador_Grafico.hpp"
 #include "ListaEntidades.hpp"
+#include "Fase.hpp"
 
 using namespace Gerenciadores;
 using namespace listas;
+using namespace fases;
 using namespace std;
 
 GerenciadorGrafico* GerenciadorGrafico::uniqueInstance = NULL;
 
 GerenciadorGrafico::GerenciadorGrafico() :
     window(NULL),
+	segudundaTela(false),
     camera(View(FloatRect(0.f, 0.f, 1280.f, 720.f)))
 {
     window = new RenderWindow(VideoMode(1280, 720), "Jogo Simas");
@@ -51,11 +54,15 @@ void GerenciadorGrafico::displayWindow() {
 }
 
 void GerenciadorGrafico::atualizarCamera(const Vector2f posMago) {
+
     const float visaoE = camera.getSize().x;
     const float visaoD = camera.getSize().y;
 
-    const float maxX = window->getSize().x;
-    const float maxY = 1080;
+    float maxX = 1280;
+    float maxY = 1280;
+
+    if(!segudundaTela)
+        maxY = 720;
 
     Vector2f centro = posMago;
 
@@ -74,6 +81,9 @@ void GerenciadorGrafico::atualizarCamera(const Vector2f posMago) {
     camera.setCenter(centro);
 }
 
+void GerenciadorGrafico::setSegundaTela(bool val) {
+    segudundaTela = val;
+}
 
 void GerenciadorGrafico::desenhaTodos(listas::ListaEntidades* pLE, Sprite* fundo) {
     if (window) {

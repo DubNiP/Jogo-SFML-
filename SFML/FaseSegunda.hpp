@@ -11,7 +11,6 @@ namespace fases {
         void criarInimigos();
         void criarObstaculo();
         void criarChefoes();
-        void criarObstaculosMedios();
         void criarBlocos();
         void carregarFundo();
 

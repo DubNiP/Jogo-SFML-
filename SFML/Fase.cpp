@@ -7,7 +7,7 @@ Fase::Fase(entidades::personagens::Mago* pJog):
     lista_ents(),
     GC(),
     jog(pJog),
-    faseConcluida(false),
+	faseUmConcluida(false),
     textFundo(NULL),
     spriteFundo(NULL)
 {
@@ -66,7 +66,9 @@ void Fase::criarCenario() {
     carregarFundo();
 
     if (jog) {
-        jog->reseta(Vector2f(160.f, 630.f), 15, 0);
+        jog->reseta(Vector2f(600.f, 1100.f), 15, 0);
+        if (!(GC.getFaseConcluida())) jog->reseta(Vector2f(160.f, 630.f), 15, 0);
+       
         lista_ents.incluir(jog);
 		jog->incluirListaEntidades(&lista_ents);
 		jog->incluirGerenciadorColisoes(&GC);
@@ -130,9 +132,10 @@ void Fase::executar() {
 
             pGG->desenhaTodos(&lista_ents,spriteFundo);     //trocar no futuro?
         }
+        faseUmConcluida = GC.getFaseConcluida();
     }
 }
 
 bool Fase::getFaseConcluida() const {
-    return faseConcluida;
+    return faseUmConcluida;
 }
