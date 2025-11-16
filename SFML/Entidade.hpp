@@ -18,6 +18,7 @@ protected:
 	Clock tempoMovimento;
 	Clock tempoAceleracao;
 	bool olhandoDir;
+	bool clocksIni;
 	// ostream buffer;
 	//void salvarDataBuffer();
 public:
@@ -53,4 +54,5 @@ public:
 	const bool getOlhandoDir() const;
 	void setOlhandoDir(bool dir);
 	void atualizaDirSprite();
+	void iniciarClocks();
 };

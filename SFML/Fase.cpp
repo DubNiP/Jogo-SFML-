@@ -9,7 +9,8 @@ Fase::Fase(entidades::personagens::Mago* pJog):
     GC(),
     jog(pJog),
     textFundo(NULL),
-    spriteFundo(NULL)
+    spriteFundo(NULL),
+    faseIniciada(false)
 {
     GC.setJog(pJog);
 }
@@ -110,6 +111,7 @@ void Fase::executar() {
         GC.setWindow(pGG->getWindow());
         RenderWindow* window = pGG->getWindow();
         Event event;
+        faseIniciada = true;
         while (window && window->isOpen() && jog && jog->getVidas() > 0 && !GC.getFaseConcluida()) {
             pGG->atualizarCamera(jog->getPos());
 		    View cam = pGG->getCamera();
@@ -140,4 +142,8 @@ void Fase::executar() {
 
 void Fase::criarProjetil(Vector2f pos, bool dir, bool bond) {
     criaEntidade(new entidades::Projetil(pos, dir, bond));
+}
+
+const bool Fase::getFaseIniciada() const {
+    return faseIniciada;
 }

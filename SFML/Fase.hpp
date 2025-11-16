@@ -25,6 +25,7 @@ namespace fases {
 		entidades::personagens::Mago* jog;
 		Texture* textFundo;
 		Sprite* spriteFundo;
+		bool faseIniciada;
 
 		void criarSapos();
 		void criarPlataformas();
@@ -39,6 +40,7 @@ namespace fases {
 		~Fase();
 		void criarProjetil(Vector2f pos, bool dir, bool bond);
 		void executar();         //nao foi implementado executar nas derivadas de fase. Aqui existe uma dúvida em relaçao a esse executar
+		const bool getFaseIniciada() const;
 	};
 
 }

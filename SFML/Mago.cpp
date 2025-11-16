@@ -23,6 +23,9 @@ namespace entidades {
 		}
 
 		void Mago::executar() {
+			if (faseAtual && faseAtual->getFaseIniciada()) {
+				iniciarClocks();
+			}
 			gravidade();
 			mover();
 			posicaoBarra();
@@ -83,6 +86,10 @@ namespace entidades {
 			num_vidas = vidas;
 			pontos = pts;
 			danoClock.restart();
+			ataqueClock.restart();
+			clocksIni = false;
+			vel.y = 0.f;
+			emTerra = true;
 			barraVida.setSize(Vector2f(30.f * (num_vidas / 15.f), 2.f));
 		}
 

@@ -10,10 +10,9 @@ Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 	emAceleracao(false),
 	forcaGravidade(30.f),
 	velocidadeTerminal(30.f),
-	olhandoDir(dir)
+	olhandoDir(dir),
+	clocksIni(false)
 {
-	tempoMovimento.restart();
-	tempoAceleracao.restart();
 	attPos();
 }
 
@@ -76,6 +75,9 @@ void Entidade::attPos() {
 }
 
 void Entidade::gravidade() {
+	if (!clocksIni) {
+		return;
+	}
 	float dt = tempoMovimento.getElapsedTime().asSeconds() ;
 
 	if (!emTerra) {
@@ -97,6 +99,9 @@ void Entidade::gravidade() {
 }
 
 void Entidade::acelerar() {
+	if (!clocksIni) {
+		return;
+	}
 	float dtAc = tempoAceleracao.getElapsedTime().asSeconds();;
 
 	if (emAceleracao && dtAc < 0.4) {
@@ -137,6 +142,14 @@ void Entidade::atualizaDirSprite() {
 			FloatRect bounds = pSprite->getLocalBounds();
 			pSprite->setOrigin(bounds.width, 0.f);
 		}
+	}
+}
+
+void Entidade::iniciarClocks() {
+	if (!clocksIni) {
+		tempoMovimento.restart();
+		tempoAceleracao.restart();
+		clocksIni = true;
 	}
 }
 
