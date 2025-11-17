@@ -9,7 +9,7 @@ namespace listas {
 template <class TL>
 class Lista
 {
-private:
+public:
     template <class TE>
     class Elemento {
     private:
@@ -25,6 +25,32 @@ private:
         Elemento<TE>* getProx() const { return pProx; }
         TE* getInfo() const { return pInfo; }
     };
+    class Iterator {
+    private:
+        Elemento<TL>* atual;
+    public:
+        Iterator(Elemento<TL>* p = NULL) : atual(p) {}
+        ~Iterator() {}
+        TL* operator*() const {
+            if (atual) {
+                return atual->getInfo();
+            }
+            return NULL;
+        }
+        Iterator& operator++() {
+            if (atual) {
+                atual = atual->getProx();
+            }
+            return *this;
+        }
+        const bool operator!=(const Iterator& aux) const {
+            return atual != aux.atual;
+        }
+        const bool operator==(const Iterator& aux) const {
+            return atual == aux.atual;
+        }
+    };
+private:
 
     Elemento<TL>* pPrimeiro;
     Elemento<TL>* pUltimo;
@@ -38,6 +64,9 @@ public:
     bool vazia() const { return pPrimeiro == NULL; }
     Elemento<TL>* getPrimeiro() const { return pPrimeiro; }
     Elemento<TL>* getUltimo() const { return pUltimo; }
+
+    Iterator begin() { return Iterator(pPrimeiro); }
+    Iterator end() { return Iterator(NULL); }
 
     void incluir(TL* item) {
         if (pPrimeiro == NULL) {

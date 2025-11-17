@@ -4,6 +4,7 @@
 #include "Inimigo.hpp"
 #include "Projetil.hpp"
 #include "Teia.hpp"
+
 namespace listas {
 
     class ListaEntidades
@@ -12,6 +13,7 @@ namespace listas {
         Lista<Entidade> LEs;
 
     public:
+        using Iterator = Lista<Entidade>::Iterator;
         ListaEntidades();
         ~ListaEntidades();
 
@@ -27,6 +29,8 @@ namespace listas {
         void removerMorto();
 
         Entidade* getItem(int pos) const;
+        Iterator begin() { return LEs.begin(); }
+        Iterator end() { return LEs.end(); }
     };
 
 }
