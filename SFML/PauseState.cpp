@@ -19,6 +19,17 @@ void PauseState::Entrar() {
     Gerenciadores::GerenciadorGrafico::getGG().resetarCamera();
     menu.resetaFlags();
     menu.reseta();
+
+    if (faseAtual == 1) {
+        menu.setListaEntidades(contexto->getFase1()->getListaEntidades());
+    } else if (faseAtual == 2) {
+        menu.setListaEntidades(contexto->getFase2()->getListaEntidades());
+    } else {
+        menu.setListaEntidades(NULL);
+    }
+
+    cout << "PauseState::Entrar() -> menu.lista_ents = " << menu.getListaEntidades() << endl;
+
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
 }
