@@ -12,7 +12,6 @@ using namespace sf;
 class SelecaoFaseState : public State {
 private:
     MenuSelecaoFase menu;
-    Event evento;
 
 public:
     SelecaoFaseState(Jogo* contexto);
@@ -21,4 +20,5 @@ public:
     void Entrar();
     void handle();
     void Sair();
+    void update(int i);
 };

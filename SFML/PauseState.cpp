@@ -16,16 +16,16 @@ PauseState::~PauseState() {
 }
 
 void PauseState::Entrar() {
-    Gerenciadores::GerenciadorGrafico::Instance().resetarCamera();
+    Gerenciadores::GerenciadorGrafico::getGG().resetarCamera();
     menu.resetaFlags();
     menu.reseta();
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(&menu);
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
 }
 
 void PauseState::handle() {
     auto* GE = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
-    auto& GG = Gerenciadores::GerenciadorGrafico::Instance();
+    auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
     RenderWindow* window = GG.getWindow();
 
     while (window && window->isOpen() && !menu.getContinuar() && !menu.getVoltarMenu()) {
@@ -39,7 +39,7 @@ void PauseState::handle() {
 }
 
 void PauseState::Sair() {
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(NULL);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
 
     if (menu.getContinuar()) {
         contexto->mudarEstado(new JogandoState(contexto, faseAtual));
@@ -47,5 +47,17 @@ void PauseState::Sair() {
     else if (menu.getVoltarMenu()) {
         contexto->getMago()->reseta(Vector2f(100.f, 630.f), 15, 0);
         contexto->mudarEstado(new MenuPrincipalState(contexto));
+    }
+}
+
+void PauseState::update(int i) {
+    if (i == 1) {
+        menu.moverBaixo();
+    }
+    else if (i == 2) {
+        menu.moverCima();
+    }
+    else if (i == 3) {
+        menu.confirmar();
     }
 }

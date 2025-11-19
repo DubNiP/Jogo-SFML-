@@ -17,8 +17,9 @@ namespace entidades {
 	namespace personagens{
 
 		class Mago: public Personagem {
-		protected:
+		protected:      //Seguindo diagrama UML base.
 			int pontos;
+		private:
 			float invencibilidade;
 			Clock danoClock;
 			Clock ataqueClock;

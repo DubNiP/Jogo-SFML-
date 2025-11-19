@@ -2,8 +2,7 @@
 
 SelecaoFaseState::SelecaoFaseState(Jogo* contexto) :
     State(contexto),
-    menu(),
-    evento()
+    menu()
 {
 }
 
@@ -14,8 +13,8 @@ void SelecaoFaseState::Entrar() {
     contexto->getGG().resetarCamera();
     menu.resetaFlags();
     menu.reseta();
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(&menu);
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
 }
 
 void SelecaoFaseState::handle() {
@@ -34,8 +33,8 @@ void SelecaoFaseState::handle() {
 }
 
 void SelecaoFaseState::Sair() {
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(NULL);
 
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
     if (menu.getVoltar()) {
         contexto->mudarEstado(new MenuPrincipalState(contexto));
     }
@@ -44,5 +43,17 @@ void SelecaoFaseState::Sair() {
     }
     else if (menu.getFaseEscolhida() == 2) {
         contexto->mudarEstado(new JogandoState(contexto, 2));
+    }
+}
+
+void SelecaoFaseState::update(int i) {
+    if (i == 1) {
+        menu.moverBaixo();
+    }
+    else if (i == 2) {
+        menu.moverCima();
+    }
+    else if (i == 3) {
+        menu.confirmar();
     }
 }

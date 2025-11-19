@@ -7,14 +7,16 @@ MenuPrincipalState::MenuPrincipalState(Jogo* contexto):
 }
 
 MenuPrincipalState::~MenuPrincipalState() {
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
 }
 
 void MenuPrincipalState::Entrar() {
     contexto->getGG().resetarCamera();
     menu.resetaFlags();
     menu.reseta();
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(&menu);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
+
 }
 
 void MenuPrincipalState::handle() {
@@ -34,8 +36,8 @@ void MenuPrincipalState::handle() {
 }
 
 void MenuPrincipalState::Sair() {
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(NULL);
 
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
     if (menu.getIniciar()) {
         contexto->mudarEstado(new SelecaoFaseState(contexto));
     }
@@ -43,5 +45,17 @@ void MenuPrincipalState::Sair() {
         auto& GG = contexto->getGG();
         RenderWindow* window = GG.getWindow();
         if (window) window->close();
+    }
+}
+
+void MenuPrincipalState::update(int i) {
+    if (i == 1) {
+        menu.moverBaixo();
+    }
+    else if (i == 2) {
+        menu.moverCima();
+    }
+    else if (i == 3) {
+        menu.confirmar();
     }
 }

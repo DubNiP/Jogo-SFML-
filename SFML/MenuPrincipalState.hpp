@@ -19,4 +19,5 @@ public:
     void Entrar();
     void handle();
     void Sair();
+    void update(int i);
 };

@@ -15,7 +15,7 @@ protected:
 	Sprite* pSprite;
 	Texture* textura;
 	RectangleShape barraFundo;     //nao deveria ser em entidade?
-	RectangleShape barraVida;        
+	RectangleShape barraVida;
 public:
 	Ente();
 	virtual ~Ente();

@@ -28,5 +28,5 @@ public:
 	entidades::personagens::Mago* getMago();
 	fases::FasePrimeira* getFase1();
 	fases::FaseSegunda* getFase2();
-	Gerenciadores::GerenciadorGrafico& getGG();
+	Gerenciadores::GerenciadorGrafico& getGG();   //ACHO QUE N FAZ SENTIDO PQ O GG É SINGLETON!!!
 };

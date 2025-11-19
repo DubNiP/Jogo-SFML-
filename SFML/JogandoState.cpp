@@ -35,6 +35,10 @@ void JogandoState::handle() {
             return;
         }
 
+        if (faseAtual->getPause()) {
+            contexto->mudarEstado(new PauseState(contexto, numeroFase));
+            return;
+        }
         
         if (pMago && pMago->getConcluiuFase()) {
             faseAtual->resetar();
@@ -42,15 +46,10 @@ void JogandoState::handle() {
             return;
         }
 
-        if (faseAtual->getPause()) {
-            contexto->mudarEstado(new PauseState(contexto, numeroFase));
-            return;
-        }
     }
 }
 
 void JogandoState::Sair() {
-
     if (numeroFase == 2) {
         contexto->getGG().setSegundaTela(false);
     }

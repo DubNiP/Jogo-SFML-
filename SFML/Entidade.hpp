@@ -25,7 +25,7 @@ public:
 	Entidade(Vector2f posicao = Vector2f(0.f, 0.f), Vector2f velocidade = Vector2f(0.f, 0.f), bool dir = true);
 	virtual ~Entidade();
 
-	virtual void executar() = 0;
+	virtual void executar();
 	//virtual void salvar() = 0;
 
 	const bool getEmTerra() const;

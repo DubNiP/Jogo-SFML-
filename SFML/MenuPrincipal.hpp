@@ -1,7 +1,7 @@
 #pragma once
 #include "Menu.hpp"
 
-class MenuPrincipal : public Menu {
+class MenuPrincipal :public Menu {
 private:
     bool sair;
     bool iniciar;

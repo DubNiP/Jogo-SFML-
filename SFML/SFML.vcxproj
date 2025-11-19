@@ -152,6 +152,7 @@
     <ClCompile Include="MenuPrincipal.cpp" />
     <ClCompile Include="MenuPrincipalState.cpp" />
     <ClCompile Include="MenuSelecaoFase.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Saida.cpp" />
     <ClCompile Include="Sapo.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="Espinho.cpp" />
     <ClCompile Include="SelecaoFaseState.cpp" />
+    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Teia.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
@@ -202,6 +204,7 @@
     <ClInclude Include="Espinho.hpp" />
     <ClInclude Include="SelecaoFaseState.hpp" />
     <ClInclude Include="State.hpp" />
+    <ClInclude Include="Subject.hpp" />
     <ClInclude Include="Teia.hpp" />
     <ClInclude Include="Personagem.hpp" />
     <ClInclude Include="Plataforma.hpp" />

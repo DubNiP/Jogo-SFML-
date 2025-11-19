@@ -7,7 +7,7 @@ private:
     bool voltarMenu;
 
 protected:
-    void set_values();
+    void set_values();    //pq protected, vale para os outros estados tbm.
 
 public:
     MenuGameOver();

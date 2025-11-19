@@ -3,7 +3,7 @@
 
 Jogo::Jogo() :
     pJog1(Vector2f(100.f,630.f), Vector2f(3.f, 100.f)),
-    GG(Gerenciadores::GerenciadorGrafico::Instance()),
+    GG(Gerenciadores::GerenciadorGrafico::getGG()),
     fase1(&pJog1),
     fase2(&pJog1)
 {

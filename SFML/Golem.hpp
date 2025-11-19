@@ -9,7 +9,7 @@ namespace entidades {
         private:
             int tamanho;
             int moverAleatorio;
-            float velocidadeInicialX;  // Novo atributo
+            float velocidadeInicialX;
 
         public:
             Golem(Vector2f pos, Mago* pJog, Vector2f vel);
