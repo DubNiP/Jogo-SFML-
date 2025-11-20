@@ -17,9 +17,7 @@ Fase::Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJ
     doisJog(false)
 {
     GC.setJog1(pJog1);
-    if (doisJog) {
-        GC.setJog2(pJog2);
-    }
+    GC.setJog2(pJog2);
 }
 
 Fase::~Fase() {

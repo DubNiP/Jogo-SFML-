@@ -27,12 +27,18 @@ void JogandoState::Entrar() {
         faseAtual = contexto->getFase2();
         contexto->getGG().setSegundaTela(true);
     }
+
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago1(pMago1);
-    if (numJogadores == 2 && pMago2) {
-        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(pMago2);
-    }
-    else {
-        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(NULL);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(NULL);
+
+    if (faseAtual) {
+        if (numJogadores == 2) {
+            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(pMago2);
+            faseAtual->setdoisJog(true);
+        }
+        else {
+            faseAtual->setdoisJog(false);
+        }
     }
 }
 
