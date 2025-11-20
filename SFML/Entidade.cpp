@@ -1,16 +1,16 @@
 #include "Entidade.hpp"
 #include "Projetil.hpp" // ajuste o nome do arquivo se necessário
+#define velocidadeTerminal 40.f
+#define forcaGravidade 30.f
+#define aceleracao 0.1f
 
 Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 	Ente(),
 	pos(posicao),
 	emTerra(true),
+	emAceleracao(false),
 	vel(velocidade),
 	velocidadeInicial(velocidade),
-	aceleracao(0.1f),
-	emAceleracao(false),
-	forcaGravidade(30.f),
-	velocidadeTerminal(40.f),
 	olhandoDir(dir),
 	clocksIni(false)
 {
@@ -31,10 +31,7 @@ void Entidade::salvarDataBuffer() {
 		<< vel.y << " "
 		<< velocidadeInicial.x << " "
 		<< velocidadeInicial.y << " "
-		<< aceleracao << " "
 		<< emAceleracao << " "
-		<< forcaGravidade << " "
-		<< velocidadeTerminal << " "
 		<< tempoMovimento.getElapsedTime().asSeconds() << " "
 		<< tempoAceleracao.getElapsedTime().asSeconds() << " "
 		<< olhandoDir << " "

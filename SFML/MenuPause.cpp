@@ -49,12 +49,10 @@ void MenuPause::confirmar() {
         voltarMenu = true;
     }
     else if (pos == 3) {
-        std::cout << "MenuPause::confirmar() -> salvar selecionado. lista_ents ptr = " << lista_ents << std::endl;
+        
         if (lista_ents) {
+            
             lista_ents->salvarTodos();
-            std::cout << "MenuPause::confirmar() -> salvarTodos() chamado" << std::endl;
-        } else {
-            std::cout << "MenuPause::confirmar() -> lista_ents == nullptr (nenhuma lista conectada)" << std::endl;
         }
     }
 }

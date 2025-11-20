@@ -31,6 +31,7 @@ namespace Gerenciadores {
         ~GerenciadorColisoes();
         
         const bool getFaseConcluida() const;
+        void setFaseConcluida(bool v);
 
         const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
         void colidiu(Entidade* pe1, Entidade* pe2);

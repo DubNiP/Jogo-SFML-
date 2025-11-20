@@ -13,8 +13,7 @@ namespace entidades {
             ~Bloco();
 
             void executar();
-            void salvar();
-            void salvarDataBuffer();
+            void salvar() { return; }
 
             void carregarSprite();
             const float getLargura() const;

@@ -1,5 +1,8 @@
 #include "Fase.hpp"
 #include <random>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 using namespace fases;
 
@@ -74,7 +77,7 @@ void Fase::criarCenario() {
 
     if (jog) {
         Vector2f posInicial = getPosicaoInicialJogador();
-        jog->reseta(posInicial, 15, 0);
+        jog->reseta(Vector2f(160.f, 630.f), 15, 0);
 
 		jog->setFaseAtual(this);
         lista_ents.incluir(jog);
@@ -179,4 +182,122 @@ const bool Fase::getPause() const {
 
 listas::ListaEntidades* Fase::getListaEntidades() {
     return &lista_ents;
+}
+
+
+void Fase::carregarSave(const string& caminho) {
+    ifstream recuperarDados(caminho);
+
+    if (!recuperarDados.is_open()) {
+        cerr << "Fase::carregarSave: nao foi possivel abrir " << caminho << endl;
+        fflush(stdin);
+        return;
+    }
+
+    GC.limparObstaculos();
+    GC.limparInimigos();
+    GC.limparProjetis();
+    GC.limparBlocos();
+
+    lista_ents.limparPreservando(jog);
+
+    if (jog) {
+        jog->setFaseAtual(this);
+        lista_ents.incluir(jog);
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(jog);
+    }
+
+    criarBlocos();
+
+    while (!recuperarDados.eof()) {
+        int idEnt = -1;
+        if (!(recuperarDados >> idEnt)) {
+            break;
+        }
+
+        float posx=0.f, posy=0.f;
+        int emTerraInt=0;
+        float velx=0.f, vely=0.f;
+        float vIniX=0.f, vIniY=0.f;
+        int emAcelInt=0;
+        float tMov=0.f, tAcel=0.f;
+        int olhandoDirInt=1;
+        int clocksIniInt = 0;
+
+        if (!(recuperarDados >> posx >> posy >> emTerraInt
+                >> velx >> vely  >> vIniX >> vIniY
+                >> emAcelInt >> tMov >> tAcel  
+                >> olhandoDirInt >> clocksIniInt)) {
+            cerr << "Fase::carregarSave: formato inesperado apos id=" << idEnt << endl;
+            break;
+        }
+
+        Vector2f posL(posx, posy);
+        bool olhando = (olhandoDirInt != 0);
+        bool clocksIni = (clocksIniInt != 0);
+
+        switch (idEnt) {
+
+
+
+            case 1:
+            {
+                if (jog) {
+                
+                    jog->iniciarClocks();
+                }
+                break;
+            }
+            case 2: 
+            {
+                
+                float raio = 0.f, intervalo = 0.f;
+              
+                if (recuperarDados.good()) {
+                   
+                    if (!(recuperarDados >> raio >> intervalo)) {
+                    
+                        recuperarDados.clear();
+                    
+                    }
+                }
+             
+                auto* s = new entidades::personagens::Sapo(posL, jog, Vector2f(20.f, 70.f));
+                criaEntidade(s);
+                break;
+            }
+            case 10: // Alavanca
+            {
+                
+                int acionadaInt = 0;
+                if (recuperarDados >> acionadaInt) {
+                    
+                } else {
+                    recuperarDados.clear();
+                }
+                
+                auto* a = new entidades::obstaculos::Alavanca(posL, Vector2f(30.f, 50.f), nullptr);
+                criaEntidade(a);
+                break;
+            }
+            default:
+            {
+               
+                string restOfLine;
+                getline(recuperarDados, restOfLine); // avança para próxima linha
+                cout << idEnt << endl;
+                cerr << "Fase::carregarSave: id nao tratado = " << idEnt << ", ignorando." << endl;
+                break;
+            }
+        }
+    }
+
+    recuperarDados.close();
+
+    // após carregar, garantir que GC conheça a janela se existir pGG
+    if (pGG) {
+        GC.setWindow(pGG->getWindow());
+    }
+
+    cout << "Fase::carregarSave: fim do carregamento." << std::endl;
 }

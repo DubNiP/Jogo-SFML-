@@ -20,6 +20,10 @@ const bool GerenciadorColisoes::getFaseConcluida() const {
 	return faseConcluida;
 }
 
+void GerenciadorColisoes::setFaseConcluida(bool v) {
+	faseConcluida = v;
+}
+
 const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) const {
 	if (!pe1 || !pe2 || pe1 == pe2) {
 		return false;

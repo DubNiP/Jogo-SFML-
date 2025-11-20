@@ -1,5 +1,6 @@
 #include "Mago.hpp"
 #include "fase.hpp"
+#include "FasePrimeira.hpp"
 
 namespace entidades {
 	namespace personagens {
@@ -55,13 +56,18 @@ namespace entidades {
 		void Mago::salvarDataBuffer() {
 			Personagem::salvarDataBuffer();
 
+			int numFaseAtual = 0;
+			if (dynamic_cast<fases::FasePrimeira*>(faseAtual)) numFaseAtual = 1;
+			else numFaseAtual = 2;
+
 			tempBuffer << pontos << " " 
 				<< invencibilidade << " " 
 				<< danoClock.getElapsedTime().asSeconds() << " " 
 				<< ataqueClock.getElapsedTime().asSeconds() << " " 
 				<< naTeia << " " 
 				<< apto << " " 
-				<< concluiuFase << endl;
+				<< concluiuFase << " "
+				<< numFaseAtual << endl;
 			
 		}
 

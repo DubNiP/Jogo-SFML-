@@ -12,12 +12,9 @@ class Entidade : public Ente {
 protected:
 	Vector2f pos;
 	bool emTerra;
+	bool emAceleracao;
 	Vector2f vel;
 	Vector2f velocidadeInicial;
-	float aceleracao;
-	float emAceleracao;
-	float forcaGravidade;
-	float velocidadeTerminal;	
 	Clock tempoMovimento;
 	Clock tempoAceleracao;
 	bool olhandoDir;

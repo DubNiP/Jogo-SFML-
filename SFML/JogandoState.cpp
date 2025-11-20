@@ -22,6 +22,16 @@ void JogandoState::Entrar() {
         faseAtual = contexto->getFase2();
         contexto->getGG().setSegundaTela(true);
     }
+    else if (numeroFase == 3) {
+       
+        faseAtual = contexto->getFase1(); 
+        contexto->getGG().setSegundaTela(false);
+
+        faseAtual->inicializar();
+
+        faseAtual->carregarSave("Save/save.txt");
+    }
+
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(pMago);
 }
 

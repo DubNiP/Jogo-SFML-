@@ -176,7 +176,7 @@ namespace entidades {
 				<< apto << " "
 				<< moverAleatorio << " "
 				<< velocidadeInicialX << " "
-				<< faseAtual << "fim" << "\n";
+				<< faseAtual << endl;
 		}
 
 		void MagoNegro::carregarSprite() {

@@ -43,11 +43,16 @@ namespace fases {
 		~Fase();
 		void criarProjetil(Vector2f pos, bool dir, bool bond);
 		void inicializar();
-		void executar();         //nao foi implementado executar nas derivadas de fase. Aqui existe uma dúvida em relaçao a esse executar
+		void executar();         //nao foi implementado executar nas derivadas de fase. Aqui existe uma dúvida em relação a esse executar
 		void resetar();
 		const bool getFaseIniciada() const;
 		const bool getPause() const;
+
+		// expõe a lista de entidades para funcionalidades externas (ex: salvar via menu de pause)
 		listas::ListaEntidades* getListaEntidades();
+
+		// novo: carrega um save a partir de um arquivo e recria entidades na fase
+		void carregarSave(const std::string& caminho);
 	};
 
 }

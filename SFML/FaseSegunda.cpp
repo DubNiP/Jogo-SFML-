@@ -105,5 +105,5 @@ void FaseSegunda::carregarFundo() {
 }
 
 Vector2f FaseSegunda::getPosicaoInicialJogador() const {
-    return Vector2f(150.f, 1200.f);
+    return Vector2f(150.f, 1110.f);
 }
