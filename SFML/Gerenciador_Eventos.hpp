@@ -10,7 +10,8 @@ namespace Gerenciador {
     class GerenciadorEvento : public subject {
     private:
         static GerenciadorEvento* pEvento;
-        entidades::personagens::Mago* pMago;
+        entidades::personagens::Mago* pMago1;
+        entidades::personagens::Mago* pMago2;
         bool prevUp;
         bool prevDown;
         bool prevEnter;
@@ -22,7 +23,8 @@ namespace Gerenciador {
 
         static GerenciadorEvento* getGerenciadorEvento();
 
-        void setMago(entidades::personagens::Mago* pj);
+        void setMago1(entidades::personagens::Mago* pj);
+        void setMago2(entidades::personagens::Mago* pj);
 
         void executar();
         void executarMenu();

@@ -3,18 +3,23 @@
 
 using namespace fases;
 
-Fase::Fase(entidades::personagens::Mago* pJog):
+Fase::Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2):
     Ente(),
     lista_ents(),
     GC(),
-    jog(pJog),
+    jog1(pJog1),
+    jog2(pJog2),
     textFundo(NULL),
     spriteFundo(NULL),
     faseIniciada(false),
     pause(false),
-    cenarioCriado(false)
+    cenarioCriado(false),
+    doisJog(false)
 {
-    GC.setJog(pJog);
+    GC.setJog1(pJog1);
+    if (doisJog) {
+        GC.setJog2(pJog2);
+    }
 }
 
 Fase::~Fase() {
@@ -22,7 +27,7 @@ Fase::~Fase() {
     GC.limparInimigos();
     GC.limparProjetis();
     GC.limparBlocos();
-    lista_ents.limparPreservando(jog);                 //estranho..
+    lista_ents.limparPreservando(jog1,jog2);                 //estranho..
     if (spriteFundo) {
         delete spriteFundo;
         spriteFundo = NULL;
@@ -32,7 +37,8 @@ Fase::~Fase() {
         textFundo = NULL;
     }
     
-    jog = NULL;
+    jog1 = NULL;
+    jog2 = NULL;
 }
 
 void Fase::criarSapos() {
@@ -47,7 +53,7 @@ void Fase::criarSapos() {
     while (i--) {
         uniform_int_distribution<int> dist2(0, 50);
         int j = dist2(rng) % v.size();
-        criaEntidade(new entidades::personagens::Sapo(v[j], jog, Vector2f(20.f, 70.f)));
+        criaEntidade(new entidades::personagens::Sapo(v[j], jog1, Vector2f(20.f, 70.f)));
         v[j] = v.back();
         v.pop_back();
     }
@@ -68,18 +74,29 @@ void Fase::criarCenario() {
     GC.limparInimigos();
     GC.limparProjetis();
     GC.limparBlocos();
-    lista_ents.limparPreservando(jog);                                    //estranho..
+    lista_ents.limparPreservando(jog1,jog2);                                    //estranho..
 
     carregarFundo();
 
-    if (jog) {
-        Vector2f posInicial = getPosicaoInicialJogador();
-        jog->reseta(posInicial, 15, 0);
+    Vector2f posInicial = getPosicaoInicialJogador();
 
-		jog->setFaseAtual(this);
-        lista_ents.incluir(jog);
-        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(jog);
+    if (jog1) {
+        jog1->reseta(posInicial, 15, 0);
+
+		jog1->setFaseAtual(this);
+        lista_ents.incluir(jog1);
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago1(jog1);
     }
+
+    if (doisJog) {
+        jog2->reseta(posInicial, 15, 0);
+
+        jog2->setFaseAtual(this);
+        lista_ents.incluir(jog2);
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(jog2);
+    }
+
+
     criarObstaculo();
     criarInimigos();
     criarBlocos();
@@ -130,8 +147,8 @@ void Fase::executar() {
         Event event;
         faseIniciada = true;
         bool teclaEscAnterior = false;
-        while (window && window->isOpen() && jog && jog->getVidas() > 0 && !GC.getFaseConcluida()) {
-            pGG->atualizarCamera(jog->getPos());
+        while (window && window->isOpen() && jog1 && jog1->getVidas() > 0 && !GC.getFaseConcluida()) {
+            pGG->atualizarCamera(jog1->getPos());
 		    View cam = pGG->getCamera();
 
             window->setView(cam);
@@ -156,7 +173,7 @@ void Fase::executar() {
 
             pGG->desenhaTodos(&lista_ents,spriteFundo);   
         }
-        jog->setConcluiuFase(GC.getFaseConcluida());
+        jog1->setConcluiuFase(GC.getFaseConcluida());
     }
 }
 
@@ -167,6 +184,10 @@ void Fase::resetar() {
 
 void Fase::criarProjetil(Vector2f pos, bool dir, bool bond) {
     criaEntidade(new entidades::Projetil(pos, dir, bond));
+}
+
+void Fase::setdoisJog(bool doisJ) {
+    doisJog = doisJ;
 }
 
 const bool Fase::getFaseIniciada() const {

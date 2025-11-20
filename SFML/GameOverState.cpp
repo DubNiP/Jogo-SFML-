@@ -40,7 +40,7 @@ void GameOverState::handle() {
 
 void GameOverState::Sair() {
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
-    contexto->getMago()->reseta(Vector2f(100.f, 630.f), 15, 0);
+    contexto->getMago1()->reseta(Vector2f(100.f, 630.f), 15, 0);
     if (menu.getReiniciar()) {
         contexto->mudarEstado(new JogandoState(contexto, faseAtual));
     }

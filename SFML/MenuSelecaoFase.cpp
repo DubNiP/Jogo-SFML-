@@ -3,7 +3,8 @@
 MenuSelecaoFase::MenuSelecaoFase() :
     Menu(),
     voltar(false),
-    faseEscolhida(-1)
+    faseEscolhida(-1),
+    numJogadores(1)
 {
     set_values();
     reseta();
@@ -13,14 +14,14 @@ MenuSelecaoFase::~MenuSelecaoFase() {
 }
 
 void MenuSelecaoFase::set_values() {
-    const char* opcoes[] = { "Selecionar Fase", "Fase 1", "Fase 2", "Voltar" };
-    const Vector2f posicoes[] = { {420.f, 110.f}, {600.f, 300.f}, {600.f, 400.f}, {600.f, 500.f} };
-    const unsigned int tamanhos[] = { 60u, 50u, 50u, 50u };
+    const char* opcoes[] = { "Selecionar Fase", "1 Jogador - Fase 1", "1 Jogador - Fase 2","2 Jogadores - Fase 1","2 Jogadores - Fase 2","Voltar" };
+    const Vector2f posicoes[] = { {420.f, 110.f},{500.f, 250.f},{500.f, 320.f},{500.f, 390.f},{500.f, 460.f},{600.f, 550.f} };
+    const unsigned int tamanhos[] = { 60u, 40u, 40u, 40u, 40u, 50u };
 
     texts.clear();
-    texts.reserve(4);
+    texts.reserve(6);
 
-    for (size_t i = 0; i < 4; i++) {
+    for (size_t i = 0; i < 6; i++) {
         Text t;
         t.setFont(font);
         t.setString(opcoes[i]);
@@ -33,18 +34,28 @@ void MenuSelecaoFase::set_values() {
     }
 
     posMin = 1; 
-    posMax = 3;  
+    posMax = 5;  
     pos = posMin;
 }
 
 void MenuSelecaoFase::confirmar() {
     if (pos == 1) {
         faseEscolhida = 1;
+        numJogadores = 1;
     }
     else if (pos == 2) {
         faseEscolhida = 2;
+        numJogadores = 1;
     }
-    else if (pos == 3) {
+    else if (pos == 3) { 
+        faseEscolhida = 1;
+        numJogadores = 2;
+    }
+    else if (pos == 4) {  
+        faseEscolhida = 2;
+        numJogadores = 2;
+    }
+    else if (pos == 5) {
         voltar = true;
     }
 }
@@ -57,7 +68,12 @@ int MenuSelecaoFase::getFaseEscolhida() const {
     return faseEscolhida;
 }
 
+int MenuSelecaoFase::getNumJogadores() const {  
+    return numJogadores;
+}
+
 void MenuSelecaoFase::resetaFlags() {
     voltar = false;
     faseEscolhida = -1;
+    numJogadores = -1;
 }

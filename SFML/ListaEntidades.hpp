@@ -19,7 +19,7 @@ namespace listas {
         void incluir(Entidade* pE);
         void excluir(Entidade* pE);
         void limpar();
-        void limparPreservando(Entidade* keep);
+        void limparPreservando(Entidade* J1, Entidade* J2);
 
         void executarTodos();
         void desenharTodos();

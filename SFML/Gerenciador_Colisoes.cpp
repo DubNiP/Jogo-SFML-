@@ -444,7 +444,7 @@ void GerenciadorColisoes::executar() {
 	removerMortos();
 }
 
-void GerenciadorColisoes::setJog(entidades::personagens::Mago* pJog) {
+void GerenciadorColisoes::setJog1(entidades::personagens::Mago* pJog) {
 	pJog1 = pJog;
 }
 
@@ -465,7 +465,7 @@ void GerenciadorColisoes::limiteDeTela() {
 			FloatRect boundJog = pJog1->getBounds();
 
 			const float X = windowSize.x - boundJog.width;
-			limiteDeTelaMago(X, Y);
+			limiteDeTelaMago(true,X, Y);
 			limiteDeTelaProjeteis(X, Y);
 		}
 		if (pJog2) {
@@ -473,24 +473,27 @@ void GerenciadorColisoes::limiteDeTela() {
 			FloatRect boundJog2 = pJog2->getBounds();
 
 			const float X2 = windowSize.x - boundJog2.width;
-			limiteDeTelaMago(X2, Y);
+			limiteDeTelaMago(false,X2, Y);
 			limiteDeTelaProjeteis(X2, Y);
 		}
 	}
 }
 
-void GerenciadorColisoes::limiteDeTelaMago(float X, float Y) {
+void GerenciadorColisoes::limiteDeTelaMago(bool J1, float X, float Y) {
 
-	if (pJog1->getPos().x < 0.f)   pJog1->setPos(Vector2f(0.f, pJog1->getPos().y));
-	if (pJog1->getPos().y < 0.f)   pJog1->setPos(Vector2f(pJog1->getPos().x, 0.f));
-	if (pJog1->getPos().x > X)   pJog1->setPos(Vector2f(X, pJog1->getPos().y));
-	if (pJog1->getPos().y > Y)   pJog1->setPos(Vector2f(pJog1->getPos().x, Y));
+	if (J1) {
+		if (pJog1->getPos().x < 0.f)   pJog1->setPos(Vector2f(0.f, pJog1->getPos().y));
+		if (pJog1->getPos().y < 0.f)   pJog1->setPos(Vector2f(pJog1->getPos().x, 0.f));
+		if (pJog1->getPos().x > X)   pJog1->setPos(Vector2f(X, pJog1->getPos().y));
+		if (pJog1->getPos().y > Y)   pJog1->setPos(Vector2f(pJog1->getPos().x, Y));
 
-	if (pJog2->getPos().x < 0.f)   pJog2->setPos(Vector2f(0.f, pJog2->getPos().y));
-	if (pJog2->getPos().y < 0.f)   pJog2->setPos(Vector2f(pJog2->getPos().x, 0.f));
-	if (pJog2->getPos().x > X)   pJog2->setPos(Vector2f(X2, pJog2->getPos().y));
-	if (pJog2->getPos().y > Y)   pJog2->setPos(Vector2f(pJog2->getPos().x, Y));
-
+	}
+	else {
+		if (pJog2->getPos().x < 0.f)   pJog2->setPos(Vector2f(0.f, pJog2->getPos().y));
+		if (pJog2->getPos().y < 0.f)   pJog2->setPos(Vector2f(pJog2->getPos().x, 0.f));
+		if (pJog2->getPos().x > X)   pJog2->setPos(Vector2f(X, pJog2->getPos().y));
+		if (pJog2->getPos().y > Y)   pJog2->setPos(Vector2f(pJog2->getPos().x, Y));
+	}
 }
 
 void GerenciadorColisoes::limiteDeTelaProjeteis(float X, float Y) {

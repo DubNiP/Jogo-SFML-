@@ -2,9 +2,9 @@
 
 using namespace fases;
 
-FasePrimeira::FasePrimeira(entidades::personagens::Mago* pJog):
-    Fase(pJog),
-    maxGolems(10)
+FasePrimeira::FasePrimeira(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2):
+    Fase(pJog1,pJog2),
+    maxGolems(8)
 {
 }
 
@@ -54,7 +54,7 @@ void FasePrimeira::criarGolems() {
     while (i--) {
         uniform_int_distribution<int> dist2(0, 50);
         int j = dist2(rng) % v.size();
-        criaEntidade(new entidades::personagens::Golem(v[j], jog, Vector2f(1.f, 30.f)));
+        criaEntidade(new entidades::personagens::Golem(v[j], jog1, Vector2f(1.f, 30.f)));
         v[j] = v.back();
         v.pop_back();
     }

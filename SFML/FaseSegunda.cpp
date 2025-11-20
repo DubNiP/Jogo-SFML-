@@ -9,9 +9,9 @@
 
 using namespace fases;
 
-FaseSegunda::FaseSegunda(entidades::personagens::Mago* pJog) :
-    Fase(pJog),
-    maxChefoes(1)
+FaseSegunda::FaseSegunda(entidades::personagens::Mago* pJog, entidades::personagens::Mago* pJog2) :
+    Fase(pJog,pJog2),
+    maxChefoes(5)
 {
 }
 
@@ -31,7 +31,7 @@ void FaseSegunda::criarInimigos() {
 
     for (int i = 0; i < 3; i++) {
         int idx = dist2(rng);
-        criaEntidade(new entidades::personagens::Sapo(posicoesInimigos[idx], jog, Vector2f(20.f, 70.f)));
+        criaEntidade(new entidades::personagens::Sapo(posicoesInimigos[idx], jog1, Vector2f(20.f, 70.f)));
     }
    
 }
@@ -55,7 +55,7 @@ void FaseSegunda::criarObstaculo() {
 }
 
 void FaseSegunda::criarChefoes() {
-    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 200.f), jog, Vector2f(3.f, 50.f));
+    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 200.f), jog1, Vector2f(3.f, 50.f));
     criaEntidade(pM);
 	pM->setFaseAtual(this);
 }

@@ -3,9 +3,10 @@
 
 Jogo::Jogo() :
     pJog1(Vector2f(100.f,630.f), Vector2f(3.f, 100.f)),
+    pJog2(Vector2f(100.f, 630.f), Vector2f(3.f, 100.f)),
     GG(Gerenciadores::GerenciadorGrafico::getGG()),
-    fase1(&pJog1),
-    fase2(&pJog1)
+    fase1(&pJog1, &pJog2),
+    fase2(&pJog1, &pJog2)
 {
     Ente::setGG(&GG);        
     estadoAtual = new MenuPrincipalState(this);
@@ -35,8 +36,11 @@ void Jogo::mudarEstado(State * novoEstado) {
     estadoAtual = novoEstado;
 }
 
-entidades::personagens::Mago* Jogo::getMago() {
+entidades::personagens::Mago* Jogo::getMago1() {
     return &pJog1;
+}
+entidades::personagens::Mago* Jogo::getMago2() {
+    return &pJog2;
 }
 
 fases::FasePrimeira* Jogo::getFase1() {

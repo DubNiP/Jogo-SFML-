@@ -14,7 +14,8 @@ using namespace sf;
 
 class Jogo {
 private:
-	entidades::personagens::Mago pJog1;            
+	entidades::personagens::Mago pJog1;   
+	entidades::personagens::Mago pJog2;
 	Gerenciadores::GerenciadorGrafico& GG;
 	State* estadoAtual;
 	fases::FasePrimeira fase1;
@@ -25,7 +26,8 @@ public:
 	void executar();
 	void mudarEstado(State* novoEstado);
 
-	entidades::personagens::Mago* getMago();
+	entidades::personagens::Mago* getMago1();
+	entidades::personagens::Mago* getMago2();
 	fases::FasePrimeira* getFase1();
 	fases::FaseSegunda* getFase2();
 	Gerenciadores::GerenciadorGrafico& getGG();   //ACHO QUE N FAZ SENTIDO PQ O GG É SINGLETON!!!

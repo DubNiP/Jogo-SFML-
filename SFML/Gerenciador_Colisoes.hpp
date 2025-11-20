@@ -62,12 +62,12 @@ namespace Gerenciadores {
 
         void executar();
 
-        void setJog(entidades::personagens::Mago* pJog);
+        void setJog1(entidades::personagens::Mago* pJog);
         void setJog2(entidades::personagens::Mago* pJog);
         void setWindow(RenderWindow* win);
 
         void limiteDeTela();
-        void limiteDeTelaMago(float X, float Y);
+        void limiteDeTelaMago(bool J1,float X, float Y);
         void limiteDeTelaProjeteis(float X, float Y);
     };
 

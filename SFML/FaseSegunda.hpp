@@ -17,7 +17,7 @@ namespace fases {
 
 
     public:
-        FaseSegunda(entidades::personagens::Mago* pJog);
+        FaseSegunda(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2);
         ~FaseSegunda();
     };
 

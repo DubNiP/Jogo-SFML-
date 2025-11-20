@@ -13,11 +13,13 @@
 class JogandoState : public State {
 private:
     int numeroFase;
-    entidades::personagens::Mago* pMago;
+    int numJogadores;
+    entidades::personagens::Mago* pMago1;
+    entidades::personagens::Mago* pMago2;
     fases::Fase* faseAtual;
 
 public:
-    JogandoState(Jogo* contexto, int numFase);
+    JogandoState(Jogo* contexto, int numFase, int numJog = 1);
     ~JogandoState();
 
     void Entrar();

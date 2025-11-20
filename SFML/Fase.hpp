@@ -22,29 +22,34 @@ namespace fases {
 	protected:
 		listas::ListaEntidades lista_ents;
 		Gerenciadores::GerenciadorColisoes GC;
-		entidades::personagens::Mago* jog;
+		entidades::personagens::Mago* jog1;
+		entidades::personagens::Mago* jog2;
 		Texture* textFundo;
 		Sprite* spriteFundo;
 		bool faseIniciada;
 		bool pause;
 		bool cenarioCriado;
+		bool doisJog;
 
 		void criarSapos();
 		void criarPlataformas();
 		virtual void criarInimigos() = 0;
 		virtual void criarObstaculo() = 0;
 		virtual void criarBlocos() = 0;
-		void criarCenario();                            //fazer ser virtual no futuro??? (diagrama não deixa a princípio)
+		void criarCenario();                            //fazer ser virtual no futuro??? (diagrama não deixa a princípio), COLOCAR NA CONSTRUTORA.
 		virtual void carregarFundo() = 0;
 		virtual Vector2f getPosicaoInicialJogador() const;
 		Entidade* criaEntidade(Entidade* e);
 	public:
-		Fase(entidades::personagens::Mago* pJog);
+		Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2);
 		~Fase();
 		void criarProjetil(Vector2f pos, bool dir, bool bond);
 		void inicializar();
-		void executar();         //nao foi implementado executar nas derivadas de fase. Aqui existe uma dúvida em relaçao a esse executar
+		void executar();
 		void resetar();
+
+		void setdoisJog(bool doisJ);
+
 		const bool getFaseIniciada() const;
 		const bool getPause() const;
 		listas::ListaEntidades* getListaEntidades();

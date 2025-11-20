@@ -23,7 +23,7 @@ namespace fases {
 		void carregarFundo();
 
 	public:
-		FasePrimeira(entidades::personagens::Mago* pJog);        
+		FasePrimeira(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2 = NULL);
 		~FasePrimeira();
 	};
 
