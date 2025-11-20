@@ -24,19 +24,23 @@ void FasePrimeira::criarObstaculo() {
 }
 
 void FasePrimeira::criarBlocos() {
-    //1280 e 720
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 500.f), Vector2f(400.f, 40.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(600.f, 500.f), Vector2f(680.f, 40.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 280.f), Vector2f(760.f, 40.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(980.f, 0.f), Vector2f(40.f, 350.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1020.f, 150.f), Vector2f(80.f, 40.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1020.f, 290.f), Vector2f(80.f, 40.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1180.f, 360.f), Vector2f(80.f, 40.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1180.f, 220.f), Vector2f(80.f, 40.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 700.f), Vector2f(1300.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(20.f, 720.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1260.f, 0.f), Vector2f(20.f, 720.f)));
+    //Tamanho tela: 1280 e 720
+    //AQUI ESTÁ SENDO USADO O PADRÃO DE PROJETO PROTOTYPE
+
+    entidades::obstaculos::Bloco molde(Vector2f(0.f,0.f),Vector2f(0.f,0.f));
+
+    criaEntidade(molde.clone(Vector2f(0.f, 500.f), Vector2f(400.f, 40.f)));
+    criaEntidade(molde.clone(Vector2f(600.f, 500.f), Vector2f(680.f, 40.f)));
+    criaEntidade(molde.clone(Vector2f(0.f, 280.f), Vector2f(760.f, 40.f)));
+    criaEntidade(molde.clone(Vector2f(980.f, 0.f), Vector2f(40.f, 350.f)));
+    criaEntidade(molde.clone(Vector2f(1020.f, 150.f), Vector2f(80.f, 40.f)));
+    criaEntidade(molde.clone(Vector2f(1020.f, 290.f), Vector2f(80.f, 40.f)));
+    criaEntidade(molde.clone(Vector2f(1180.f, 360.f), Vector2f(80.f, 40.f)));
+    criaEntidade(molde.clone(Vector2f(1180.f, 220.f), Vector2f(80.f, 40.f)));
+    criaEntidade(molde.clone(Vector2f(0.f, 700.f), Vector2f(1300.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(20.f, 720.f)));
+    criaEntidade(molde.clone(Vector2f(1260.f, 0.f), Vector2f(20.f, 720.f)));
 }
 
 void FasePrimeira::criarGolems() {

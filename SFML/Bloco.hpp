@@ -6,12 +6,14 @@ namespace entidades {
 
         class Bloco : public Entidade {
         private:
-            const float larguraB;
-            const float alturaB;
+            float larguraB;
+            float alturaB;
         public:
             Bloco(Vector2f pos, Vector2f tam);
+            Bloco(const Bloco& copia, Vector2f pos, Vector2f tam);
             ~Bloco();
 
+            Entidade* clone(Vector2f pos, Vector2f tam) const;
             void executar();
             void salvar();
             void salvarDataBuffer();

@@ -271,6 +271,28 @@ void GerenciadorColisoes::tratarColisoesProjeteisInimgs() {
 	}
 }
 
+void GerenciadorColisoes::tratarColisoesProjeteisBlocos() {
+	set<entidades::Projetil*>::iterator itP = LPs.begin();
+	while (itP != LPs.end()) {
+		bool colidiu = false;
+		list<entidades::obstaculos::Bloco*>::iterator itB = LBs.begin();
+		while (itB != LBs.end()) {
+			if (*itB && verificarColisao(*itP, *itB)) {
+				(*itP)->setAtivo(false);
+				itP = LPs.erase(itP);
+				colidiu = true;
+				break;
+			}
+			itB++;
+		}
+
+		if (colidiu) {
+			continue;
+		}
+		itP++;
+	}
+}
+
 void GerenciadorColisoes::tratarColisoesInimgs() {
 	vector<entidades::personagens::Inimigo*>::iterator itA = LIs.begin();
 	while (itA != LIs.end()) {
@@ -356,6 +378,7 @@ void GerenciadorColisoes::executar() {
 	tratarColisoesProjeteisInimgs();
 	tratarColisoesProjeteisObstacs();
 	tratarColisoesJogsProjeteis();
+	tratarColisoesProjeteisBlocos();
 
 	tratarColisoesJogsObstacs();
 	tratarColisoesJogsBlocos();

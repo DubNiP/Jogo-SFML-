@@ -38,10 +38,6 @@ void Ente::setGG(Gerenciadores::GerenciadorGrafico* pG) {
 	pGG = pG;
 }
 
-void Ente::setPos(const Vector2f& pos) {
-	if (pSprite) pSprite->setPosition(pos);
-}
-
 void Ente::setScale(const Vector2f& scale) {
 	if (pSprite) pSprite->setScale(scale);
 }

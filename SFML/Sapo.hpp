@@ -14,8 +14,8 @@ namespace entidades {
 
             ~Sapo();
 
-            void executar() override;
-            void salvar() override;
+            void executar();
+            void salvar();
             void salvarDataBuffer();
 
             void danificar();

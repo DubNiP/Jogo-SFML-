@@ -1,5 +1,5 @@
 #include "Entidade.hpp"
-#include "Projetil.hpp" // ajuste o nome do arquivo se necessário
+#include "Projetil.hpp"
 
 Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 	Ente(),

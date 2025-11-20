@@ -45,6 +45,7 @@ namespace Gerenciadores {
         void tratarColisoesInimgsBlocos();
         void tratarColisoesProjeteisObstacs();
         void tratarColisoesProjeteisInimgs();
+        void tratarColisoesProjeteisBlocos();
         void tratarColisoesInimgs();
 
         void incluirInimigo(entidades::personagens::Inimigo* pInimigo);

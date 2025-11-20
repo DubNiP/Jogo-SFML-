@@ -62,28 +62,30 @@ void FaseSegunda::criarChefoes() {
 
 
 void FaseSegunda::criarBlocos() {
+    //PADRÃO DE PROJETO PROTOTYPE:
+    entidades::obstaculos::Bloco molde(Vector2f(0.f, 0.f), Vector2f(0.f, 0.f));
 
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 1260.f), Vector2f(1280.f, 20.f))); // chão
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f))); // teto
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(20.f, 1260.f)));  // parede esquerda
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1260.f, 0.f), Vector2f(20.f, 1260.f)));  // parede direita
+    criaEntidade(molde.clone(Vector2f(0.f, 1260.f), Vector2f(1280.f, 20.f))); // chão
+    criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f))); // teto
+    criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(20.f, 1260.f)));  // parede esquerda
+    criaEntidade(molde.clone(Vector2f(1260.f, 0.f), Vector2f(20.f, 1260.f)));  // parede direita
 
     // Bloco vertical 
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(280.f, 720.f), Vector2f(20.f, 540.f)));
+    criaEntidade(molde.clone(Vector2f(280.f, 720.f), Vector2f(20.f, 540.f)));
 
     //Escadaria 
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 1170.f), Vector2f(100.f, 20.f)));
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 1060.f), Vector2f(940.f, 20.f)));
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 990.f), Vector2f(100.f, 20.f)));
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 880.f), Vector2f(940.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 800.f), Vector2f(100.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(200.f, 700.f), Vector2f(920.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 580.f), Vector2f(140.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(20.f, 1170.f), Vector2f(100.f, 20.f)));
+	criaEntidade(molde.clone(Vector2f(180.f, 1060.f), Vector2f(940.f, 20.f)));
+	criaEntidade(molde.clone(Vector2f(20.f, 990.f), Vector2f(100.f, 20.f)));
+	criaEntidade(molde.clone(Vector2f(180.f, 880.f), Vector2f(940.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(20.f, 800.f), Vector2f(100.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(200.f, 700.f), Vector2f(920.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(20.f, 580.f), Vector2f(140.f, 20.f)));
 
    
     // Hall do Mago Negro
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(120.f, 440.f), Vector2f(1140.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(120.f, 380.f), Vector2f(40.f, 80.f)));
+    criaEntidade(molde.clone(Vector2f(120.f, 440.f), Vector2f(1140.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(120.f, 380.f), Vector2f(40.f, 80.f)));
 
 }
 
