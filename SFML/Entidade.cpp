@@ -12,8 +12,12 @@ Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 	vel(velocidade),
 	velocidadeInicial(velocidade),
 	olhandoDir(dir),
+	tempoMovimento(),
+	tempoAceleracao(),
 	clocksIni(false)
 {
+	tempoAceleracao.restart();
+	tempoAceleracao.restart();
 	attPos();
 }
 
@@ -32,10 +36,11 @@ void Entidade::salvarDataBuffer() {
 		<< velocidadeInicial.x << " "
 		<< velocidadeInicial.y << " "
 		<< emAceleracao << " "
-		<< tempoMovimento.getElapsedTime().asSeconds() << " "
-		<< tempoAceleracao.getElapsedTime().asSeconds() << " "
-		<< olhandoDir << " "
-		<< clocksIni << " ";
+		<< olhandoDir << " ";
+
+}
+
+void Entidade::executar() {
 
 }
 
@@ -46,6 +51,11 @@ const bool Entidade::getEmTerra() const {
 
 void Entidade::setEmTerra(const bool v) {
 	emTerra = v;
+}
+
+void Entidade::setEmAceleracao(const bool a)
+{
+	emAceleracao = a;
 }
 
 const Vector2f Entidade::getPos() const {
@@ -115,7 +125,7 @@ void Entidade::acelerar() {
 		return;
 	}
 
-	float dtAc = tempoAceleracao.getElapsedTime().asSeconds();;
+	float dtAc = tempoAceleracao.getElapsedTime().asSeconds() ;
 
 	if (emAceleracao && dtAc < 0.4 || emAceleracao && dynamic_cast<entidades::Projetil*>(this)) {
 		dtAc = tempoAceleracao.getElapsedTime().asSeconds();

@@ -27,10 +27,14 @@ public:
 	virtual ~Entidade();
 
 	virtual void salvar() = 0;
-	virtual void executar() = 0;
+	void executar();
 
 	const bool getEmTerra() const;
 	void setEmTerra(const bool v);
+
+	void setEmAceleracao(const bool v);
+	void setTempMovSalvo(float temp);
+	void setTempAclSalvo(float temp);
 
 	const Vector2f getPos() const;
 	void setPos(const Vector2f& p);

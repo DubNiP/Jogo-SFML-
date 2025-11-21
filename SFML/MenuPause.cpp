@@ -6,7 +6,7 @@ MenuPause::MenuPause() :
     Menu(),
     continuar(false),
     voltarMenu(false),
-    lista_ents(nullptr)
+    salvar(false)
 {
     set_values();
     reseta();
@@ -49,11 +49,7 @@ void MenuPause::confirmar() {
         voltarMenu = true;
     }
     else if (pos == 3) {
-        
-        if (lista_ents) {
-            
-            lista_ents->salvarTodos();
-        }
+		salvar = true;
     }
 }
 
@@ -65,15 +61,13 @@ bool MenuPause::getVoltarMenu() const {
     return voltarMenu;
 }
 
+bool MenuPause::getSalvar() const {
+    return salvar;
+}
+
 void MenuPause::resetaFlags() {
     continuar = false;
     voltarMenu = false;
 }
 
-void MenuPause::setListaEntidades(listas::ListaEntidades* l) {
-    lista_ents = l;
-}
 
-listas::ListaEntidades* MenuPause::getListaEntidades() const {
-    return lista_ents;
-}

@@ -13,11 +13,14 @@ namespace entidades {
 	namespace personagens{
 
 		class Mago: public Personagem {
-		protected:
+		protected:      //Seguindo diagrama UML base.
 			int pontos;
+		private:
 			float invencibilidade;
 			Clock danoClock;
 			Clock ataqueClock;
+			float tempDanoSalv;
+			float tempAtaqSalv;
 			bool naTeia;
 			bool apto;
 			bool concluiuFase;
@@ -28,6 +31,7 @@ namespace entidades {
 
 			void executar();
 			void salvar();
+			void carregar(int num, int pontos, float inv, float tempDanoSalv, float tempAtaqSalv, bool naTeia, bool apt, bool fConcl);
 			void salvarDataBuffer();
 			void mover();
 

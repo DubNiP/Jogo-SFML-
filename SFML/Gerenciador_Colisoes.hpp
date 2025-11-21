@@ -22,7 +22,7 @@ namespace Gerenciadores {
         vector<entidades::personagens::Inimigo*>  LIs;
         list<entidades::obstaculos::Obstaculo*>  LOs;
         list<entidades::obstaculos::Bloco*> LBs;
-        set<entidades::Projetil*>    LPs;  
+        set<entidades::Projetil*>LPs;  
         entidades::personagens::Mago* pJog1;
         RenderWindow* window;
         bool faseConcluida;
@@ -46,6 +46,7 @@ namespace Gerenciadores {
         void tratarColisoesInimgsBlocos();
         void tratarColisoesProjeteisObstacs();
         void tratarColisoesProjeteisInimgs();
+        void tratarColisoesProjeteisBlocos();
         void tratarColisoesInimgs();
 
         void incluirInimigo(entidades::personagens::Inimigo* pInimigo);

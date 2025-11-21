@@ -8,11 +8,27 @@ namespace entidades {
             larguraB(tam.x),
             alturaB(tam.y)
         {
-            id = 9;
             carregarSprite();
         }
 
+        Bloco::Bloco(const Bloco& copia,Vector2f pos, Vector2f tam):
+            Entidade(pos, copia.vel, true),
+            larguraB(tam.x),
+            alturaB(tam.y)
+        {
+            textura = new Texture();
+            *textura = *copia.textura;
+            //try catch?
+            pSprite->setTexture(*textura, true);
+            pSprite->setTextureRect(IntRect(0, 0, (int)larguraB, (int)alturaB));
+        }
+
         Bloco::~Bloco() {
+        }
+
+        Entidade* Bloco::clone(Vector2f pos, Vector2f tam) const {
+
+            return new Bloco(*this,pos,tam);
         }
 
         void Bloco::executar() {

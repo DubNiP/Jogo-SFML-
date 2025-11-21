@@ -8,7 +8,7 @@ namespace entidades {
 			p(pPlat),
 			acionada(false)
 		{
-			id = 10;
+			id = 9;
 			carregarSprite();
 		}
 
@@ -42,6 +42,11 @@ namespace entidades {
 			Obstaculo::salvarDataBuffer();
 
 			tempBuffer << acionada << endl;
+		}
+
+		void Alavanca::carregar(float l, float a, bool dano, bool acionad) {
+			Obstaculo::carregar(l, a, dano);
+			acionada = acionad;
 		}
 
 		void Alavanca::obstaculizar(entidades::personagens::Mago* pJ) {

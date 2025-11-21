@@ -11,13 +11,15 @@ namespace entidades {
             float intervaloPulo;
         public:
             Sapo(Vector2f pos, Mago* pJog, Vector2f vel);
+            Sapo();
 
             ~Sapo();
 
-            void executar() override;
-            void salvar() override;
+            void executar();
+            void salvar();
             void salvarDataBuffer();
-
+            void carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
+                int d, float tS, float tP, float r, float intPul);
             void danificar();
             void tomarDano(int dano, bool bondade);
 

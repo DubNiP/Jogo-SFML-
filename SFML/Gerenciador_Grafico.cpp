@@ -11,7 +11,7 @@ GerenciadorGrafico* GerenciadorGrafico::uniqueInstance = NULL;
 
 GerenciadorGrafico::GerenciadorGrafico() :
     window(NULL),
-	segudundaTela(false),
+	segundaTela(false),
     camera(View(FloatRect(0.f, 0.f, 1280.f, 720.f)))
 {
     window = new RenderWindow(VideoMode(1280, 720), "Jogo Simas");
@@ -27,11 +27,10 @@ GerenciadorGrafico::~GerenciadorGrafico() {
     }
 }
 
-GerenciadorGrafico& GerenciadorGrafico::Instance() {
-    static once_flag flag;
-    call_once(flag, []() {
+GerenciadorGrafico& GerenciadorGrafico::getGG() {
+    if (!uniqueInstance) {
         uniqueInstance = new GerenciadorGrafico();
-        });
+    }
     return *uniqueInstance;
 }
 
@@ -61,7 +60,7 @@ void GerenciadorGrafico::atualizarCamera(const Vector2f posMago) {
     float maxX = 1280;
     float maxY = 1280;
 
-    if(!segudundaTela)
+    if(!segundaTela)
         maxY = 720;
 
     Vector2f centro = posMago;
@@ -89,7 +88,7 @@ void GerenciadorGrafico::resetarCamera() {
 }
 
 void GerenciadorGrafico::setSegundaTela(bool val) {
-    segudundaTela = val;
+    segundaTela = val;
 }
 
 void GerenciadorGrafico::desenhaTodos(listas::ListaEntidades* pLE, Sprite* fundo) {

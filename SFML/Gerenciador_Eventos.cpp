@@ -5,8 +5,8 @@ namespace Gerenciador {
     GerenciadorEvento* GerenciadorEvento::pEvento = NULL;
 
     GerenciadorEvento::GerenciadorEvento() :
+        subject(),
         pMago(NULL),
-        pMenu(NULL),
         prevUp(false),
         prevDown(false),
         prevEnter(false)
@@ -15,7 +15,6 @@ namespace Gerenciador {
 
     GerenciadorEvento::~GerenciadorEvento() {
         pMago = NULL;
-        pMenu = NULL;
     }
 
     GerenciadorEvento* GerenciadorEvento::getGerenciadorEvento() {
@@ -29,10 +28,6 @@ namespace Gerenciador {
         pMago = pj;
     }
 
-    void GerenciadorEvento::setMenu(Menu* pm) {
-        pMenu = pm;
-        prevUp = prevDown = prevEnter = false;
-    }
 
     void GerenciadorEvento::executar() {
         if (pMago) {
@@ -47,26 +42,24 @@ namespace Gerenciador {
     }
 
     void GerenciadorEvento::executarMenu() {
-        if (!pMenu) return;
 
-        bool down = Keyboard::isKeyPressed(Keyboard::Down);
-        bool up = Keyboard::isKeyPressed(Keyboard::Up);
-        bool enter = Keyboard::isKeyPressed(Keyboard::Enter);
+    bool down = Keyboard::isKeyPressed(Keyboard::Down);
+    bool up = Keyboard::isKeyPressed(Keyboard::Up);
+    bool enter = Keyboard::isKeyPressed(Keyboard::Enter);
 
-        if (down && !prevDown) {
-            pMenu->moverBaixo();
-        }
-        if (up && !prevUp) {
-            pMenu->moverCima();
-        }
-        if (enter && !prevEnter) {
-            pMenu->confirmar();
-        }
+    if (down && !prevDown) {
+        notify(1);
+    }
+    if (up && !prevUp) {
+        notify(2);
+    }
+    if (enter && !prevEnter) {
+        notify(3);
+    }
 
-
-        prevDown  = down;
-        prevUp    = up;
-        prevEnter = enter;
+    prevDown  = down;
+    prevUp    = up;
+    prevEnter = enter;
     }
 
     void GerenciadorEvento::soltaTeclas() {

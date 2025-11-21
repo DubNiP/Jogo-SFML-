@@ -37,20 +37,29 @@ void FaseSegunda::criarInimigos() {
 }
 
 void FaseSegunda::criarObstaculo() {
+    criarPlataformas();
+    criarEspinho();
+}
 
+void FaseSegunda::criarPlataformas() {
+
+    auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(20.f, 470.f), Vector2f(100.f, 20.f), false, 90.f, 10.f)));
+    auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 790.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+    auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 970.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+    auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 1150.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+
+
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1230.f), Vector2f(30.f, 40.f), plat1));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 850.f), Vector2f(30.f, 40.f), plat2));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1030.f), Vector2f(30.f, 40.f), plat3));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(350.f, 1230.f), Vector2f(30.f, 40.f), plat4));
+
+}
+
+void FaseSegunda::criarEspinho() {
     criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), 1.f));
     criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 980.f), Vector2f(40.f, 10.f), 1.f));
     criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 790.f), Vector2f(40.f, 10.f), 1.f));
-
-    auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 970.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
-    auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 790.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
-    auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(20.f, 470.f), Vector2f(100.f, 20.f), false, 90.f, 10.f)));
-    auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 1150.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
-
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1030.f), Vector2f(30.f, 40.f), plat1));
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 850.f), Vector2f(30.f, 40.f), plat2));
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1230.f), Vector2f(30.f, 40.f), plat3));
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(350.f, 1230.f), Vector2f(30.f, 40.f), plat4));
 
 }
 
@@ -62,28 +71,30 @@ void FaseSegunda::criarChefoes() {
 
 
 void FaseSegunda::criarBlocos() {
+    //PADRÃO DE PROJETO PROTOTYPE:
+    entidades::obstaculos::Bloco molde(Vector2f(0.f, 0.f), Vector2f(0.f, 0.f));
 
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 1260.f), Vector2f(1280.f, 20.f))); // chão
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f))); // teto
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(20.f, 1260.f)));  // parede esquerda
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1260.f, 0.f), Vector2f(20.f, 1260.f)));  // parede direita
+    criaEntidade(molde.clone(Vector2f(0.f, 1260.f), Vector2f(1280.f, 20.f))); // chão
+    criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f))); // teto
+    criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(20.f, 1260.f)));  // parede esquerda
+    criaEntidade(molde.clone(Vector2f(1260.f, 0.f), Vector2f(20.f, 1260.f)));  // parede direita
 
     // Bloco vertical 
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(280.f, 720.f), Vector2f(20.f, 540.f)));
+    criaEntidade(molde.clone(Vector2f(280.f, 720.f), Vector2f(20.f, 540.f)));
 
     //Escadaria 
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 1170.f), Vector2f(100.f, 20.f)));
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 1060.f), Vector2f(940.f, 20.f)));
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 990.f), Vector2f(100.f, 20.f)));
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 880.f), Vector2f(940.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 800.f), Vector2f(100.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(200.f, 700.f), Vector2f(920.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 580.f), Vector2f(140.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(20.f, 1170.f), Vector2f(100.f, 20.f)));
+	criaEntidade(molde.clone(Vector2f(180.f, 1060.f), Vector2f(940.f, 20.f)));
+	criaEntidade(molde.clone(Vector2f(20.f, 990.f), Vector2f(100.f, 20.f)));
+	criaEntidade(molde.clone(Vector2f(180.f, 880.f), Vector2f(940.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(20.f, 800.f), Vector2f(100.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(200.f, 700.f), Vector2f(920.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(20.f, 580.f), Vector2f(140.f, 20.f)));
 
    
     // Hall do Mago Negro
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(120.f, 440.f), Vector2f(1140.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(120.f, 380.f), Vector2f(40.f, 80.f)));
+    criaEntidade(molde.clone(Vector2f(120.f, 440.f), Vector2f(1140.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(120.f, 380.f), Vector2f(40.f, 80.f)));
 
 }
 

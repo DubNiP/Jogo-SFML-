@@ -20,9 +20,10 @@ namespace fases {
 
 	class Fase: public Ente {
 	protected:
-		listas::ListaEntidades lista_ents;
+		static listas::ListaEntidades lista_ents;
 		Gerenciadores::GerenciadorColisoes GC;
 		entidades::personagens::Mago* jog;
+		vector<entidades::obstaculos::Plataforma*> lPlataformas;
 		Texture* textFundo;
 		Sprite* spriteFundo;
 		bool faseIniciada;
@@ -30,7 +31,7 @@ namespace fases {
 		bool cenarioCriado;
 
 		void criarSapos();
-		void criarPlataformas();
+		virtual void criarPlataformas() = 0;
 		virtual void criarInimigos() = 0;
 		virtual void criarObstaculo() = 0;
 		virtual void criarBlocos() = 0;
@@ -48,11 +49,11 @@ namespace fases {
 		const bool getFaseIniciada() const;
 		const bool getPause() const;
 
-		// expõe a lista de entidades para funcionalidades externas (ex: salvar via menu de pause)
 		listas::ListaEntidades* getListaEntidades();
 
-		// novo: carrega um save a partir de um arquivo e recria entidades na fase
 		void carregarSave(const std::string& caminho);
+		void setarEntidade(Entidade* ent, Vector2f posL, bool emTerra,
+		bool emAcl, Vector2f vel, Vector2f velInit, bool olhandoDir);
 	};
 
 }

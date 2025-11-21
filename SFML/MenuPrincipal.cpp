@@ -13,14 +13,14 @@ MenuPrincipal::~MenuPrincipal() {
 }
 
 void MenuPrincipal::set_values() {
-    const char* options[] = { "Nome_Jogo", "Jogar", "Ranking", "Sair" };
-    const Vector2f posi[] = { {490.f, 110.f}, {620.f, 380.f}, {600.f, 450.f}, {630.f, 520.f} };
-    const unsigned int tam[] = { 80u, 50u, 50u, 50u };
+    const char* options[] = { "Magix", "Jogar", "Sair" };
+    const Vector2f posi[] = { {570.f, 110.f}, {590.f, 380.f}, {600.f, 450.f}};
+    const unsigned int tam[] = { 80u, 50u, 50u};
 
     texts.clear();
-    texts.reserve(4);
+    texts.reserve(3);
 
-    for (size_t i = 0; i < 4; i++) {
+    for (size_t i = 0; i < 3; i++) {
         Text t;
         t.setFont(font);
         t.setString(options[i]);
@@ -33,7 +33,7 @@ void MenuPrincipal::set_values() {
     }
 
     posMin = 1;  
-    posMax = 3;  
+    posMax = 2;  
     pos = posMin;
 }
 
@@ -41,10 +41,10 @@ void MenuPrincipal::confirmar() {
     if (pos == 1) {
         iniciar = true;
     }
-    else if (pos == 3) {
+    else if (pos == 2) {
         sair = true;
     }
-    // pos == 2 (Ranking) não faz nada ainda
+    
 }
 
 bool MenuPrincipal::getIniciar() const {

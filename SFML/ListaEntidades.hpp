@@ -13,7 +13,6 @@ namespace listas {
         Lista<Entidade> LEs;
 
     public:
-        using Iterator = Lista<Entidade>::Iterator;
         ListaEntidades();
         ~ListaEntidades();
 
@@ -29,8 +28,8 @@ namespace listas {
         void removerProjetis();
         void removerMorto();
 
-        Iterator begin() { return LEs.begin(); }
-        Iterator end() { return LEs.end(); }
+        Lista<Entidade>::Iterator begin() { return LEs.begin(); }
+        Lista<Entidade>::Iterator end() { return LEs.end(); }
     };
 
 }

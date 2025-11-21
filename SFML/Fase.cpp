@@ -1,14 +1,17 @@
 #include "Fase.hpp"
 #include <random>
 #include <fstream>
-#include <iostream>
 #include <string>
+#include <iostream>
+#include "Golem.hpp"
+#include "MagoNegro.hpp"
 
 using namespace fases;
 
+listas::ListaEntidades Fase::lista_ents;
+
 Fase::Fase(entidades::personagens::Mago* pJog):
     Ente(),
-    lista_ents(),
     GC(),
     jog(pJog),
     textFundo(NULL),
@@ -54,15 +57,6 @@ void Fase::criarSapos() {
         v[j] = v.back();
         v.pop_back();
     }
-}
-
-void Fase::criarPlataformas() {
-
-    auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(400.f, 588.f), Vector2f(200.f, 20.f), false, 90.f, 5.f)));
-    auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(760.f, 380.f), Vector2f(220.f, 20.f), false, 100.f, 5.f)));
-
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1100.f, 670.f), Vector2f(30.f, 50.f), plat1));
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1030.f, 120.f), Vector2f(30.f, 50.f), plat2));
 }
 
 void Fase::criarCenario() {
@@ -186,19 +180,19 @@ listas::ListaEntidades* Fase::getListaEntidades() {
 
 
 void Fase::carregarSave(const string& caminho) {
-    ifstream recuperarDados(caminho);
+    ifstream recuperarDados(caminho, ios::in);
 
     if (!recuperarDados.is_open()) {
         cerr << "Fase::carregarSave: nao foi possivel abrir " << caminho << endl;
-        fflush(stdin);
+		fflush(stdin);
         return;
     }
 
+    // limpar fase
     GC.limparObstaculos();
     GC.limparInimigos();
     GC.limparProjetis();
     GC.limparBlocos();
-
     lista_ents.limparPreservando(jog);
 
     if (jog) {
@@ -208,96 +202,209 @@ void Fase::carregarSave(const string& caminho) {
     }
 
     criarBlocos();
+	criarPlataformas();
 
-    while (!recuperarDados.eof()) {
-        int idEnt = -1;
-        if (!(recuperarDados >> idEnt)) {
-            break;
-        }
+    int idEnt = -1;
+    float posx = 0.f, posy = 0.f;
+    int emTerraInt = 0;
+    float velx = 0.f, vely = 0.f;
+    float vIniX = 0.f, vIniY = 0.f;
+    int emAcelInt = 0;
+    int olhandoDirInt = 1;
 
-        float posx=0.f, posy=0.f;
-        int emTerraInt=0;
-        float velx=0.f, vely=0.f;
-        float vIniX=0.f, vIniY=0.f;
-        int emAcelInt=0;
-        float tMov=0.f, tAcel=0.f;
-        int olhandoDirInt=1;
-        int clocksIniInt = 0;
-
-        if (!(recuperarDados >> posx >> posy >> emTerraInt
-                >> velx >> vely  >> vIniX >> vIniY
-                >> emAcelInt >> tMov >> tAcel  
-                >> olhandoDirInt >> clocksIniInt)) {
-            cerr << "Fase::carregarSave: formato inesperado apos id=" << idEnt << endl;
-            break;
-        }
+    while (recuperarDados >> idEnt >> posx >> posy >> emTerraInt
+        >> velx >> vely >> vIniX >> vIniY
+        >> emAcelInt >> olhandoDirInt) {
 
         Vector2f posL(posx, posy);
+        Vector2f vel(velx, vely);
+        Vector2f velInit(vIniX, vIniY);
+        bool emTerra = (emTerraInt != 0);
+        bool emAcl = (emAcelInt != 0);
         bool olhando = (olhandoDirInt != 0);
-        bool clocksIni = (clocksIniInt != 0);
+
+        int numVidas = 0;
+        if (idEnt == 1 || idEnt == 2 || idEnt == 3 || idEnt == 4) {
+            if (!(recuperarDados >> numVidas)) {
+                recuperarDados.clear();
+                string lixo; getline(recuperarDados, lixo);
+                numVidas = 0;
+            }
+        }
+
+        int m = 0, d = 0;
+        short mA = 0;
+        Vector2f pI(0.f, 0.f);
+        float tS = 0.f, tP = 0.f;
+        if (idEnt >= 2 && idEnt <= 4) {
+            if (!(recuperarDados >> m >> mA >> pI.x >> pI.y >> d >> tS >> tP)) {
+                recuperarDados.clear();
+                string lixo; getline(recuperarDados, lixo);
+            }
+        }
 
         switch (idEnt) {
+            case 1: { // Mago 
+                int pontosInt = 0, naTeiaInt = 0, apto = 0, concluiuInt = 0;
+                float inv = 0.f, tDano = 0.f, tAtaq = 0.f;
 
-
-
-            case 1:
-            {
+                if (!(recuperarDados >> pontosInt >> inv >> tDano >> tAtaq
+                    >> naTeiaInt >> apto >> concluiuInt)) {
+                    recuperarDados.clear();
+                    string lixo;
+                    getline(recuperarDados, lixo);
+                    break;
+                }
                 if (jog) {
-                
+                    setarEntidade(jog, posL, emTerra, emAcl, vel, velInit, olhando);
+                    jog->carregar(numVidas, pontosInt, inv, tDano, tAtaq,
+                        naTeiaInt != 0, apto!= 0 , concluiuInt != 0);
                     jog->iniciarClocks();
                 }
                 break;
             }
-            case 2: 
-            {
-                
+
+            case 2: { // Sapo
                 float raio = 0.f, intervalo = 0.f;
-              
-                if (recuperarDados.good()) {
-                   
-                    if (!(recuperarDados >> raio >> intervalo)) {
-                    
-                        recuperarDados.clear();
-                    
-                    }
+                if (!(recuperarDados >> raio >> intervalo)) {
+                    recuperarDados.clear();
+                    string lixo; 
+                    getline(recuperarDados, lixo);
                 }
-             
                 auto* s = new entidades::personagens::Sapo(posL, jog, Vector2f(20.f, 70.f));
+                setarEntidade(s, posL, emTerra, emAcl, vel, velInit, olhando);
+                s->setVidas(numVidas);
+                s->carregar(numVidas, m, jog, mA, pI, d, tS, tP, raio, intervalo);
                 criaEntidade(s);
                 break;
             }
-            case 10: // Alavanca
-            {
-                
-                int acionadaInt = 0;
-                if (recuperarDados >> acionadaInt) {
-                    
-                } else {
+
+            case 3: { // MagoNegro
+                int tamanho = 0; bool apto = false;
+                if (!(recuperarDados >> tamanho >> apto )) {
                     recuperarDados.clear();
+                    string lixo; 
+                    getline(recuperarDados, lixo);
                 }
-                
-                auto* a = new entidades::obstaculos::Alavanca(posL, Vector2f(30.f, 50.f), nullptr);
-                criaEntidade(a);
+                auto* mn = new entidades::personagens::MagoNegro(posL, jog, Vector2f(20.f, -70.f));
+                setarEntidade(mn, posL, emTerra, emAcl, vel, velInit, olhando);
+                mn->setVidas(numVidas);
+                mn->carregar(numVidas, m, jog, mA, pI, d, tS, tP, tamanho, apto);
+                mn->setFaseAtual(this);
+                criaEntidade(mn);
                 break;
             }
-            default:
-            {
-               
-                string restOfLine;
-                getline(recuperarDados, restOfLine); // avança para próxima linha
-                cout << idEnt << endl;
-                cerr << "Fase::carregarSave: id nao tratado = " << idEnt << ", ignorando." << endl;
+
+            case 4: { // Golem
+                int tamanho = 0; 
+                if (!(recuperarDados >> tamanho )) {
+                    recuperarDados.clear();
+                    string lixo; 
+                    getline(recuperarDados, lixo);
+                }
+                auto* g = new entidades::personagens::Golem(posL, jog, Vector2f(20.f, -70.f));
+                setarEntidade(g, posL, emTerra, emAcl, vel, velInit, olhando);
+                g->setVidas(numVidas);
+                g->carregar(numVidas, m, jog, mA, pI, d, tS, tP, tamanho);
+                criaEntidade(g);
                 break;
             }
+
+            case 5: { // Teia
+                bool dano = false; float larg = 0.f, alt = 0.f;
+                int vida = 0; int ativoInt = 0;
+  
+                if (!(recuperarDados >> dano >> larg >> alt >> vida >> ativoInt)) {
+                    recuperarDados.clear();
+                    string lixo; getline(recuperarDados, lixo);
+                }
+                auto* t = new entidades::obstaculos::Teia(posL, Vector2f(larg, alt));
+                setarEntidade(t, posL, emTerra, emAcl, vel, velInit, olhando);
+                t->carregar(larg, alt, dano, vida, (ativoInt != 0));
+                criaEntidade(t);
+                break;
+            }
+
+            case 6: { // Saida
+                bool dano = false; float larg = 0.f, alt = 0.f;
+                bool aberta = false; float raio = 0.f;
+                if (!(recuperarDados >> dano >> larg >> alt >> aberta >> raio)) {
+                    recuperarDados.clear();
+                    string lixo; getline(recuperarDados, lixo);
+                }
+                auto* s = new entidades::obstaculos::Saida(posL, Vector2f(larg, alt));
+                setarEntidade(s, posL, emTerra, emAcl, vel, velInit, olhando);
+                s->carregar(larg, alt, dano, aberta, raio);
+                criaEntidade(s);
+                break;
+            }
+
+            case 7: { // Plataforma
+                bool dano = false; float larg = 0.f, alt = 0.f;
+                float ampl = 0.f, per = 0.f, yin = 0.f, yant = 0.f; bool ativ = false; float temp = 0.f;
+                if (!(recuperarDados >> dano >> larg >> alt >> ampl >> per >> yin >> yant >> ativ >> temp)) {
+                    recuperarDados.clear();
+                    string lixo; getline(recuperarDados, lixo);
+                }
+                auto* p = new entidades::obstaculos::Plataforma(posL, Vector2f(larg, alt), dano, ampl, per);
+                setarEntidade(p, posL, emTerra, emAcl, vel, velInit, olhando);
+                p->carregar(larg, alt, dano, ampl, per, yin, yant, ativ, temp);
+                criaEntidade(p);
+                break;
+            }
+
+            case 8: { // Espinho
+                bool dano = false; float larg = 0.f, alt = 0.f;
+                int quantDano = 0;
+                if (!(recuperarDados >> dano >> larg >> alt >> quantDano)) {
+                    recuperarDados.clear();
+                    string lixo; getline(recuperarDados, lixo);
+                }
+                auto* e = new entidades::obstaculos::Espinho(posL, Vector2f(larg, alt), quantDano);
+                setarEntidade(e, posL, emTerra, emAcl, vel, velInit, olhando);
+                e->carregar(larg, alt, dano, quantDano);
+                criaEntidade(e);
+                break;
+            }
+
+            case 10: { // Projetil
+                bool ativo, olhandoDir, bond;
+                int danoInt = 0;
+
+                if (!(recuperarDados >> ativo >> olhandoDir >> bond >> danoInt)) {
+                    recuperarDados.clear();
+                    string lixo;
+                    getline(recuperarDados, lixo);
+                }
+                auto* pr = new entidades::Projetil(posL, olhandoDir, bond);
+                setarEntidade(pr, posL, emTerra, emAcl, vel, velInit, olhando);
+                pr->carregar(ativo, bond, danoInt);
+                criaEntidade(pr);
+                break;
+            }
+
+            default: {
+                recuperarDados.clear();
+                string lixo; getline(recuperarDados, lixo);
+                break;
+            }           
         }
-    }
+    } 
 
     recuperarDados.close();
 
-    // após carregar, garantir que GC conheça a janela se existir pGG
-    if (pGG) {
-        GC.setWindow(pGG->getWindow());
-    }
+    if (pGG) GC.setWindow(pGG->getWindow());
 
-    cout << "Fase::carregarSave: fim do carregamento." << std::endl;
+}
+
+void Fase::setarEntidade(Entidade* ent, Vector2f posL, bool emTerra,
+    bool emAcl, Vector2f vel, Vector2f velInit, bool olhandoDir) {
+    ent->setPos(posL);
+    ent->setEmTerra(emTerra);
+    ent->setEmAceleracao(emAcl);
+    ent->setVelocidadeX(vel.x);
+    ent->setVelocidadeY(vel.y);
+    ent->setVelocidadeInicialX(velInit.x);
+    ent->setVelocidadeInicialY(velInit.y);
+    ent->setOlhandoDir(olhandoDir);
 }

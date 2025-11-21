@@ -126,6 +126,13 @@
     <ClCompile Include="MenuPause.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Observer.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Arquivos de Origem</Filter>
+=======
     <ClCompile Include="Bloco.cpp">
       <Filter>Obstaculos</Filter>
     </ClCompile>
@@ -137,6 +144,7 @@
     </ClCompile>
     <ClCompile Include="Plataforma.cpp">
       <Filter>Obstaculos</Filter>
+>>>>>>> 62b7f2e829f1c185ff2b39ecec8f1b1ceb13a5cb
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +244,10 @@
     <ClInclude Include="MenuPause.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="Subject.hpp">
+      <Filter>Arquivos de Cabeçalho</Filter>
+=======
     <ClInclude Include="Plataforma.hpp">
       <Filter>Obstaculos</Filter>
     </ClInclude>
@@ -247,6 +259,7 @@
     </ClInclude>
     <ClInclude Include="Saida.hpp">
       <Filter>Obstaculos</Filter>
+>>>>>>> 62b7f2e829f1c185ff2b39ecec8f1b1ceb13a5cb
     </ClInclude>
   </ItemGroup>
 </Project>

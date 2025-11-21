@@ -5,7 +5,7 @@
 using namespace std;
 
 
-//OBS: TEM ALGUNS METODOS QUE ENVOLVEM EXCLUSÃO QUE TEM UMA COMPLEXIDADE ALTA ACREDITO EU
+//OBS: TEM ALGUNS METODOS QUE ENVOLVEM EXCLUSÃO QUE TEM UMA COMPLEXIDADE ALTA ACREDITO EU.
 
 
 namespace listas {
@@ -46,7 +46,7 @@ namespace listas {
     }
 
     void ListaEntidades::limparPreservando(Entidade* keep) {                  //isso é zoado, é bom dar um jeito de remover isso...
-        Lista<Entidade>::Iterator it = LEs.begin();
+        Lista<Entidade>::Iterator it = LEs.begin();                           //POSSIVEL SOLUCAO: COLOCAR DYNAMIC CAST PRA JOGADOR E N EXCLUIR SE FOR.
         while(it != LEs.end()) {
             Entidade* e = *it;
             if (e && e != keep) {

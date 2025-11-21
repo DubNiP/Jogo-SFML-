@@ -3,15 +3,14 @@
 #include <SFML/Graphics.hpp>
 #include "Mago.hpp"
 #include "Menu.hpp"
+#include "Subject.hpp"
 
 namespace Gerenciador {
 
-    class GerenciadorEvento {
+    class GerenciadorEvento : public subject {
     private:
         static GerenciadorEvento* pEvento;
         entidades::personagens::Mago* pMago;
-        Menu* pMenu;
-
         bool prevUp;
         bool prevDown;
         bool prevEnter;
@@ -24,12 +23,11 @@ namespace Gerenciador {
         static GerenciadorEvento* getGerenciadorEvento();
 
         void setMago(entidades::personagens::Mago* pj);
-        void setMenu(Menu* pm);
 
         void executar();
         void executarMenu();
         void soltaTeclas();
-        bool verificarEventosJanela(sf::RenderWindow* window);
+        bool verificarEventosJanela(RenderWindow* window);
 
 
     };

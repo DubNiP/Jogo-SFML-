@@ -14,16 +14,16 @@ namespace fases {
 		void criarObstaculo();
 		void criarBlocos();
 
-
 		void criarGolems();
-
-
+		
 		void criarTeias();
+
+		void criarPlataformas();
 
 		void carregarFundo();
 
 	public:
-		FasePrimeira(entidades::personagens::Mago* pJog);         //FASE ESTÁ CONHECENDO Mago AQUI, E NO DIAGRAMA NÃO TEM NADA, PODE?
+		FasePrimeira(entidades::personagens::Mago* pJog);        
 		~FasePrimeira();
 	};
 

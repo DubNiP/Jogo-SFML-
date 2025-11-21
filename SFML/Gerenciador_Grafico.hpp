@@ -13,11 +13,11 @@ namespace Gerenciadores {
         static GerenciadorGrafico* uniqueInstance;
         RenderWindow* window;
         View camera;
-        bool segudundaTela;
+        bool segundaTela;
         GerenciadorGrafico();
         ~GerenciadorGrafico();
     public:
-        static GerenciadorGrafico& Instance();
+        static GerenciadorGrafico& getGG();
         void desenharEnte(const Drawable& shape);
         void clearWindow(Color cor = Color::Black);
         void displayWindow();
@@ -29,5 +29,3 @@ namespace Gerenciadores {
         View getCamera() const;
     };
 }
-
-//Colocar executar no futuro?

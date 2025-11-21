@@ -22,8 +22,6 @@ public:
 	virtual void executar() = 0;
 	void desenhar();
 	void static setGG(Gerenciadores::GerenciadorGrafico* pG);
-
-	void setPos(const Vector2f& pos);
 	void setScale(const Vector2f& scale);
 
 	FloatRect getBounds() const;        
