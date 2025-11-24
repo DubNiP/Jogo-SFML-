@@ -102,8 +102,12 @@
     <ClCompile Include="MenuPrincipalState.cpp">
       <Filter>GerenciadorEstadosObserver</Filter>
     </ClCompile>
-    <ClCompile Include="MenuRanking.cpp" />
-    <ClCompile Include="MenuRankingState.cpp" />
+    <ClCompile Include="MenuRanking.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuRankingState.cpp">
+      <Filter>GerenciadorEstadosObserver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ente.hpp" />
@@ -209,8 +213,12 @@
     <ClInclude Include="MenuPrincipalState.hpp">
       <Filter>GerenciadorEstadosObserver</Filter>
     </ClInclude>
-    <ClInclude Include="MenuRanking.hpp" />
-    <ClInclude Include="MenuRankingState.hpp" />
+    <ClInclude Include="MenuRanking.hpp">
+      <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuRankingState.hpp">
+      <Filter>GerenciadorEstadosObserver</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Obstaculos">

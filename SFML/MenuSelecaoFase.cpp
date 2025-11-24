@@ -1,5 +1,8 @@
 #include "MenuSelecaoFase.hpp"
 
+
+using namespace Menu;
+
 MenuSelecaoFase::MenuSelecaoFase() :
     Menu(),
     voltar(false),

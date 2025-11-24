@@ -26,17 +26,6 @@ namespace Gerenciadores {
         entidades::personagens::Mago* pJog1;
         entidades::personagens::Mago* pJog2;
         bool faseConcluida;
-    public:
-        GerenciadorColisoes(entidades::personagens::Mago* pJog = NULL, entidades::personagens::Mago* pJog2 = NULL, RenderWindow* window = NULL);
-        ~GerenciadorColisoes();
-        
-        const bool getFaseConcluida() const;
-        void setFaseConcluida(bool v);
-
-        const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
-        void colidiu(Entidade* pe1, Entidade* pe2);
-        bool estaSobre(const FloatRect& obst, const FloatRect& ent, Entidade* b, float folga = 6.f);
-
         void tratarColisoesJogsObstacs();
         void tratarColisoesJogsBlocos();
         void tratarColisoesJogsInimgs();
@@ -48,6 +37,16 @@ namespace Gerenciadores {
         void tratarColisoesProjeteisInimgs();
         void tratarColisoesProjeteisBlocos();
         void tratarColisoesInimgs();
+    public:
+        GerenciadorColisoes(entidades::personagens::Mago* pJog = NULL, entidades::personagens::Mago* pJog2 = NULL, RenderWindow* window = NULL);
+        ~GerenciadorColisoes();
+        
+        const bool getFaseConcluida() const;
+        void setFaseConcluida(bool v);
+
+        const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
+        void colidiu(Entidade* pe1, Entidade* pe2);
+        bool estaSobre(const FloatRect& obst, const FloatRect& ent, Entidade* b, float folga = 6.f);
 
         void incluirInimigo(entidades::personagens::Inimigo* pInimigo);
         void incluirObstaculo(entidades::obstaculos::Obstaculo* pObstaculo);
@@ -62,7 +61,6 @@ namespace Gerenciadores {
 
         void executar();
 
-        void setJog1(entidades::personagens::Mago* pJog);
         void setJog2(entidades::personagens::Mago* pJog);
     
 

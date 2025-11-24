@@ -9,6 +9,8 @@
 
 using namespace sf;
 
+using namespace Menu;
+
 namespace estados {
     class SelecaoFaseState : public State {
     private:

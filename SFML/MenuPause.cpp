@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 
+using namespace Menu;
+
 MenuPause::MenuPause() :
     Menu(),
     continuar(false),

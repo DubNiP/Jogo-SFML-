@@ -4,6 +4,8 @@
 
 using namespace sf;
 
+using namespace Menu;
+
 namespace estados {
     class PauseState : public State {
     private:

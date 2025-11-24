@@ -1,22 +1,26 @@
 #pragma once
 #include "Menu.hpp"
 
-class MenuSelecaoFase : public Menu {
-private:
-    bool voltar;
-    int faseEscolhida;
-    int numJogadores;
+using namespace sf;
 
-protected:
-    void set_values();
+namespace Menu {
+    class MenuSelecaoFase : public Menu {
+    private:
+        bool voltar;
+        int faseEscolhida;
+        int numJogadores;
 
-public:
-    MenuSelecaoFase();
-    ~MenuSelecaoFase();
+    protected:
+        void set_values();
 
-    void confirmar();
-    bool getVoltar() const;
-    int getFaseEscolhida() const;
-    int getNumJogadores() const;
-    void resetaFlags();
-};
+    public:
+        MenuSelecaoFase();
+        ~MenuSelecaoFase();
+
+        void confirmar();
+        bool getVoltar() const;
+        int getFaseEscolhida() const;
+        int getNumJogadores() const;
+        void resetaFlags();
+    };
+}

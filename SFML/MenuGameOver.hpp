@@ -1,20 +1,22 @@
 #pragma once
 #include "Menu.hpp"
 
-class MenuGameOver : public Menu {
-private:
-    bool reiniciar;
-    bool voltarMenu;
+namespace Menu {
+    class MenuGameOver : public Menu {
+    private:
+        bool reiniciar;
+        bool voltarMenu;
 
-protected:
-    void set_values();    //pq protected, vale para os outros estados tbm.
+    protected:
+        void set_values();    //pq protected, vale para os outros estados tbm.
 
-public:
-    MenuGameOver();
-    ~MenuGameOver();
+    public:
+        MenuGameOver();
+        ~MenuGameOver();
 
-    void confirmar();
-    bool getReiniciar() const;
-    bool getVoltarMenu() const;
-    void resetaFlags();
-};
+        void confirmar();
+        bool getReiniciar() const;
+        bool getVoltarMenu() const;
+        void resetaFlags();
+    };
+}

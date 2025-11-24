@@ -7,7 +7,7 @@
 #include <iostream>
 
 using namespace std;
-using namespace sf;
+using namespace Menu;
 
 MenuPrincipal::MenuPrincipal() :
     Menu(),

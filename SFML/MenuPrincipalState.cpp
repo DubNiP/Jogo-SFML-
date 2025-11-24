@@ -1,5 +1,4 @@
 #include "MenuPrincipalState.hpp"
-#include "MenuRankingState.hpp"
 
 using namespace estados;
 

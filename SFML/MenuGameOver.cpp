@@ -1,5 +1,7 @@
 #include "MenuGameOver.hpp"
 
+using namespace Menu;
+
 MenuGameOver::MenuGameOver() :
     Menu(),
     reiniciar(false),

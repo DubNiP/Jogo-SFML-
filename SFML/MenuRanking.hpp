@@ -3,27 +3,29 @@
 #include <vector>
 #include <string>
 
-namespace Gerenciadores { class GerenciadorGrafico; }
+using namespace sf;
 
-class MenuRanking : public Menu {
-private:
-    bool sair;
-    int rankPos;
-    vector<pair<string, int>> ranking;
+namespace Menu {
+    class MenuRanking : public Menu {
+    private:
+        bool sair;
+        int rankPos;
+        vector<pair<string, int>> ranking;
 
-protected:
-    void set_values();
+    protected:
+        void set_values();
 
-public:
-    MenuRanking();
-    ~MenuRanking();
+    public:
+        MenuRanking();
+        ~MenuRanking();
 
-    void confirmar();
-    bool getSair() const;
-    void resetaFlags();
+        void confirmar();
+        bool getSair() const;
+        void resetaFlags();
 
-    void mostrarRanking();
+        void mostrarRanking();
 
-    vector<int> calcularFaixa();
-    void preencherTexts(const vector<int>& faixa);
-};
+        vector<int> calcularFaixa();
+        void preencherTexts(const vector<int>& faixa);
+    };
+}

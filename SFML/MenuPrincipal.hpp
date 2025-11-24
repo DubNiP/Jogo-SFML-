@@ -5,25 +5,29 @@
 
 namespace Gerenciadores { class GerenciadorGrafico; }
 
-class MenuPrincipal :public Menu {
-private:
-    bool sair;
-    bool iniciar;
-	bool ranking;
-    char nomeMago[50];
+using namespace sf;
 
-protected:
-    void set_values();
+namespace Menu {
+    class MenuPrincipal :public Menu {
+    private:
+        bool sair;
+        bool iniciar;
+        bool ranking;
+        char nomeMago[50];
 
-public:
-    MenuPrincipal();
-    ~MenuPrincipal();
+    protected:
+        void set_values();
 
-    void confirmar();
-    bool getIniciar() const;
-    bool getSair() const;
-	bool getRanking() const;
-    void setNomeMago(const char* n);
-    void resetaFlags();
+    public:
+        MenuPrincipal();
+        ~MenuPrincipal();
 
-};
+        void confirmar();
+        bool getIniciar() const;
+        bool getSair() const;
+        bool getRanking() const;
+        void setNomeMago(const char* n);
+        void resetaFlags();
+
+    };
+}

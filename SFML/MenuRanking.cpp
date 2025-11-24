@@ -1,12 +1,11 @@
 #include "MenuRanking.hpp"
-#include "Gerenciador_Grafico.hpp"
 #include <fstream>
 #include <algorithm>
 #include <iostream>
 
 using namespace std;
-using namespace sf;
 
+using namespace Menu;
 
 MenuRanking::MenuRanking() :
     Menu(),

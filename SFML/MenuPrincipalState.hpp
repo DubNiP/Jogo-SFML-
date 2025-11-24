@@ -6,8 +6,11 @@
 #include "Jogo.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Eventos.hpp"
+#include "MenuRankingState.hpp"
 
 using namespace sf;
+
+using namespace Menu;
 
 namespace estados {
 

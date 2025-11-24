@@ -1,6 +1,7 @@
 #include "SelecaoFaseState.hpp"
 
 using namespace estados;
+using namespace Menu;
 
 SelecaoFaseState::SelecaoFaseState(Jogo* contexto) :
     State(contexto),
