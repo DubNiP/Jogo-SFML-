@@ -20,7 +20,7 @@ JogandoState::JogandoState(Jogo* contexto, int numFase, int numJog, bool reseta)
 }
 
 JogandoState::~JogandoState() {
-    pMago1 = NULL;                    /*TROQUEI*/
+    pMago1 = NULL;                    
     pMago2 = NULL;
     faseAtual = NULL;
 }
@@ -35,14 +35,25 @@ void JogandoState::Entrar() {
         Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(true);
     }
     else if (numeroFase == 3) {
+        ifstream arquivoFase(contexto->getMago1()->getCaminho());
 
-        faseAtual = contexto->getFase1();
-        Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(false);
+        char n[50];
+        int p, f;
+
+        arquivoFase >> n >> p >> f;
+
+        if (f == 1) {
+            faseAtual = contexto->getFase1();
+            Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(false);
+        }
+        else {
+            faseAtual = contexto->getFase2();
+            Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(true);
+        }
 
         faseAtual->inicializar();
 
-        faseAtual->carregarSave("Save/save.txt");
-        numeroFase = 1;
+        faseAtual->carregarSave(contexto->getMago1()->getCaminho());
     }
 
     if (faseAtual) {

@@ -4,6 +4,7 @@
 #include "Mago.hpp"
 #include "Menu.hpp"
 #include "Subject.hpp"
+#include <deque>
 
 // Gerenciador de Eventos com apoio do padrão de projeto Observer.
 
@@ -18,6 +19,9 @@ namespace Gerenciador {
         bool prevDown;
         bool prevEnter;
 
+        // fila local de eventos coletados da janela
+        deque<Event> eventQueue;
+
         GerenciadorEvento();
         ~GerenciadorEvento();
 
@@ -31,9 +35,14 @@ namespace Gerenciador {
         void executar();
         void executarMenu();
         void soltaTeclas();
+
+        // coleta eventos da janela e os armazena internamente
+        // retorna false se janela foi fechada
         bool verificarEventosJanela(RenderWindow* window);
 
-
+        // APIs para consumir a fila de eventos coletada
+        bool temEvento() const;
+        bool proximoEvento(Event& out);
     };
 
 }

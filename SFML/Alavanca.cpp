@@ -28,7 +28,7 @@ namespace entidades {
 
 			salvarDataBuffer();
 
-			buffer.open("Save/save.txt", ios::out | ios::app);
+			buffer.open(caminho, ios::out | ios::app);
 
 			if (!buffer.is_open()) {
 				cout << "Arquivo não pode ser aberto" << endl;
@@ -64,5 +64,6 @@ namespace entidades {
 			setScale(Vector2f(1.f, 1.f));
 			setPos(pos);
 		}
+
 	}
 }

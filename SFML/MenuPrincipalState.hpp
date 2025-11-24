@@ -10,16 +10,20 @@
 using namespace sf;
 
 namespace estados {
+
     class MenuPrincipalState : public State {
     private:
         MenuPrincipal menu;
+        Font font;
+        Text inputText;
+        String buffer;
     public:
         MenuPrincipalState(Jogo* contexto);
         ~MenuPrincipalState();
 
-        void Entrar();
-        void handle();
-        void Sair();
-        void update(int i);
+            void Entrar();
+            void handle();
+            void Sair();
+            void update(int i);
     };
 }

@@ -31,3 +31,4 @@ namespace Gerenciadores {
         View getCamera() const;
     };
 }
+
